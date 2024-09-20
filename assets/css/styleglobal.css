@@ -8,14 +8,14 @@
 --color-contrast: #ffffff;
 --color-button: rgb(29, 153, 29);
 /* color-font */
---color-primary-text-emphasis: #052c65;
---color-secondary-text-emphasis: #2b2f32;
---color-success-text-emphasis: #0a3622;
---color-info-text-emphasis: #055160;
---color-warning-text-emphasis: #664d03;
---color-danger-text-emphasis: #58151c;
---color-light-text-emphasis: #495057;
---color-dark-text-emphasis: #495057;
+--color-primary-text: #444444;
+--color-secondary-text: #2b2f32;
+--color-success-text: #0a3622;
+--color-info-text: #055160;
+--color-warning-text: #664d03;
+--color-danger-text: #58151c;
+--color-light-text: #495057;
+--color-dark-text: #495057;
 /* font */
 --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 --heading-font: "Raleway", sans-serif;
