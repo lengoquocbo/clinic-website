@@ -1,0 +1,126 @@
+body{
+    font-family: var(--default-font);
+}
+.register{
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 20px;
+}
+.reg_title{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    color: var(--color-primary-text);
+    font-size: 40px;
+}
+.reg_input{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.reg_input input{
+    height: 25px;
+    padding: 10px 10px 10px 40px;
+    /* Tạo khoảng trống cho icon bên trái */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.reg_input i{
+    z-index: 10;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 25px;
+    color: #999;
+}
+.register p{
+    text-align: center;
+    margin-bottom: 50px;
+    color: #666;
+}
+.reg_btshowpass{
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 320px;
+    font-size:var(--font-size-medium);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.reg_checkbox{
+    margin-right: 7px;
+    cursor: pointer;
+}
+.btreg{
+    width: 100%;
+    height: 48px;
+    margin-top: 32px;
+    background-color: var(--color-button);
+    color: white;
+    font-size: 16px;
+    font-weight: 450;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    border: #fff;
+}
+
+.reg_span{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}
+.reg_span::before, .reg_span::after{
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+.reg_span span{
+    padding:20px;
+}
+.otherreg{
+    align-items: center;
+    text-align: center;
+    font-size: 48px;
+    margin-top: -20px;
+}
+.otherreg i {
+    margin: 20px;
+}
+
+.other a {
+    text-decoration: none;
+}
+
+/* tablet */
+@media (min-width: 612px) {
+    .reg_btshowpass{
+        margin-left: 310px;
+    }
+}
+/* Media Queries cho responsive with phone*/
+@media (max-width: 600px) {
+    .register {
+        padding: 30px;
+        border: none;
+        box-shadow: none;
+    }
+
+    .reg_input {
+        margin-bottom: 10px;
+    }
+
+    .reg_btshowpass{
+        margin-top: -40px;
+        right: 15%;
+    }
+}
