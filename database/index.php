@@ -1,5 +1,4 @@
 <?php
-
     $dsn = 'mysql:host=localhost;dbname=csdl_phongkham';
 $username = 'root';
 $password = '';
