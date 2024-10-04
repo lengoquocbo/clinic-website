@@ -1,20 +1,16 @@
 <?php
+require_once 'connectdb.php';
 class Nhanvien {
     private $db;
 
-    public function __construct($db){
+    public function __construct(){
         $this->db = Database::getInstance()->getConection(); 
     } 
-    public function getAll(){  
-        $sql = "SELECT * FROM nhanvien";
-        $result = $this->db->query($sql);  
-
-        if ($result->num_rows > 0) {
-            return $result->fetch_all(MYSQLI_ASSOC);  
-        } else {
-            return [];  
-        }
+    public function getAll() {
+        $result = $this->db->query("SELECT * FROM staffs");
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
+
     public function getById($id){
         $stmt = $this->db->prepare("SELECT * FROM staffs WHERE staffID = ?");
         $stmt->bind_param("s", $id);

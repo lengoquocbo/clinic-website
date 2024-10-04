@@ -13,6 +13,14 @@ function loadContent($mod, $act) {
         
     } else if($mod === 'thuoc' && $act ==='delete'){
     } else if($mod === 'thuoc' && $act ==='edit'){
+    } else if ($mod === 'nhanvien' && $act === 'list') {
+        ob_start();
+        include 'nhanvien.php';
+        return ob_get_clean();
+    } else if($mod === 'nhanvien' && $act ==='add'){
+        
+    } else if($mod === 'nhanvien' && $act ==='delete'){
+    } else if($mod === 'nhanvien' && $act ==='edit'){
     }
 
     return ' <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2023/8/26/1233821/Giai-Nhi-1--Nang-Tre.jpg" alt="Hình ảnh">
@@ -32,7 +40,8 @@ define('BASE_URL', '/clinic-website/');
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Vinmeclatest xin chào</title>
     <style>
-        body, html {
+       body,
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -41,7 +50,7 @@ define('BASE_URL', '/clinic-website/');
 }
 
 .container {
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -53,9 +62,8 @@ define('BASE_URL', '/clinic-website/');
     align-items: center;
     padding: 0 20px;
     background-color: var(--color-accent);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Tạo bóng mờ màu đen */
-
 }
+
 
 .header .logo {
     font-size: 32px;
@@ -77,21 +85,21 @@ define('BASE_URL', '/clinic-website/');
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease; 
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header .nav ul li:hover {
-    background-color: #ffffff; 
+    background-color: #ffffff;
 }
 
 .header .nav ul li:hover a {
-    color: var(--default-font); 
+    color: var(--default-font);
 }
 
 .header .nav ul li a {
     text-decoration: none;
     color: #ffffff;
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
 }
 
 
@@ -115,7 +123,7 @@ define('BASE_URL', '/clinic-website/');
     display: none;
 }
 
-.menu_list_button_check:checked ~ .overlay {
+.menu_list_button_check:checked~.overlay {
     display: block;
 }
 
@@ -127,7 +135,7 @@ define('BASE_URL', '/clinic-website/');
     width: 320px;
     height: 100vh;
     background-color: var(--color-default);
-    padding: 20px;    
+    padding: 20px;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     position: fixed;
@@ -135,7 +143,7 @@ define('BASE_URL', '/clinic-website/');
     left: 0;
 }
 
-.menu_list_button_check:checked ~ .menu .menuleft {
+.menu_list_button_check:checked~.menu .menuleft {
     transform: translateX(0);
 }
 
@@ -151,11 +159,13 @@ define('BASE_URL', '/clinic-website/');
     padding: 0;
     margin: 0;
 }
-.menuleft-nav ul li a{
+
+.menuleft-nav ul li a {
     display: flex;
-    padding: 15px ;
+    padding: 15px;
 }
-.menuleft-nav ul li a:hover{
+
+.menuleft-nav ul li a:hover {
     background-color: var(--color-accent);
     border-radius: 5px;
 }
@@ -169,17 +179,18 @@ define('BASE_URL', '/clinic-website/');
     display: block;
     text-align: left;
     cursor: pointer;
-   
+
 }
 
-.menuleft-nav  i{
-    margin-right: 10px; 
+.menuleft-nav i {
+    margin-right: 10px;
     font-size: 20px;
     vertical-align: middle;
     color: #ffffff;
-    
+
 }
-.menuleft-nav ul li button{
+
+.menuleft-nav ul li button {
     padding: 15px;
     width: 100%;
     text-align: center;
@@ -191,10 +202,12 @@ define('BASE_URL', '/clinic-website/');
     border: white;
 
 }
-.menuleft_button{
+
+.menuleft_button {
     margin-top: 50px;
 }
-.menuleft_button li button:hover{
+
+.menuleft_button li button:hover {
     background-color: var(--color-success-text);
 }
 
@@ -203,13 +216,15 @@ define('BASE_URL', '/clinic-website/');
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 50px); /* Chiều cao của viewport trừ đi chiều cao của header */
     text-align: center;
+    height: 80vh;
 }
 
 .tabbarright img {
-    width: 1200px;
-    height: auto;
+    width: 100%;
+    height: 80vh;
+    /* Thêm các thuộc tính sau nếu bạn muốn ảnh to hơn và có hiệu ứng bóng */
+    /* hoặc kích thước mong muốn */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -219,6 +234,10 @@ define('BASE_URL', '/clinic-website/');
     padding: 10px;
     background-color: #f1f1f1;
     border-top: 1px solid #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #666;
+    border: none;
 }
 
     </style>
@@ -250,7 +269,7 @@ define('BASE_URL', '/clinic-website/');
                         <li><a href="#" id="lichhen"><i class='bx bx-calendar'></i> Lịch hẹn</a></li>
                         <li><a href=""><i class='bx bxs-heart'></i> Khám bệnh</a></li>
                         <li><a href=""><i class='bx bxs-duplicate'></i> Hồ sơ bệnh nhân</a></li>
-                        <li><a href=""><i class='bx bxs-group'></i> Hồ sơ nhân viên</a></li>
+                        <li><a href="index.php?mod=nhanvien&act=list"><i class='bx bxs-group'></i> Hồ sơ nhân viên</a></li>
                         <li><a href=""><i class='bx bxs-server'></i> Quản lí thiết bị</a></li>
                         <div class="menuleft_button">
                         <li><button><i class='bx bx-log-out'></i> Đăng xuất</button></li>
@@ -264,7 +283,9 @@ define('BASE_URL', '/clinic-website/');
             </div>
         </div>
 
-        <div class="footer">quocbo</div>
+        <div class="footer">
+             <span>By quocbo - quanghuy  @ vku-23JIT | <?php echo date("d/m/Y"); ?></span>
+         </div>
     </div>
 
     <script src="assets/js/admin.js"></script>
