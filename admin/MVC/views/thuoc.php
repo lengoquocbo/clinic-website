@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách thuốc</title>
     <style>
+      
         .table_container {
             margin: 0 auto;
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: center;
             width: 80%;
             border-radius: 8px;
-
+            margin-top: 30px;
 
         }
         .medicine-list__table-container {
@@ -111,6 +112,7 @@
 </head>
 
 <body>
+    <div class="around">
     <div class="table_container">
         <h2 class="medicine-list__title">Danh sách thuốc</h2>
 
@@ -158,6 +160,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
 </body>
 

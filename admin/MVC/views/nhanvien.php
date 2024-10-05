@@ -15,7 +15,8 @@
             flex-direction: column;
             justify-content: center;
             width: 80%;
-            
+            margin-top: 30px;
+
         }
 
         .table_wrapper {
@@ -32,7 +33,7 @@
         .table {
             width: 100%;
             border-collapse: collapse;
-       
+
         }
 
         .medicine-list__title {
@@ -101,51 +102,54 @@
 </head>
 
 <body>
+    <div class="around">
 
-    <div class="table_container">
-        <h2 class="medicine-list__title">Danh sách nhân viên</h2>
+        <div class="table_container">
+            <h2 class="medicine-list__title">Danh sách nhân viên</h2>
 
-        <?php if (isset($_COOKIE['msg'])) { ?>
-        <div class="alert alert--success">
-            <strong>Thông báo</strong> <?= $_COOKIE['msg'] ?>
-        </div>
-        <?php } ?>
+            <?php if (isset($_COOKIE['msg'])) { ?>
+                <div class="alert alert--success">
+                    <strong>Thông báo</strong> <?= $_COOKIE['msg'] ?>
+                </div>
+            <?php } ?>
 
-        <!-- Nút thêm thuốc (hiển thị mà không cần quyền admin) -->
-        <button onclick="location.href='themthuoc.php'" class="medicine-list__add-btn">Thêm thuốc</button>
+            <!-- Nút thêm thuốc (hiển thị mà không cần quyền admin) -->
+            <button onclick="location.href='themthuoc.php'" class="medicine-list__add-btn">Thêm thuốc</button>
 
-        <!-- Bảng có thanh cuộn -->
-        <div class="table_wrapper">
-            <table class="table">
-                <tr>
-                    <th>ID</th>
-                    <th>Họ và tên</th>
-                    <th>Chức vụ</th>
-                    <th>Số điện thoại</th>
-                    <th>Trạng thái</th>
-                    <th>Thao tác</th>
-                </tr>
-                <?php
-                require_once '../model/nhanvienmodel.php';
-
-                $nhanvienmodel = new Nhanvien();
-                $nhanvien_list = $nhanvienmodel->getALL();
-                foreach ($nhanvien_list as $nhanvien) { ?>
+            <!-- Bảng có thanh cuộn -->
+            <div class="table_wrapper">
+                <table class="table">
                     <tr>
-                        <td><?= $nhanvien['staffID'] ?></td>
-                        <td><?= $nhanvien['fullname'] ?></td>
-                        <td><?= $nhanvien['position'] ?></td>
-                        <td><?= $nhanvien['phone'] ?></td>
-                        <td><?= $nhanvien['status'] ?></td>
-                        <td>
-                            <a href='suathuoc.php?id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
-                            <a href='xoathuoc.php?id=<?= $thuoc['medicineID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
-                        </td>
+                        <th>ID</th>
+                        <th>Họ và tên</th>
+                        <th>Chức vụ</th>
+                        <th>Số điện thoại</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
                     </tr>
-                <?php  } ?>
-            </table>
+                    <?php
+                    require_once '../model/nhanvienmodel.php';
+
+                    $nhanvienmodel = new Nhanvien();
+                    $nhanvien_list = $nhanvienmodel->getALL();
+                    foreach ($nhanvien_list as $nhanvien) { ?>
+                        <tr>
+                            <td><?= $nhanvien['staffID'] ?></td>
+                            <td><?= $nhanvien['fullname'] ?></td>
+                            <td><?= $nhanvien['position'] ?></td>
+                            <td><?= $nhanvien['phone'] ?></td>
+                            <td><?= $nhanvien['status'] ?></td>
+                            <td>
+                                <a href='suathuoc.php?id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
+                                <a href='xoathuoc.php?id=<?= $thuoc['medicineID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
+                            </td>
+                        </tr>
+                    <?php  } ?>
+                </table>
+            </div>
         </div>
     </div>
+
 
 </body>
 
