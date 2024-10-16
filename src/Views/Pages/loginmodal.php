@@ -13,13 +13,10 @@
 </head>
 
 <body>
-
-    <button id="openModalButton" class="openModalButton">Đăng Nhập</button>
-
-
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            
             <div class="login">
                 <h1 class="login__title">Vinmeclatest</h1>
                 <p>Đăng nhập để tiếp tục</p>

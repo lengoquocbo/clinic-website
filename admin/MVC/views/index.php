@@ -1,38 +1,54 @@
 <?php
-// Kiểm tra xem có tham số mod và act được truyền qua URL không
 $mod = isset($_GET['mod']) ? $_GET['mod'] : '';
 $act = isset($_GET['act']) ? $_GET['act'] : '';
+
 
 // Hàm để tải nội dung của trang
 function loadContent($mod, $act)
 {
     if ($mod === 'thuoc' && $act === 'list') {
         ob_start();
-        include 'thuoc.php';
+        include '../views/thuoc/thuoc.php';
         return ob_get_clean();
-    } else if ($mod === 'thuoc' && $act === 'add') {
+    } elseif ($mod === 'thuoc' && $act === 'add') {
         // Xử lý thêm thuốc
-    } else if ($mod === 'thuoc' && $act === 'delete') {
-        // Xử lý xóa thuốc
-    } else if ($mod === 'thuoc' && $act === 'edit') {
-        // Xử lý sửa thuốc
-    } else if ($mod === 'nhanvien' && $act === 'list') {
+        // Chuyển hướng nếu cần và exit để ngăn chặn thực thi thêm mã
+        header('Location: ../clinic-website/src/Views/Pages/thuoc_add.php');
+        exit();
+    } elseif ($mod === 'thuoc' && $act === 'delete') {
+     
+    } elseif ($mod === 'thuoc' && $act === 'edit') {
+  
+       
+    } elseif ($mod === 'nhanvien' && $act === 'list') {
         ob_start();
-        include 'nhanvien.php';
+        include '../views/nhanvien/nhanvien.php';
         return ob_get_clean();
-    } else if ($mod === 'nhanvien' && $act === 'add') {
-        // Xử lý thêm nhân viên
-    } else if ($mod === 'nhanvien' && $act === 'delete') {
+    } elseif ($mod === 'nhanvien' && $act === 'add') {
+        ob_start();
+        include '../views/nhanvien/themnhanvien.php';
+        return ob_end_clean();
+    } elseif ($mod === 'nhanvien' && $act === 'delete') {
         // Xử lý xóa nhân viên
-    } else if ($mod === 'nhanvien' && $act === 'edit') {
-        // Xử lý sửa nhân viên
+       
+    } elseif ($mod === 'nhanvien' && $act === 'edit') {
+        ob_start();
+        include '../views/nhanvien/suanhanvien.php';
+        return ob_get_clean();
+    } elseif ($mod === 'thietbi') {
+        ob_start();
+        include '../views/thietbi.php';
+        return ob_get_clean();
     } else {
-        // Trường hợp mặc định: hiển thị trang chủ
         ob_start();
         include 'home.php';
         return ob_get_clean();
     }
 }
+
+// Lấy nội dung trang dựa trên mod và act
+$content = loadContent($mod, $act);
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -60,7 +76,7 @@ function loadContent($mod, $act)
         }
 
         .header {
-            height: 50px;
+            height: 70px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -147,7 +163,8 @@ function loadContent($mod, $act)
             cursor: pointer;
             color: white;
         }
-        .menu_list_button:hover{
+
+        .menu_list_button:hover {
             color: black;
         }
 
@@ -199,7 +216,7 @@ function loadContent($mod, $act)
         .menuleft-nav ul {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin-top: 60px;
         }
 
         .menuleft-nav ul li a {
@@ -303,18 +320,18 @@ function loadContent($mod, $act)
                         <li><a href="#"><i class='bx bxs-heart'></i> Khám bệnh</a></li>
                         <li><a href="#"><i class='bx bxs-duplicate'></i> Hồ sơ bệnh nhân</a></li>
                         <li><a href="index.php?mod=nhanvien&act=list"><i class='bx bxs-group'></i> Hồ sơ nhân viên</a></li>
-                        <li><a href="#"><i class='bx bxs-server'></i> Quản lí thiết bị</a></li>
+                        <li><a href="index.php?mod=thietbi"><i class='bx bxs-server'></i> Quản lí thiết bị</a></li>
                     </ul>
                     <div class="menuleft_button">
                         <ul>
-                            <li><button><i class='bx bx-log-out'></i> Đăng xuất</button></li>
-                            <li><button><i class='bx bx-revision'></i> Tải lại</button></li>
+                            <li style="margin-top: 250px;"><button><i class='bx bx-log-out'></i> Đăng xuất</button></li>
+                            <li style="margin-top: 20px;"><button><i class='bx bx-revision'></i> Tải lại</button></li>
                         </ul>
                     </div>
                 </nav>
             </div>
             <div id="tabbarright" class="tabbarright">
-                <?php echo loadContent($mod, $act); ?>
+                <?php echo $content; ?>
             </div>
         </div>
 

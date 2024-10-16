@@ -69,7 +69,9 @@
         </div>
 
         <div class="login__register">
-            <p>Bạn chưa có tài khoản? <a href="/register"><b>Đăng ký</b></a></p>
+          
+            <p>Bạn chưa có tài khoản? <a href="register.php"><b>Đăng ký</b></a></p>
+           
         </div>
     </div>
 </body>

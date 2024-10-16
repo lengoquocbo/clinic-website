@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phòng Khám Sức Khỏe</title>
+    <link rel="stylesheet" href="assets/css/loginmodal.css">
+
     <link rel="stylesheet" href="assets/css/UI.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
     <header>
         <nav>
@@ -17,9 +21,30 @@
                 <li><a href="#team">Đội ngũ nhân viên</a></li>
                 <li><a href="#medical_record">Hồ sơ bệnh án</a></li>
                 <li><a href="#contact">Liên hệ</a></li>
+                <li style="margin-left: 370px;">
+                    <form method="POST">
+                        <button class="openModalButton" type="submit" name="dangnhap">Đăng Nhập</button>
+                    </form>
+                </li>
+                <li>
+                    <form method="POST">
+                        <button type="submit" name="dangky">Đăng Ký</button>
+                    </form>
+                </li>
             </ul>
         </nav>
     </header>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['dangnhap'])) {
+            header('Location:../clinic-website/src/Views/Pages/login.php');
+            exit();
+        } else if (isset($_POST['dangky'])) {
+            header('Location:../clinic-website/src/Views/Pages/register.php');
+            exit();
+        }
+    }
+    ?>
 
     <!-- Phần Trang chủ -->
     <section id="home">
@@ -89,8 +114,8 @@
             <a href="#contact" class="cta-button">Liên hệ với chúng tôi</a>
         </div>
     </section>
-      <!-- Phần Đặt lịch -->
-      <section id="appointment">
+    <!-- Phần Đặt lịch -->
+    <section id="appointment">
         <div class="appointment-header">
             <h2>Đặt Lịch Hẹn</h2>
             <p>Hãy điền thông tin vào form bên dưới để đặt lịch hẹn với chúng tôi. Chúng tôi sẽ liên hệ với bạn để xác nhận lịch hẹn.</p>
@@ -126,12 +151,12 @@
                         </select>
                     </div>
                     <div>
-                        <label for="doctor">Bác sĩ:</label>
-                        <select id="doctor" name="doctor" required>
-                            <option value="">Chọn bác sĩ</option>
-                            <option value="doctor1">Bác sĩ 1</option>
-                            <option value="doctor2">Bác sĩ 2</option>
-                            <option value="doctor3">Bác sĩ 3</option>
+                        <label for="service">Dịch vụ:</label>
+                        <select id="service" name="service" required>
+                            <option value="">Chọn dịch vụ</option>
+                            <option value="service1">Dịch vụ 1</option>
+                            <option value="service1">Dịch vụ 2</option>
+                            <option value="service1">Dịch vụ 3</option>
                         </select>
                     </div>
                 </div>
@@ -167,9 +192,9 @@
             </div>
         </div>
     </section>
-    
-      <!-- Phần Đội ngũ nhân viên -->
-      <section id="team">
+
+    <!-- Phần Đội ngũ nhân viên -->
+    <section id="team">
         <h2>Đội ngũ nhân viên</h2>
         <p>Đội ngũ chuyên gia y tế hàng đầu với nhiều năm kinh nghiệm trong các lĩnh vực sức khỏe và y tế. Chúng tôi tự hào vì có một đội ngũ bác sĩ tận tâm, nhiệt tình và luôn cập nhật các kiến thức y khoa mới nhất.</p>
         <div class="team-members">
@@ -226,8 +251,8 @@
             </div>
         </div>
     </section>
-    
-    
+
+
 
     <!-- Phần Hồ sơ bệnh án -->
     <section id="medical_record">
@@ -257,70 +282,74 @@
         };
 
         function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     </script>
-<footer>
-    <div class="container-footer">
-        <div class="footer">
-            <!-- Phần Đăng ký nhận tin tức -->
-            <div class="newsletter">
-                <div class="newsletter-left">
-                    <h2>Đăng ký nhận</h2>
-                    <h1>tin tức sức khỏe</h1>
-                </div>
-                <div class="newsletter-right">
-                    <div class="newsletters-input">
-                        <input type="email" placeholder="Nhập địa chỉ email của bạn" name="email" id="newsletter-email" required>
-                        <button type="submit">Gửi</button>
+    <footer>
+        <div class="container-footer">
+            <div class="footer">
+                <!-- Phần Đăng ký nhận tin tức -->
+                <div class="newsletter">
+                    <div class="newsletter-left">
+                        <h2>Đăng ký nhận</h2>
+                        <h1>tin tức sức khỏe</h1>
                     </div>
-                </div>
-            </div>
-
-            <!-- Nội dung footer -->
-            <div class="footer-content">
-                <!-- Thông tin về phòng khám -->
-                <div class="footer-main">
-                    <h2>Phòng Khám Sức Khỏe</h2>
-                    <p>Chúng tôi cam kết mang lại dịch vụ y tế tốt nhất cho sức khỏe của bạn và gia đình. Luôn đồng hành cùng bạn trong mọi hành trình chăm sóc sức khỏe.</p>
-                    <div class="social-links">
-                        <a href="#"><i class='bx bxl-instagram' ></i></i></a>
-                        <a href="#"><i class='bx bxl-twitter' ></i></a>
-                        <a href="#"><i class='bx bxl-facebook-circle' ></i></i></a>
-                        <a href="#"><i class='bx bxl-gmail'></i></a>
+                    <div class="newsletter-right">
+                        <div class="newsletters-input">
+                            <input type="email" placeholder="Nhập địa chỉ email của bạn" name="email" id="newsletter-email" required>
+                            <button type="submit">Gửi</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Liên kết hữu ích -->
-                <div class="links">
-                    <p>Liên kết hữu ích</p>
-                    <a href="#" class="link">Dịch vụ của chúng tôi</a>
-                    <a href="#" class="link">Câu hỏi thường gặp</a>
-                    <a href="#" class="link">Liên hệ hỗ trợ</a>
-                </div>
+                <!-- Nội dung footer -->
+                <div class="footer-content">
+                    <!-- Thông tin về phòng khám -->
+                    <div class="footer-main">
+                        <h2>Phòng Khám Sức Khỏe</h2>
+                        <p>Chúng tôi cam kết mang lại dịch vụ y tế tốt nhất cho sức khỏe của bạn và gia đình. Luôn đồng hành cùng bạn trong mọi hành trình chăm sóc sức khỏe.</p>
+                        <div class="social-links">
+                            <a href="#"><i class='bx bxl-instagram'></i></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-facebook-circle'></i></i></a>
+                            <a href="#"><i class='bx bxl-gmail'></i></a>
+                        </div>
+                    </div>
 
-                <!-- Chính sách và điều khoản -->
-                <div class="links">
-                    <p>Chính sách</p>
-                    <a href="#" class="link">Chính sách bảo mật</a>
-                    <a href="#" class="link">Điều khoản sử dụng</a>
-                </div>
+                    <!-- Liên kết hữu ích -->
+                    <div class="links">
+                        <p>Liên kết hữu ích</p>
+                        <a href="#" class="link">Dịch vụ của chúng tôi</a>
+                        <a href="#" class="link">Câu hỏi thường gặp</a>
+                        <a href="#" class="link">Liên hệ hỗ trợ</a>
+                    </div>
 
-                <!-- Điều hướng -->
-                <div class="links">
-                    <p>Điều hướng</p>
-                    <a href="#home" class="link">Trang chủ</a>
-                    <a href="#services"class="link">Dịch vụ</a>
-                    <a href="#appointment"class="link">Đặt lịch</a>
-                    <a href="#team" class="link">Đội ngũ nhân viên</a>
-                    <a href="#medical_record"class="link">Hồ sơ bệnh án</a>
-                    <a href="#contact"class="link">Liên hệ</a>       
+                    <!-- Chính sách và điều khoản -->
+                    <div class="links">
+                        <p>Chính sách</p>
+                        <a href="#" class="link">Chính sách bảo mật</a>
+                        <a href="#" class="link">Điều khoản sử dụng</a>
+                    </div>
+
+                    <!-- Điều hướng -->
+                    <div class="links">
+                        <p>Điều hướng</p>
+                        <a href="#home" class="link">Trang chủ</a>
+                        <a href="#services" class="link">Dịch vụ</a>
+                        <a href="#appointment" class="link">Đặt lịch</a>
+                        <a href="#team" class="link">Đội ngũ nhân viên</a>
+                        <a href="#medical_record" class="link">Hồ sơ bệnh án</a>
+                        <a href="#contact" class="link">Liên hệ</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
+
 </html>
 <script src="assets/js/UI.js"></script>

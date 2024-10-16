@@ -1,3 +1,27 @@
+<?php
+$mod = isset($_GET['mod']) ? $_GET['mod'] : '';
+$act = isset($_GET['act']) ? $_GET['act'] : '';
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+
+
+
+// Hàm để tải nội dung của trang
+function loadContentnhanvien($mod, $act)
+{
+    if ($mod === 'nhanvien' && $act === 'edit') {
+        ob_start();
+        include '../views/nhanvien/suanhanvien,php';
+        return ob_get_clean();
+    } elseif ($mod === 'thuoc' && $act === 'add') {
+        ob_start();
+        include '../views/thuoc/themthuoc.php';
+        return ob_get_clean();
+    } elseif ($mod === 'thuoc' && $act === 'delete') {
+    //    .....
+    }
+}
+$content = loadContentnhanvien($mod, $act);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +38,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 80%;
+            width: 100%;
             margin-top: 30px;
 
         }
@@ -114,7 +138,7 @@
             <?php } ?>
 
             <!-- Nút thêm thuốc (hiển thị mà không cần quyền admin) -->
-            <button onclick="location.href='themthuoc.php'" class="medicine-list__add-btn">Thêm thuốc</button>
+            <a href="index.php?mod=nhanvien&act=add"><button class="medicine-list__add-btn">Thêm Nhân Viên mới</button></a>
 
             <!-- Bảng có thanh cuộn -->
             <div class="table_wrapper">
@@ -129,7 +153,6 @@
                     </tr>
                     <?php
                     require_once '../model/nhanvienmodel.php';
-
                     $nhanvienmodel = new Nhanvien();
                     $nhanvien_list = $nhanvienmodel->getALL();
                     foreach ($nhanvien_list as $nhanvien) { ?>
@@ -140,8 +163,8 @@
                             <td><?= $nhanvien['phone'] ?></td>
                             <td><?= $nhanvien['status'] ?></td>
                             <td>
-                                <a href='suathuoc.php?id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
-                                <a href='xoathuoc.php?id=<?= $thuoc['medicineID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
+                                <a href="index.php?mod=nhanvien&act=edit&id=<?= $nhanvien['staffID'] ?>" class="medicine-list__action-btn">Sửa</a>
+                                <a href='xoathuoc.php?id=<?= $nhanvien['staffID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
                             </td>
                         </tr>
                     <?php  } ?>

@@ -14,10 +14,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 80%;
+            width: 100%;
             border-radius: 8px;
             margin-top: 30px;
-
+         
         }
         .medicine-list__table-container {
             max-height: 400px;

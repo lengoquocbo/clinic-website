@@ -589,7 +589,7 @@ body {
 section {
     padding: 3rem;
     margin: 50px auto;
-    max-width: 1200px;
+    max-width: 85%;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
