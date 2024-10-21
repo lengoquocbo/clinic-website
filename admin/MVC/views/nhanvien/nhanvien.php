@@ -152,7 +152,7 @@ $content = loadContentnhanvien($mod, $act);
                         <th>Thao tác</th>
                     </tr>
                     <?php
-                    require_once '../model/nhanvienmodel.php';
+                    require_once __DIR__ . '/../../model/nhanvienmodel.php';
                     $nhanvienmodel = new Nhanvien();
                     $nhanvien_list = $nhanvienmodel->getALL();
                     foreach ($nhanvien_list as $nhanvien) { ?>

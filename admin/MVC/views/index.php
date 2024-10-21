@@ -35,6 +35,26 @@ function loadContent($mod, $act)
         ob_start();
         include '../views/nhanvien/suanhanvien.php';
         return ob_get_clean();
+    } elseif ($mod === 'dichvu' && $act === 'edit') {
+        ob_start();
+        include '../views/dichvu/suadichvu.php';
+        return ob_get_clean();
+        # code...
+    } elseif ($mod === 'dichvu' && $act === 'list') {
+        # code...
+        ob_start();
+        include '../views/dichvu/dichvu.php';
+        return ob_get_clean();
+    } elseif ($mod === 'dichvu' && $act === 'delete') {
+        # code...
+        ob_start();
+        include '../views/dichvu/xoadichvu.php';
+        return ob_get_clean();
+    } elseif ($mod === 'dichvu' && $act === 'add') {
+        # code...
+        ob_start();
+        include '../views/dichvu/themdichvu.php';
+        return ob_get_clean();
     } elseif ($mod === 'thietbi') {
         ob_start();
         include '../views/thietbi.php';
@@ -76,7 +96,7 @@ $content = loadContent($mod, $act);
         }
 
         .header {
-            height: 70px;
+            height: 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -98,13 +118,10 @@ $content = loadContent($mod, $act);
         }
 
         .header .nav ul li {
-            font-size: 20px;
+            
             border-radius: 5px;
-            height: 50px;
-            width: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 0;
+            
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -117,6 +134,12 @@ $content = loadContent($mod, $act);
         }
 
         .header .nav ul li a {
+            font-size: 20px;
+            height: 50px;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-decoration: none;
             color: #ffffff;
             transition: color 0.3s ease;
@@ -295,7 +318,7 @@ $content = loadContent($mod, $act);
                 <ul>
                     <li><a href="index.php">Trang chủ</a></li>
                     <li><a href="index.php?mod=thuoc&act=list">Thuốc</a></li>
-                    <li><a href="#services">Dịch vụ</a></li>
+                    <li><a href="index.php?mod=dichvu&act=list">Dịch vụ</a></li>
                     <li><a href="#statistic">Thống kê</a></li>
                 </ul>
             </nav>
