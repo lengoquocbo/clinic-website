@@ -11,15 +11,21 @@ function loadContent($mod, $act)
         include '../views/thuoc/thuoc.php';
         return ob_get_clean();
     } elseif ($mod === 'thuoc' && $act === 'add') {
-        // Xử lý thêm thuốc
-        // Chuyển hướng nếu cần và exit để ngăn chặn thực thi thêm mã
-        header('Location: ../clinic-website/src/Views/Pages/thuoc_add.php');
-        exit();
+        ob_start();
+        include '../views/thuoc/themthuoc.php';
+        return ob_get_clean();
     } elseif ($mod === 'thuoc' && $act === 'delete') {
-     
+        ob_start();
+        include '../views/thuoc/xoathuoc.php';
+        return ob_get_clean();
     } elseif ($mod === 'thuoc' && $act === 'edit') {
-  
+        ob_start();
+        include '../views/thuoc/suathuoc.php';
+        return ob_get_clean();
        
+       
+        //Nhân Viên
+
     } elseif ($mod === 'nhanvien' && $act === 'list') {
         ob_start();
         include '../views/nhanvien/nhanvien.php';
@@ -27,10 +33,11 @@ function loadContent($mod, $act)
     } elseif ($mod === 'nhanvien' && $act === 'add') {
         ob_start();
         include '../views/nhanvien/themnhanvien.php';
-        return ob_end_clean();
+        return ob_get_clean();
     } elseif ($mod === 'nhanvien' && $act === 'delete') {
-        // Xử lý xóa nhân viên
-       
+        ob_start();
+        include '../views/nhanvien/xoanhanvien.php';
+        return ob_get_clean();       
     } elseif ($mod === 'nhanvien' && $act === 'edit') {
         ob_start();
         include '../views/nhanvien/suanhanvien.php';
@@ -96,7 +103,7 @@ $content = loadContent($mod, $act);
         }
 
         .header {
-            height: 50px;
+            height: 70px;
             display: flex;
             justify-content: space-between;
             align-items: center;

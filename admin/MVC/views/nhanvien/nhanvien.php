@@ -17,7 +17,7 @@ function loadContentnhanvien($mod, $act)
         include '../views/thuoc/themthuoc.php';
         return ob_get_clean();
     } elseif ($mod === 'thuoc' && $act === 'delete') {
-    //    .....
+        //    .....
     }
 }
 $content = loadContentnhanvien($mod, $act);
@@ -75,8 +75,13 @@ $content = loadContentnhanvien($mod, $act);
             cursor: pointer;
             margin-bottom: 20px;
             display: block;
-            margin-left: auto;
+            height: 30px;
+            text-decoration: none;
+            width: 150px;
         }
+        
+            
+
 
         .table th,
         .table td {
@@ -137,8 +142,8 @@ $content = loadContentnhanvien($mod, $act);
                 </div>
             <?php } ?>
 
-            <!-- Nút thêm thuốc (hiển thị mà không cần quyền admin) -->
-            <a href="index.php?mod=nhanvien&act=add"><button class="medicine-list__add-btn">Thêm Nhân Viên mới</button></a>
+
+            <a href="index.php?mod=nhanvien&act=add" class="medicine-list__add-btn">Thêm Nhân Viên mới</a>
 
             <!-- Bảng có thanh cuộn -->
             <div class="table_wrapper">
@@ -148,6 +153,7 @@ $content = loadContentnhanvien($mod, $act);
                         <th>Họ và tên</th>
                         <th>Chức vụ</th>
                         <th>Số điện thoại</th>
+                        <th>Hình ảnh</th>
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
@@ -161,10 +167,17 @@ $content = loadContentnhanvien($mod, $act);
                             <td><?= $nhanvien['fullname'] ?></td>
                             <td><?= $nhanvien['position'] ?></td>
                             <td><?= $nhanvien['phone'] ?></td>
+                            <td>
+                                <?php if (!empty($nhanvien['hinhanh'])): ?>
+                                    <img src="../views/nhanvien/uploads/<?= htmlspecialchars($nhanvien['hinhanh']) ?>" alt="Hình ảnh nhân viên" style="width: 100px; height: auto;">
+                                <?php else: ?>
+                                    Không có hình ảnh
+                                <?php endif; ?>
+                            </td>
                             <td><?= $nhanvien['status'] ?></td>
                             <td>
                                 <a href="index.php?mod=nhanvien&act=edit&id=<?= $nhanvien['staffID'] ?>" class="medicine-list__action-btn">Sửa</a>
-                                <a href='xoathuoc.php?id=<?= $nhanvien['staffID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
+                                <a href='index.php?mod=nhanvien&act=delete&id=<?= $nhanvien['staffID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa người này?")' class="medicine-list__action-btn">Xóa</a>
                             </td>
                         </tr>
                     <?php  } ?>

@@ -51,10 +51,12 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             display: block;
-            margin-left: auto;
             margin-right: 20px;
+            width: 90px;
+            text-decoration: none;
+            margin-left: 20px;
         }
 
         .medicine-list__add-btn:hover {
@@ -124,7 +126,7 @@
         <?php } ?>
 
         <!-- Nút thêm thuốc -->
-        <button onclick="location.href='themthuoc.php'" class="medicine-list__add-btn">Thêm thuốc</button>
+        <a href="index.php?mod=thuoc&act=add" class="medicine-list__add-btn">Thêm Thuốc</a>
 
         <!-- Bảng danh sách thuốc -->
         <div class="medicine-list__table-container">
@@ -152,8 +154,8 @@
                             <td><?= number_format($thuoc['price'], 0, ',', '.') ?> VNĐ</td>
                             <td><?= $thuoc['function'] ?></td>
                             <td>
-                                <a href='suathuoc.php?id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
-                                <a href='xoathuoc.php?id=<?= $thuoc['medicineID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
+                                <a href='index.php?mod=thuoc&act=edit&id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
+                                <a href='index.php?mod=thuoc&act=delete&id=<?= $thuoc['medicineID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
                             </td>
                         </tr>
                     <?php } ?>

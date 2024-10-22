@@ -63,6 +63,10 @@ class Services{
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public function getname() {
+        $result = $this->db->query("SELECT serviceID, servicename FROM services");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
 }
 ?>
