@@ -46,7 +46,7 @@
 <body>
 
     <?php
-    require_once '../model/nhanvienmodel.php';
+    require_once __DIR__ . '/../../model/nhanvienmodel.php';
     if (isset($_GET['id'])) {
         $staffID = $_GET['id'];
         $nhanvienmodel = new Nhanvien();

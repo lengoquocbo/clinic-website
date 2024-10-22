@@ -149,7 +149,7 @@
                         <tr>
                             <td><?= $thuoc['medicineID'] ?></td>
                             <td><?= $thuoc['name'] ?></td>
-                            <td><?= number_format($thuoc['price'], 0, ',', '.') ?></td>
+                            <td><?= number_format($thuoc['price'], 0, ',', '.') ?> VNĐ</td>
                             <td><?= $thuoc['function'] ?></td>
                             <td>
                                 <a href='suathuoc.php?id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
