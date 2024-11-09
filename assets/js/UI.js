@@ -1,4 +1,22 @@
-// phan slide
+// menu
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+// Lấy phần tử "Trang chủ"
+const homeLink = navMenu.querySelector('li:first-child');
+
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+
+    // Kiểm tra nếu menu đang hiển thị
+    if (navMenu.classList.contains('show')) {
+        homeLink.style.display = 'none'; // Ẩn "Trang chủ" khi mở menu
+    } else {
+        homeLink.style.display = 'block'; // Hiện "Trang chủ" khi đóng menu
+    }
+});
+
+// phan slides
 let slideIndex = 0;
     showSlides();
     

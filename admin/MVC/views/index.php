@@ -22,8 +22,12 @@ function loadContent($mod, $act)
         ob_start();
         include '../views/thuoc/suathuoc.php';
         return ob_get_clean();
-       
-       
+    } elseif ($mod === 'thuoc' && $act === 'ketoa') {
+        ob_start();
+        include '../views/khambenh/kethuoc/themkethuoc.php';
+        return ob_get_clean();
+
+
         //Nhân Viên
 
     } elseif ($mod === 'nhanvien' && $act === 'list') {
@@ -37,12 +41,14 @@ function loadContent($mod, $act)
     } elseif ($mod === 'nhanvien' && $act === 'delete') {
         ob_start();
         include '../views/nhanvien/xoanhanvien.php';
-        return ob_get_clean();       
+        return ob_get_clean();
     } elseif ($mod === 'nhanvien' && $act === 'edit') {
         ob_start();
         include '../views/nhanvien/suanhanvien.php';
         return ob_get_clean();
-    } elseif ($mod === 'dichvu' && $act === 'edit') {
+    }
+    // dịch vụ 
+    elseif ($mod === 'dichvu' && $act === 'edit') {
         ob_start();
         include '../views/dichvu/suadichvu.php';
         return ob_get_clean();
@@ -66,7 +72,30 @@ function loadContent($mod, $act)
         ob_start();
         include '../views/thietbi.php';
         return ob_get_clean();
-    } else {
+    }
+    // khám bệnh 
+    else if ($mod === 'lichhen' && $act === 'list') {
+        ob_start();
+        include '../views/lichhen.php';
+        return ob_get_clean();
+    } else if ($mod === 'lichhen' && $act === 'add') {
+        ob_start();
+        include '../views/khambenh/themkhambenh.php';
+        return ob_get_clean();
+    } else if ($mod === 'lichhen' && $act === 'xacnhan') {
+        ob_start();
+        include '../views/khambenh/khambenh.php';
+        return ob_get_clean();
+    } else if ($mod === 'lichhen' && $act === 'cancel') {
+        ob_start();
+        include '../views/khambenh.php';
+        return ob_get_clean();
+    } else if ($mod === 'khambenh' && $act === 'kethuoc'){
+       ob_start();
+       include '../views/khambenh/kethuoc/kethuoc.php';
+       return ob_get_clean();
+    }
+     else {
         ob_start();
         include 'home.php';
         return ob_get_clean();
@@ -94,6 +123,7 @@ $content = loadContent($mod, $act);
             height: 100%;
             box-sizing: border-box;
             font-family: var(--default-font);
+            background-color: white  ;
         }
 
         .container {
@@ -125,10 +155,10 @@ $content = loadContent($mod, $act);
         }
 
         .header .nav ul li {
-            
+
             border-radius: 5px;
             padding: 0;
-            
+
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -192,7 +222,14 @@ $content = loadContent($mod, $act);
             font-size: 30px;
             cursor: pointer;
             color: white;
+            margin-right: 20px;
+            z-index: 10;
+            /* Đảm bảo nút hiển thị trên các thành phần khác */
+            position: relative;
+            /* Đặt vị trí tương đối */
         }
+
+
 
         .menu_list_button:hover {
             color: black;
@@ -346,10 +383,12 @@ $content = loadContent($mod, $act);
                 <label for="menu_list_check" class="exit_menu_list"><i class='bx bx-x'></i></label>
                 <nav class="menuleft-nav">
                     <ul>
-                        <li><a href="#" id="lichhen"><i class='bx bx-calendar'></i> Lịch hẹn</a></li>
-                        <li><a href="#"><i class='bx bxs-heart'></i> Khám bệnh</a></li>
-                        <li><a href="#"><i class='bx bxs-duplicate'></i> Hồ sơ bệnh nhân</a></li>
-                        <li><a href="index.php?mod=nhanvien&act=list"><i class='bx bxs-group'></i> Hồ sơ nhân viên</a></li>
+                        <li><a href="index.php?mod=lichhen&act=list" id="lichhen"><i class='bx bx-calendar'></i> Lịch hẹn</a></li>
+                        <li><a href="index.php?mod=lichhen&act=add"><i class='bx bxs-heart'></i> Khám bệnh</a></li>
+                        <li><a href="index.php?mod=thuoc&act=ketoa"><i class='bx bxs-capsule'></i></i> Kê Thuốc</a></li>
+                        <li><a href="#"><i class='bx bxs-group'></i> Quản lí người dùng</a></li>
+                        <li><a href="#"><i class='bx bxs-duplicate'></i> Quản lí bệnh nhân</a></li>
+                        <li><a href="index.php?mod=nhanvien&act=list"><i class='bx bxs-group'></i> Quản lí nhân viên</a></li>
                         <li><a href="index.php?mod=thietbi"><i class='bx bxs-server'></i> Quản lí thiết bị</a></li>
                     </ul>
                     <div class="menuleft_button">
@@ -366,7 +405,7 @@ $content = loadContent($mod, $act);
         </div>
 
         <div class="footer">
-            <span>By quocbo - quanghuy @ vku-23JIT | <?php echo date("d/m/Y"); ?></span>
+            <span>By quocbo - quanghuy - tanphat @ vku-23JIT | <?php echo date("d/m/Y"); ?></span>
         </div>
     </div>
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +52,8 @@
             cursor: pointer;
             margin-bottom: 20px;
             display: block;
-            margin-left: auto;
+            text-decoration: none;
+            width: 70px;
         }
 
         .table th,
@@ -105,46 +107,48 @@
     <div class="around">
 
         <div class="table_container">
-            <h2 class="medicine-list__title">Danh sách nhân viên</h2>
+            <h2 class="medicine-list__title">Danh Sách Lịch Hẹn</h2>
 
             <?php if (isset($_COOKIE['msg'])) { ?>
                 <div class="alert alert--success">
                     <strong>Thông báo</strong> <?= $_COOKIE['msg'] ?>
                 </div>
             <?php } ?>
-
-            <!-- Nút thêm thuốc (hiển thị mà không cần quyền admin) -->
-            <button onclick="location.href='themthuoc.php'" class="medicine-list__add-btn">Thêm thuốc</button>
-
+            <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Tạo Mới</a>
             <!-- Bảng có thanh cuộn -->
             <div class="table_wrapper">
                 <table class="table">
                     <tr>
                         <th>ID</th>
+                        <th>Thứ tự</th>
                         <th>Họ và tên</th>
-                        <th>Chức vụ</th>
+                        <th>Ngày giờ đặt</th>
                         <th>Số điện thoại</th>
+                        <th>Dịch vụ</th>
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
                     <?php
-                    require_once '../model/nhanvienmodel.php';
+                    require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\lichhenmodel.php';
 
-                    $nhanvienmodel = new Nhanvien();
-                    $nhanvien_list = $nhanvienmodel->getALL();
-                    foreach ($nhanvien_list as $nhanvien) { ?>
+                    $lichhenmodel = new Appointment();
+                    $lichhen_list = $lichhenmodel->getALL();
+                    foreach ($lichhen_list as $lichhen) { ?>
                         <tr>
-                            <td><?= $nhanvien['staffID'] ?></td>
-                            <td><?= $nhanvien['fullname'] ?></td>
-                            <td><?= $nhanvien['position'] ?></td>
-                            <td><?= $nhanvien['phone'] ?></td>
-                            <td><?= $nhanvien['status'] ?></td>
+                            <td><?= $lichhen['appointmentID'] ?></td>
+                            <td><?= $lichhen['ordernumber'] ?></td>
+                            <td><?= $lichhen['fullname'] ?></td>
+                            <td><?= $lichhen['appointmentday'] ?></td>
+                            <td><?= $lichhen['phone'] ?></td>
+                            <td><?= $lichhen['serviceName'] ?></td>
+                            <td><?= $lichhen['status'] ?></td>
                             <td>
-                                <a href='suathuoc.php?id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
-                                <a href='xoathuoc.php?id=<?= $thuoc['medicineID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>
+                                <a href='index.php?mod=lichhen&act=xacnhan&id=<?= $lichhen['appointmentID'] ?>' class="medicine-list__action-btn">Xong</a>
+                                <a href='index.php?mod=lichhen&act=cancel&id=<?= $lichhen['appointmentID'] ?>' onclick='return confirm("Bạn có chắc muốn hủy lịch hẹn này không?")' class="medicine-list__action-btn">Hủy</a>
                             </td>
                         </tr>
                     <?php  } ?>
+
                 </table>
             </div>
         </div>

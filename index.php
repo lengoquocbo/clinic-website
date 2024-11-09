@@ -7,14 +7,19 @@
     <title>Phòng Khám Sức Khỏe</title>
     <link rel="stylesheet" href="assets/css/loginmodal.css">
 
-    <link rel="stylesheet" href="assets/css/UI.css">
+   <link rel="stylesheet" href="assets/css/UI.css">
+    <link rel="stylesheet" href="assets/css/responsiveUI.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
     <header>
         <nav>
-            <ul>
+            <div class="menu-toggle">
+                <span class="home-link"><a href="#home">Trang chủ</a></span>
+                <i class='bx bx-menu-alt-right'></i>
+            </div>
+            <ul id="nav-menu">
                 <li><a href="#home">Trang chủ</a></li>
                 <li><a href="#services">Dịch vụ</a></li>
                 <li><a href="#appointment">Đặt lịch</a></li>

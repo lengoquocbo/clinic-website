@@ -20,23 +20,32 @@ class Medicine
     // Lấy thông tin thuốc theo ID
     public function getById($id)
     {
+        // Kiểm tra xem $id có phải là số nguyên không
+        if (!is_numeric($id)) {
+            return null; // Hoặc xử lý lỗi phù hợp
+        }
+    
+        // Chuẩn bị và thực thi câu truy vấn
         $stmt = $this->db->prepare("SELECT * FROM medicines WHERE medicineID = ?");
+        if ($stmt === false) {
+            die('Error in prepare: ' . $this->db->error);
+        }
+    
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        
+        // Lấy kết quả và kiểm tra
+        $result = $stmt->get_result();
+        return $result ? $result->fetch_assoc() : null; // Trả về mảng kết quả hoặc null
     }
+    
 
     
     public function addMedicine($data)
     {
-        // Chuẩn bị câu lệnh SQL
+
         $stmt = $this->db->prepare("INSERT INTO medicines (serviceID, name, function, price, status) VALUES (?, ?, ?, ?, ?)");
-
-        // Bind các tham số vào câu lệnh SQL
-        // Chú ý kiểu của serviceID là integer nên bạn cần đảm bảo nó là số nguyên
         $stmt->bind_param("issss", $data['serviceID'], $data['name'], $data['function'], $data['price'], $data['status']);
-
-        // Thực hiện câu lệnh
         return $stmt->execute();
     }
 
@@ -62,4 +71,32 @@ class Medicine
         }
         return true;
     }
+    public function getbyServiceID($serviceID){
+        $stmt = $this->db->prepare("SELECT * FROM medicines WHERE serviceID = ?");
+        $stmt->bind_param("i", $serviceID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC); // Trả về tất cả các hàng dưới dạng mảng
+    }
+    public function createUsemedicine($mdata) {
+        $stmt = $this->db->prepare("INSERT INTO usemedicines (usemedicineID, userviceID) VALUES (?, ?)");
+        
+        if ($stmt === false) {
+            die('Prepare failed: ' . htmlspecialchars($this->db->error));
+        }
+    
+        $stmt->bind_param("ss", $mdata['usemedicineID'], $mdata['userviceID']);
+    
+        if ($stmt->execute()) {
+            return true; // Thành công
+        } else {
+            return false; // Thất bại
+        }
+    
+        $stmt->close();
+    }
 }
+
+
+    
+

@@ -67,6 +67,9 @@ class Services{
         $result = $this->db->query("SELECT serviceID, servicename FROM services");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public function createUseservice(){
+        
+    }
 
 }
 ?>
