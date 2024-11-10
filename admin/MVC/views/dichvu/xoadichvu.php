@@ -11,8 +11,7 @@ if (isset($_GET['id'])) {
               </script>";
         exit;
     } else {
-        echo
-             "<script> alert('Lỗi khi cập nhật: " . $this->db->error . "'); window.history.back(); </script>";
+        echo "<script> alert('Lỗi khi cập nhật: " . $this->db->error . "'); window.history.back(); </script>";
     }
 }
 ?>

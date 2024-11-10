@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInitd66ef71106f127859dac92417214da04
 {
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Predis\\' => 7,
+        ),
         'A' => 
         array (
             'Admin\\ClinicWebsite\\' => 20,
@@ -14,6 +18,10 @@ class ComposerStaticInitd66ef71106f127859dac92417214da04
     );
 
     public static $prefixDirsPsr4 = array (
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
+        ),
         'Admin\\ClinicWebsite\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
