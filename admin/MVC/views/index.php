@@ -95,6 +95,20 @@ function loadContent($mod, $act)
        include '../views/khambenh/kethuoc/kethuoc.php';
        return ob_get_clean();
     }
+    else if ($mod === 'benhnhan' && $act === 'list'){
+        ob_start();
+        include '../views/benhnhan/benhnhan.php';
+        return ob_get_clean();
+    }
+    else if ($mod === 'benhnhan' && $act === 'delete'){
+        ob_start();
+        include '../views/benhnhan/xoabenhnhan.php';
+        return ob_get_clean();
+    }else if ($mod === 'benhnhan' && $act === 'see'){
+        ob_start();
+        include '../views/benhnhan/xembenhnhan.php';
+        return ob_get_clean();
+    }
      else {
         ob_start();
         include 'home.php';
@@ -386,8 +400,8 @@ $content = loadContent($mod, $act);
                         <li><a href="index.php?mod=lichhen&act=list" id="lichhen"><i class='bx bx-calendar'></i> Lịch hẹn</a></li>
                         <li><a href="index.php?mod=lichhen&act=add"><i class='bx bxs-heart'></i> Khám bệnh</a></li>
                         <li><a href="index.php?mod=thuoc&act=ketoa"><i class='bx bxs-capsule'></i></i> Kê Thuốc</a></li>
-                        <li><a href="#"><i class='bx bxs-group'></i> Quản lí người dùng</a></li>
-                        <li><a href="#"><i class='bx bxs-duplicate'></i> Quản lí bệnh nhân</a></li>
+                        <li><a href="index.php?mod=nguoidung&act=list"><i class='bx bxs-group'></i> Quản lí người dùng</a></li>
+                        <li><a href="index.php?mod=benhnhan&act=list"><i class='bx bxs-duplicate'></i> Quản lí bệnh nhân</a></li>
                         <li><a href="index.php?mod=nhanvien&act=list"><i class='bx bxs-group'></i> Quản lí nhân viên</a></li>
                         <li><a href="index.php?mod=thietbi"><i class='bx bxs-server'></i> Quản lí thiết bị</a></li>
                     </ul>
