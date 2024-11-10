@@ -17,5 +17,8 @@
     "scripts": {
         "phpcs": "phpcs",
         "phpcbf": "phpcbf"
+    },
+    "require": {
+        "predis/predis": "^2.2"
     }
 }

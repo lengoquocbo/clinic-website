@@ -42,10 +42,10 @@
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['dangnhap'])) {
-            header('Location:../clinic-website/src/Views/Pages/login.php');
+            header('Location:../clinic-website/src/Views/login.php');
             exit();
         } else if (isset($_POST['dangky'])) {
-            header('Location:../clinic-website/src/Views/Pages/register.php');
+            header('Location:../clinic-website/src/Views/register.php');
             exit();
         }
     }
