@@ -16,8 +16,6 @@ app.use(bodyParser.json());
 // Cấu hình
 const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
 
-
-
 // Routes
 app.post('/api/login', async (req, res) => {
     try {

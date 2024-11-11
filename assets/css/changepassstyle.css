@@ -1,3 +1,151 @@
-.hello{
-    font-size: bold;
+
+body{
+    font-family: var(--default-font);
+    background: #F5F5F5;
 }
+h2{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 40px;
+    color: var(--color-primary-text);
+    
+}
+h3{
+    text-align: center;
+    margin: 10px 0 50px 0;
+    color: var(--color-primary-text);
+}
+.form{
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+h4{
+    text-align: center;
+    margin: 20px 0 50px 0;
+}
+
+p {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.try_again{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.try_again button{
+    background: none;
+    border: none;
+    color: #555;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 12px; /* Để giữ kích thước chữ giống các phần tử xung quanh */
+    padding: 0;
+}
+
+.try_again button:hover{
+    color:#222222;
+}
+
+.try_again p{
+    padding: 8px 0 8px 8px;
+    border: none;
+    box-shadow: none;
+}
+
+h1{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 40px;
+}
+
+.change__input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.change__input input {
+
+    height: 25px;
+    padding: 10px 40px 10px 40px;
+    /* Tạo khoảng trống cho icon bên trái */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+
+}
+
+.change__input i {
+    z-index: 10;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 25px;
+    color: #999;
+}
+.bt{
+    width: 100%;
+    height: 48px;
+    margin: 10px 0 20px 0;
+    background: #CD5B45;
+    color: white; 
+    font-size: 16px;
+    font-weight: 450;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    border: #fff;
+}
+.hidden{
+    display: none !important;
+}
+.btshowpass{
+    position: absolute;
+    padding: 0;
+    margin-top: -43px;
+    margin-left: 320px;
+    font-size:var(--font-size-medium);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.error-message {
+    justify-content: center;
+    color: red;
+    margin-top: 10px;
+    display: none;
+}
+.success-message {
+    justify-content: center;
+    color: green;
+    margin-top: 10px;
+    display: none;
+}
+@media (min-width: 612px) {
+    .btshowpass{
+        margin-left: 310px;
+    }
+}
+

@@ -1,6 +1,18 @@
 /* Hiệu ứng cho header */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.home-link a {
+    text-decoration: none;
+    color: #000;
+    text-decoration: dted;
+    text-transform: uppercase;
+}
 header {
     background-color: white;
+    
     padding: 1rem;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,7 +43,8 @@ nav ul li {
 nav ul li a {
     color: rgb(0, 0, 0);
     text-decoration: none;
-    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-size: 15px;
     padding: 10px 20px;
     border-radius: 30px;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -40,7 +53,7 @@ nav ul li a {
 nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.2);
     color: #FFD700;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* trang chu va dich vu */
