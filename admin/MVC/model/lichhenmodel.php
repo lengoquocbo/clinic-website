@@ -16,18 +16,20 @@ class Appointment
         $query = "SELECT 
     a.appointmentID,
     p.fullname,
-    p.birthdate,
-    a.appointmentday, 
+    p.birthdate, 
+    a.appointmentday,
     p.phone,
     s.servicename as serviceName,
     a.status,
-    e.visittype, 
-    e.ordernumber     
+    e.visittype,
+    e.ordernumber,
+    e.exdaytime     
 FROM appointments a
-INNER JOIN patients p ON a.patientID = p.patientID
+INNER JOIN patients p ON a.patientID = p.patientID 
 INNER JOIN examine e ON a.EXID = e.EXID
 INNER JOIN services s ON e.EXID = s.serviceID
-ORDER BY a.appointmentday DESC 
+WHERE a.status = 'waiting'
+ORDER BY e.exdaytime DESC
 LIMIT 0, 25";
         $result = $this->db->query($query);
 
@@ -213,10 +215,48 @@ LIMIT 0, 25";
     }
 
     // Xóa lịch hẹn
-    public function delete($id)
-    {
-        $stmt = $this->db->prepare("DELETE FROM appointments WHERE appointmentID = ?");
-        $stmt->bind_param("s", $id);
-        return $stmt->execute();
+    public function deleteById($id) {
+        try {
+            // Bắt đầu transaction
+            $this->db->begin_transaction();
+    
+            // Lấy patientID từ appointment
+            $getPatientStmt = $this->db->prepare("SELECT patientID, EXID FROM appointments WHERE appointmentID = ?");
+            $getPatientStmt->bind_param("s", $id);
+            $getPatientStmt->execute();
+            $appointment = $getPatientStmt->get_result()->fetch_assoc();
+            
+            if ($appointment) {
+                // Xóa examine nếu có
+                if ($appointment['EXID']) {
+                    $deleteExamineStmt = $this->db->prepare("DELETE FROM examine WHERE EXID = ?");
+                    $deleteExamineStmt->bind_param("s", $appointment['EXID']);
+                    $deleteExamineStmt->execute();
+                }
+    
+                // Xóa appointment
+                $deleteApptStmt = $this->db->prepare("DELETE FROM appointments WHERE appointmentID = ?");
+                $deleteApptStmt->bind_param("s", $id);
+                $deleteApptStmt->execute();
+    
+                // Xóa patient
+                $deletePatientStmt = $this->db->prepare("DELETE FROM patients WHERE patientID = ?");
+                $deletePatientStmt->bind_param("s", $appointment['patientID']);
+                $deletePatientStmt->execute();
+            }
+    
+            // Commit transaction
+            $this->db->commit();
+            return true;
+    
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        } finally {
+            if (isset($getPatientStmt)) $getPatientStmt->close();
+            if (isset($deleteExamineStmt)) $deleteExamineStmt->close();
+            if (isset($deleteApptStmt)) $deleteApptStmt->close();
+            if (isset($deletePatientStmt)) $deletePatientStmt->close();
+        }
     }
 }

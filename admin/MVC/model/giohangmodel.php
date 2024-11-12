@@ -9,6 +9,7 @@ if (isset($_POST['action'])) {
         $userviceID = $_POST['userviceID'];
         $medicineId = $_POST['medicineId'];
         $quantity = (int)$_POST['quantity'];
+        $note= (string)$_POST['note'];
        
 
         if (!isset($_SESSION['cart'])) {
@@ -30,7 +31,8 @@ if (isset($_POST['action'])) {
                 'usemedicineID' => $usemedicineID,
                 'userviceID' => $userviceID,
                 'medicineId' => $medicineId,
-                'quantity' => $quantity
+                'quantity' => $quantity,
+                'note'=>$note
             ];
         }
 
@@ -76,6 +78,7 @@ if (isset($_POST['action'])) {
             $userviceID = $item['userviceID'];
             $medicineID = $item['medicineId'];
             $quantity = $item['quantity'];
+            $note = $item['note'];
             $totalprice = isset($item['totalprice']) ? $item['totalprice'] : 0;
     
             // Nếu `totalprice` không hợp lệ, tính toán nó từ `quantity` và `medicineID`
@@ -96,13 +99,13 @@ if (isset($_POST['action'])) {
             }
     
             // Thêm thuốc vào bảng `usemedicines`
-            $query = "INSERT INTO usemedicines (usemedicineID, userviceID, medicineID, quantity, totalprice) VALUES (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO usemedicines (usemedicineID, userviceID, medicineID, quantity,note ,totalprice) VALUES (?, ?, ?, ?, ?,?)";
             $stmt = $db->prepare($query);
             if (!$stmt) {
                 echo 'error: Unable to prepare statement';
                 exit;
             }
-            $stmt->bind_param("sssss", $usemedicineID, $userviceID, $medicineID, $quantity, $totalprice);
+            $stmt->bind_param("ssssss", $usemedicineID, $userviceID, $medicineID, $quantity, $note,$totalprice);
             if (!$stmt->execute()) {
                 echo 'error: Unable to prepare statement - ' . $db->error;
                 exit;

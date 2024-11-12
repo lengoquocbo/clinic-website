@@ -73,8 +73,9 @@
             'serviceID' => $_POST['serviceID'],
             'name' => $_POST['name'],
             'price' => $_POST['price'],
+            'quantity'=> $_POST['quantity'],
             'function' => $_POST['function'],
-            'status' => $_POST['status'],
+            'status' => $_POST['status']
         ];
 
         // Cập nhật thông tin thuốc với serviceID
@@ -107,7 +108,8 @@
 
                     <label for="price">Giá:</label>
                     <input type="text" name="price" placeholder="Giá" value="<?= $thuoc['price'] ?? '' ?>" required>
-
+                    <label for="quantity">Giá:</label>
+                    <input type="text" name="quantity" placeholder="quantity" value="<?= $thuoc['quantity'] ?? '' ?>" required>
                     <label for="function">Chức năng:</label>
                     <input type="text" name="function" placeholder="Chức năng" value="<?= $thuoc['function'] ?? '' ?>" required>
 

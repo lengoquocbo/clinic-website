@@ -1,4 +1,6 @@
+<?php 
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +19,6 @@
             justify-content: center;
             width: 100%;
             margin-top: 30px;
-
         }
 
         .table_wrapper {
@@ -28,13 +29,11 @@
 
         .table_wrapper::-webkit-scrollbar {
             display: none;
-            /* Ẩn thanh cuộn cho Chrome, Safari */
         }
 
         .table {
             width: 100%;
             border-collapse: collapse;
-
         }
 
         .medicine-list__title {
@@ -50,10 +49,8 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-bottom: 20px;
-            display: block;
             text-decoration: none;
-            width: 70px;
+            margin-left: auto;
         }
 
         .table th,
@@ -100,12 +97,33 @@
             background-color: #d4edda;
             border-color: #c3e6cb;
         }
+
+        .btn {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn button, .btn a {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn button {
+            background-color: #28a745;
+        }
     </style>
 </head>
 
 <body>
     <div class="around">
-
         <div class="table_container">
             <h2 class="medicine-list__title">Danh Sách Lịch Hẹn</h2>
 
@@ -114,8 +132,11 @@
                     <strong>Thông báo</strong> <?= $_COOKIE['msg'] ?>
                 </div>
             <?php } ?>
-            <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Tạo Mới</a>
-            <!-- Bảng có thanh cuộn -->
+            
+            <div class="btn">
+                <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Khám trực tiếp</a>
+            </div>
+
             <div class="table_wrapper">
                 <table class="table">
                     <tr>
@@ -144,17 +165,14 @@
                             <td><?= $lichhen['status'] ?></td>
                             <td>
                                 <a href='index.php?mod=lichhen&act=xacnhan&id=<?= $lichhen['appointmentID'] ?>' class="medicine-list__action-btn">Xong</a>
-                                <a href='index.php?mod=lichhen&act=cancel&id=<?= $lichhen['appointmentID'] ?>' onclick='return confirm("Bạn có chắc muốn hủy lịch hẹn này không?")' class="medicine-list__action-btn">Hủy</a>
+                                <a style="background-color:#f6c23e ;" href='index.php?mod=lichhen&act=huy&id=<?= $lichhen['appointmentID'] ?>' onclick='return confirm("Bạn có chắc muốn hủy lịch hẹn này không?")' class="medicine-list__action-btn">Hủy</a>
                             </td>
                         </tr>
                     <?php  } ?>
-
                 </table>
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

@@ -13,6 +13,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <th>ID</th>
                     <th>Tên thuốc</th>
                     <th>Số lượng</th>
+                    <th>Ghi chú</th>
                     <th>Giá</th>
                     <th>Thành tiền</th>
                     <th>Service ID</th>
@@ -32,6 +33,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         // Kiểm tra nếu thuốc tồn tại trong cơ sở dữ liệu
         if ($medicine) {
             $quantity = $cartItem['quantity'];
+            $note= $cartItem['note'];
             $userviceID = $cartItem['userviceID'];
             $usemedicineID = $cartItem['usemedicineID'];
             $subtotal = $medicine['price'] * $quantity;
@@ -41,6 +43,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <td>' . htmlspecialchars($medicine['medicineID']) . '</td>
                     <td>' . htmlspecialchars($medicine['name']) . '</td>
                     <td>' . (int)$quantity . '</td>
+                    <td>' . htmlspecialchars($note) . '</td>
                     <td>' . number_format($medicine['price']) . ' VND</td>
                     <td>' . number_format($subtotal) . ' VND</td>
                     <td>' . htmlspecialchars($userviceID) . '</td>

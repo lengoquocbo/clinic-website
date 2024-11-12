@@ -245,6 +245,7 @@ $allServices = $serviceModel->getAll();
                 const userviceID = Math.floor(Math.random() * 1000000);
                 const medicineID = $(this).data('id');
                 const quantity = $(this).closest('tr').find('input[name="quantity"]').val();
+                const note = $(this).closest('tr').find('input[name="note"]').val();
                 const usemedicineID = Math.floor(Math.random() * 1000000); // Tạo ngẫu nhiên usemedicineID (có thể tùy chỉnh)
 
                 if (quantity <= 0 || isNaN(quantity)) {
@@ -260,11 +261,12 @@ $allServices = $serviceModel->getAll();
                         usemedicineID: usemedicineID, // Thêm usemedicineID vào dữ liệu giỏ hàng
                         userviceID: userviceID,
                         medicineId: medicineID,
-                        quantity: quantity
+                        quantity: quantity,
+                        note: note
                     },
                     success: function(response) {
                         if (response === 'success') {
-                            console.log('Medicine ID:', medicineID);
+                            console.log('Medicine ID:', medicineID, note);
                             loadCart();
                         } else {
                             alert('Có lỗi xảy ra. Vui lòng thử lại!');

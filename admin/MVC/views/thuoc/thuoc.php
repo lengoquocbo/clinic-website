@@ -137,6 +137,7 @@
                         <th>Tên thuốc</th>
                         <th>Giá (VNĐ)</th>
                         <th>Chức năng</th>
+                        <th>Số lượng</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -153,6 +154,7 @@
                             <td><?= $thuoc['name'] ?></td>
                             <td><?= number_format($thuoc['price'], 0, ',', '.') ?> VNĐ</td>
                             <td><?= $thuoc['function'] ?></td>
+                            <td><?= $thuoc['quantity'] ?></td>
                             <td>
                                 <a href='index.php?mod=thuoc&act=edit&id=<?= $thuoc['medicineID'] ?>' class="medicine-list__action-btn">Sửa</a>
                                 <a href='index.php?mod=thuoc&act=delete&id=<?= $thuoc['medicineID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa thuốc này?")' class="medicine-list__action-btn">Xóa</a>

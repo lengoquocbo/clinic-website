@@ -3,7 +3,7 @@
         'name' => 'admin/clinic-website',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '1505ec46b7bb1c3b2d2d1c372b2cbf387f23f260',
+        'reference' => '276d2bb1f68afae2842f26a8802ac77227bb68ac',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'admin/clinic-website' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1505ec46b7bb1c3b2d2d1c372b2cbf387f23f260',
+            'reference' => '276d2bb1f68afae2842f26a8802ac77227bb68ac',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -36,6 +36,15 @@
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'tecnickcom/tcpdf' => array(
+            'pretty_version' => '6.7.7',
+            'version' => '6.7.7.0',
+            'reference' => 'cfbc0028cc23f057f2baf9e73bdc238153c22086',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tecnickcom/tcpdf',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
     ),
 );

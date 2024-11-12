@@ -86,9 +86,9 @@ function loadContent($mod, $act)
         ob_start();
         include '../views/khambenh/khambenh.php';
         return ob_get_clean();
-    } else if ($mod === 'lichhen' && $act === 'cancel') {
+    } else if ($mod === 'lichhen' && $act === 'huy') {
         ob_start();
-        include '../views/khambenh.php';
+        include '../views/huylichhen.php';
         return ob_get_clean();
     } else if ($mod === 'khambenh' && $act === 'kethuoc'){
        ob_start();
@@ -107,6 +107,14 @@ function loadContent($mod, $act)
     }else if ($mod === 'benhnhan' && $act === 'see'){
         ob_start();
         include '../views/benhnhan/xembenhnhan.php';
+        return ob_get_clean();
+    }else if ($mod === 'benhnhan' && $act === 'edit'){
+        ob_start();
+        include '../views/benhnhan/suabenhnhan.php';
+        return ob_get_clean();
+    }else if ($mod === 'benhnhan' && $act === 'in'){
+        ob_start();
+        include '../views/benhnhan/export_pdf.php';
         return ob_get_clean();
     }
      else {
@@ -413,9 +421,9 @@ $content = loadContent($mod, $act);
                     </div>
                 </nav>
             </div>
-            <div id="tabbarright" class="tabbarright">
-                <?php echo $content; ?>
-            </div>
+        </div>
+        <div id="tabbarright" class="tabbarright">
+            <?php echo $content; ?>
         </div>
 
         <div class="footer">

@@ -44,16 +44,16 @@ class Medicine
     public function addMedicine($data)
     {
 
-        $stmt = $this->db->prepare("INSERT INTO medicines (serviceID, name, function, price, status) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("issss", $data['serviceID'], $data['name'], $data['function'], $data['price'], $data['status']);
+        $stmt = $this->db->prepare("INSERT INTO medicines (serviceID, name, function, quantity ,price, status) VALUES (?, ?, ?, ?, ?,?)");
+        $stmt->bind_param("isssss", $data['serviceID'], $data['name'], $data['function'], $data['quantity'] ,$data['price'], $data['status']);
         return $stmt->execute();
     }
 
     // Chỉnh sửa thông tin thuốc
     public function edit_medicine($id, $data)
     {
-        $stmt = $this->db->prepare("UPDATE medicines SET serviceID = ?, name = ?, function = ?, price = ?, status = ? WHERE medicineID = ?");
-        $stmt->bind_param("issssi", $data['serviceID'], $data['name'], $data['function'], $data['price'], $data['status'], $id);
+        $stmt = $this->db->prepare("UPDATE medicines SET serviceID = ?, name = ?, function = ?, quantity=?,price = ?, status = ? WHERE medicineID = ?");
+        $stmt->bind_param("isssssi", $data['serviceID'], $data['name'], $data['function'], $data['quantity'], $data['price'], $data['status'], $id);
         return $stmt->execute();
     }
 

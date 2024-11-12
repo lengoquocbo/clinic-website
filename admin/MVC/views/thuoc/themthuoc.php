@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'name' => $_POST['name'],
         'function' => $_POST['function'],
         'price' => $_POST['price'],
-        'status' => $_POST['status'],
+        'quantity'=>$_POST['quantity'],
+        'status' => $_POST['status']
     ];
 
     if ($medicine->addMedicine($data)) {
@@ -173,6 +174,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="price">Giá:</label>
                     <input type="text" id="price" name="price" required>
 
+                    <label for="quantity">Số lượng:</label>
+                    <input type="text" id="quantity" name="quantity" required>
                     <label for="status">Trạng Thái:</label>
                     <input type="text" id="status" name="status" required>
 

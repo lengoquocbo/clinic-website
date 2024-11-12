@@ -255,6 +255,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                 const userviceID = <?php echo json_encode($userviceID); ?>;
                 const medicineID = $(this).data('id');
                 const quantity = $(this).closest('tr').find('input[name="quantity"]').val();
+                const note = $(this).closest('tr').find('input[name="note"]').val();
                 const usemedicineID = Math.floor(Math.random() * 1000000); // Tạo ngẫu nhiên usemedicineID (có thể tùy chỉnh)
 
                 if (quantity <= 0 || isNaN(quantity)) {
@@ -270,11 +271,12 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                         usemedicineID: usemedicineID, // Thêm usemedicineID vào dữ liệu giỏ hàng
                         userviceID: userviceID,
                         medicineId: medicineID,
-                        quantity: quantity
+                        quantity: quantity,
+                        note: note
                     },
                     success: function(response) {
                         if (response === 'success') {
-                            console.log('Medicine ID:', medicineID);
+                            console.log('Medicine ID:', medicineID, note);
                             loadCart();
                         } else {
                             alert('Có lỗi xảy ra. Vui lòng thử lại!');
@@ -286,6 +288,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                     }
                 });
             });
+
 
 
             // Xóa một thuốc khỏi giỏ hàng

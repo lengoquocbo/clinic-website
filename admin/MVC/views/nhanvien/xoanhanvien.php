@@ -1,29 +1,37 @@
 <?php
-require_once __DIR__ . '/../../model/nhanvienmodel.php';
+require_once __DIR__ . '/../../models/lichhen.php';
 
 if (isset($_GET['id'])) {
-    $staffID = $_GET['id'];
-    $nhanvien = new Nhanvien();
+    $appointmentID = $_GET['id'];
+    $appointment = new Appointment();
     
-    // Thực hiện xóa nhân viên
-    if ($nhanvien->delete_staff($staffID)) {
-        echo "<script>
-                alert('Xóa nhân viên thành công!');
-                window.location.href = 'index.php?mod=nhanvien&act=list';
-              </script>";
-        exit;
-    } else {
-        // Nếu có lỗi khi xóa
-        echo "<script>
-                alert('Lỗi khi xóa nhân viên. Vui lòng thử lại.');
+    // Thực hiện xóa lịch hẹn
+    try {
+        if ($appointment->deleteById($appointmentID)) {
+            echo "<script>
+                alert('Hủy lịch hẹn thành công!');
+                window.location.href = 'index.php?mod=lichhen&act=list';
+            </script>";
+            exit;
+        } else {
+            // Nếu có lỗi khi xóa
+            echo "<script>
+                alert('Lỗi khi hủy lịch hẹn. Vui lòng thử lại!');
                 window.history.back();
-              </script>";
+            </script>";
+        }
+    } catch (Exception $e) {
+        // Xử lý lỗi cụ thể nếu có
+        echo "<script>
+            alert('Lỗi: " . addslashes($e->getMessage()) . "');
+            window.history.back();
+        </script>";
     }
 } else {
-    // Nếu không có ID, quay lại danh sách nhân viên
+    // Nếu không có ID, quay lại danh sách lịch hẹn
     echo "<script>
-            alert('Không tìm thấy nhân viên để xóa.');
-            window.location.href = 'index.php?mod=nhanvien&act=list';
-          </script>";
+        alert('Không tìm thấy lịch hẹn để hủy!');
+        window.location.href = 'index.php?mod=lichhen&act=list';
+    </script>";
 }
 ?>

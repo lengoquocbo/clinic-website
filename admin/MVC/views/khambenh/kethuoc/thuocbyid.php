@@ -29,8 +29,10 @@ if (isset($_POST['serviceID'])) {
                 <td>' . (int)$item['quantity'] . '</td>
                 <td>' . number_format($item['price']) . ' VND</td>
                 <td>' . htmlspecialchars($item['status']) . '</td>
+
                 <td>
-                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+                    <input style="height: 30px; border-radius: 4px;" type="text" name="note" value="sáng và tối (1 buổi/ 1 viên)- Sau khi ăn" class="quantity-input">
+                    <input style=" border-radius: 4px;" type="number" name="quantity" value="1" min="1" class="quantity-input">
                     <button class="add-to-cart" name="add-to-cart" data-id="' . htmlspecialchars($item['medicineID']) . '">
                         Thêm vào toa
                     </button>
@@ -40,4 +42,3 @@ if (isset($_POST['serviceID'])) {
 
     echo '</tbody></table>';
 }
-?>
