@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 ?>
 <!DOCTYPE html>
@@ -105,7 +105,8 @@
             margin-bottom: 20px;
         }
 
-        .btn button, .btn a {
+        .btn button,
+        .btn a {
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
@@ -132,7 +133,7 @@
                     <strong>Thông báo</strong> <?= $_COOKIE['msg'] ?>
                 </div>
             <?php } ?>
-            
+
             <div class="btn">
                 <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Khám trực tiếp</a>
             </div>
@@ -150,7 +151,8 @@
                         <th>Thao tác</th>
                     </tr>
                     <?php
-                    require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\lichhenmodel.php';
+
+                    require_once __DIR__ . '../../model/lichhenmodel.php';
 
                     $lichhenmodel = new Appointment();
                     $lichhen_list = $lichhenmodel->getALL();

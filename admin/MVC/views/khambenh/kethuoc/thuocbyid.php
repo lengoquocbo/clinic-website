@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\thuocmodel.php';
+require_once __DIR__ .'../../../../model/thuocmodel.php';
+
 
 if (isset($_POST['serviceID'])) {
     $serviceID = $_POST['serviceID'];

@@ -1,5 +1,6 @@
 <?php
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\benhnhanmodel.php';
+require_once __DIR__ .'../../../model/benhnhanmodel.php';
+
 require_once __DIR__ . '/../../../../vendor/tecnickcom/tcpdf/tcpdf.php';
 
 if (isset($_GET['id'])) {

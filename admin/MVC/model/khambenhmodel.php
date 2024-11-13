@@ -56,12 +56,12 @@ class khambenh
     
     public function createUseservice($sdata)
 {
-    $stmt = $this->db->prepare("INSERT INTO useservices (userviceID, EXID, serviceID) VALUES (?, ?, ?)");
+    $stmt = $this->db->prepare("INSERT INTO useservices (userviceID, EXID, serviceID,totalprice) VALUES (?, ?, ?,?)");
     if (!$stmt) {
         throw new Exception("Prepare failed: " . $this->db->error);
     }
     
-    $stmt->bind_param("sss", $sdata['userviceID'], $sdata['EXID'], $sdata['serviceID']);
+    $stmt->bind_param("ssss", $sdata['userviceID'], $sdata['EXID'], $sdata['serviceID'], $sdata['totalprice']);
     
     if (!$stmt->execute()) {
         throw new Exception("Execute failed: " . $stmt->error);

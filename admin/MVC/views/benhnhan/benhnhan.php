@@ -154,7 +154,7 @@
                     </tr>
                     <tbody id="patientTableBody">
                         <?php
-                        require_once __DIR__ . '/../../model/benhnhanmodel.php';
+                        require_once __DIR__ . '../../../model/benhnhanmodel.php';
                         $benhnhanmodel = new benhnhan();
                         $benhnhan_list = $benhnhanmodel->getALL();
                         foreach ($benhnhan_list as $benhnhan) { ?> <tr>

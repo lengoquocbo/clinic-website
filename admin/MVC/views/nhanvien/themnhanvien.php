@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\nhanvienmodel.php';
+require_once __DIR__ .'../../../model/nhanvienmodel.php';
 
 function generateRandomString($fullName) {
     $nameParts = explode(' ', $fullName);

@@ -1,7 +1,9 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\thuocmodel.php';
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\dichvumodel.php';
+require_once __DIR__ .'../../../../model/thuocmodel.php';
+require_once __DIR__ .'../../../../model/dichvumodel.php';
+
+
 $userviceID = $_POST['userviceID'] ?? null; // Đảm bảo nhận userviceID từ form hoặc session
 $serviceID = $_POST['serviceID'] ?? null;   // Đảm bảo nhận serviceID từ form hoặc session
 

@@ -9,8 +9,8 @@ if (isset($_POST['action'])) {
         $userviceID = $_POST['userviceID'];
         $medicineId = $_POST['medicineId'];
         $quantity = (int)$_POST['quantity'];
-        $note= (string)$_POST['note'];
-       
+        $note = (string)$_POST['note'];
+
 
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
@@ -32,18 +32,18 @@ if (isset($_POST['action'])) {
                 'userviceID' => $userviceID,
                 'medicineId' => $medicineId,
                 'quantity' => $quantity,
-                'note'=>$note
+                'note' => $note
             ];
         }
 
         echo 'success';
     } else if ($_POST['action'] === 'remove' && isset($_POST['medicineId'])) {
         $medicineId = $_POST['medicineId'];
-        
+
         // Loại bỏ các lệnh var_dump để tránh thêm chuỗi vào phản hồi
         // var_dump("Medicine ID from AJAX:", $medicineId);
         // var_dump("Current Cart:", $_SESSION['cart']);
-    
+
         foreach ($_SESSION['cart'] as $key => $item) {
             if ($item['medicineId'] == $medicineId) {
                 unset($_SESSION['cart'][$key]);
@@ -52,12 +52,11 @@ if (isset($_POST['action'])) {
                 exit; // Dừng script sau khi xóa thành công
             }
         }
-    
+
         // Nếu không tìm thấy sản phẩm cần xóa
         echo 'error: Item not found';
         exit;
-    }
-     elseif ($_POST['action'] === 'empty') {
+    } elseif ($_POST['action'] === 'empty') {
         unset($_SESSION['cart']);
         echo 'success';
     } elseif ($_POST['action'] === 'getCart') {
@@ -72,7 +71,7 @@ if (isset($_POST['action'])) {
             echo 'error: Invalid cart data';
             exit;
         }
-    
+        $totalAmount = 0;
         foreach ($cartData as $item) {
             $usemedicineID = $item['usemedicineID'];
             $userviceID = $item['userviceID'];
@@ -80,7 +79,7 @@ if (isset($_POST['action'])) {
             $quantity = $item['quantity'];
             $note = $item['note'];
             $totalprice = isset($item['totalprice']) ? $item['totalprice'] : 0;
-    
+
             // Nếu `totalprice` không hợp lệ, tính toán nó từ `quantity` và `medicineID`
             if ($totalprice <= 0) {
                 $query_price = "SELECT price FROM medicines WHERE medicineID = ?";
@@ -97,7 +96,8 @@ if (isset($_POST['action'])) {
                 }
                 $stmt_price->close();
             }
-    
+            $totalAmount += $totalprice;
+
             // Thêm thuốc vào bảng `usemedicines`
             $query = "INSERT INTO usemedicines (usemedicineID, userviceID, medicineID, quantity,note ,totalprice) VALUES (?, ?, ?, ?, ?,?)";
             $stmt = $db->prepare($query);
@@ -105,12 +105,41 @@ if (isset($_POST['action'])) {
                 echo 'error: Unable to prepare statement';
                 exit;
             }
-            $stmt->bind_param("ssssss", $usemedicineID, $userviceID, $medicineID, $quantity, $note,$totalprice);
+            $stmt->bind_param("ssssss", $usemedicineID, $userviceID, $medicineID, $quantity, $note, $totalprice);
             if (!$stmt->execute()) {
                 echo 'error: Unable to prepare statement - ' . $db->error;
                 exit;
             }
-    
+            $query_get_current_total = "SELECT totalprice FROM useservices WHERE userviceID = ?";
+            $stmt_get_current_total = $db->prepare($query_get_current_total);
+            $stmt_get_current_total->bind_param("s", $userviceID);
+            $stmt_get_current_total->execute();
+            $result = $stmt_get_current_total->get_result();
+
+            if ($row = $result->fetch_assoc()) {
+                $currentTotalPrice = $row['totalprice'];
+            } else {
+                echo 'error: Unable to fetch current total price';
+                exit;
+            }
+            $stmt_get_current_total->close();
+
+            // Cộng thêm $totalAmount vào $currentTotalPrice
+            $newTotalPrice = $currentTotalPrice + $totalAmount;
+
+            // Cập nhật lại `totalprice` trong bảng `useservices`
+            $query_update_total = "UPDATE useservices SET totalprice = ? WHERE userviceID = ?";
+            $stmt_update_total = $db->prepare($query_update_total);
+            $stmt_update_total->bind_param("is", $newTotalPrice, $userviceID);
+
+            if (!$stmt_update_total->execute()) {
+                echo 'error: Unable to update total price in useservices';
+                exit;
+            }
+
+            $stmt_update_total->close();
+
+
             // Cập nhật số lượng tồn kho của thuốc trong bảng `medicines`
             $query_update_quantity = "UPDATE medicines SET quantity = quantity - ? WHERE medicineID = ?";
             $stmt_update = $db->prepare($query_update_quantity);
@@ -125,12 +154,9 @@ if (isset($_POST['action'])) {
             }
             $stmt_update->close();
         }
-    
+
         echo 'success';
     }
-    
-    
-    
 } else {
     echo 'error';
 }

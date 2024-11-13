@@ -1,5 +1,6 @@
 <?php
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\khambenhmodel.php';
+require_once __DIR__ .'../../../model/khambenhmodel.php';
+
 
 function generateEXID($exdaytime, $fullname)
 {
@@ -20,28 +21,83 @@ function generatepatientID($fullName)
     $lastName = end($nameParts);
     $shortName = substr($lastName, 0, 3);
     $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
-    
+
     return 'PAID' . $shortName . $randomNumbers;
 }
 
 // Function to remove diacritics
-function removeDiacritics($string) {
+function removeDiacritics($string)
+{
     $transliteration = [
-        'à' => 'a', 'á' => 'a', 'ạ' => 'a', 'ả' => 'a', 'ã' => 'a',
-        'â' => 'a', 'ầ' => 'a', 'ấ' => 'a', 'ậ' => 'a', 'ẩ' => 'a', 'ẫ' => 'a',
-        'ă' => 'a', 'ằ' => 'a', 'ắ' => 'a', 'ặ' => 'a', 'ẳ' => 'a', 'ẵ' => 'a',
-        'è' => 'e', 'é' => 'e', 'ẹ' => 'e', 'ẻ' => 'e', 'ẽ' => 'e',
-        'ê' => 'e', 'ề' => 'e', 'ế' => 'e', 'ệ' => 'e', 'ể' => 'e', 'ễ' => 'e',
-        'ì' => 'i', 'í' => 'i', 'ị' => 'i', 'ỉ' => 'i', 'ĩ' => 'i',
-        'ò' => 'o', 'ó' => 'o', 'ọ' => 'o', 'ỏ' => 'o', 'õ' => 'o',
-        'ô' => 'o', 'ồ' => 'o', 'ố' => 'o', 'ộ' => 'o', 'ổ' => 'o', 'ỗ' => 'o',
-        'ơ' => 'o', 'ờ' => 'o', 'ớ' => 'o', 'ợ' => 'o', 'ở' => 'o', 'ỡ' => 'o',
-        'ù' => 'u', 'ú' => 'u', 'ụ' => 'u', 'ủ' => 'u', 'ũ' => 'u',
-        'ư' => 'u', 'ừ' => 'u', 'ứ' => 'u', 'ự' => 'u', 'ử' => 'u', 'ữ' => 'u',
-        'ỳ' => 'y', 'ý' => 'y', 'ỵ' => 'y', 'ỷ' => 'y', 'ỹ' => 'y',
+        'à' => 'a',
+        'á' => 'a',
+        'ạ' => 'a',
+        'ả' => 'a',
+        'ã' => 'a',
+        'â' => 'a',
+        'ầ' => 'a',
+        'ấ' => 'a',
+        'ậ' => 'a',
+        'ẩ' => 'a',
+        'ẫ' => 'a',
+        'ă' => 'a',
+        'ằ' => 'a',
+        'ắ' => 'a',
+        'ặ' => 'a',
+        'ẳ' => 'a',
+        'ẵ' => 'a',
+        'è' => 'e',
+        'é' => 'e',
+        'ẹ' => 'e',
+        'ẻ' => 'e',
+        'ẽ' => 'e',
+        'ê' => 'e',
+        'ề' => 'e',
+        'ế' => 'e',
+        'ệ' => 'e',
+        'ể' => 'e',
+        'ễ' => 'e',
+        'ì' => 'i',
+        'í' => 'i',
+        'ị' => 'i',
+        'ỉ' => 'i',
+        'ĩ' => 'i',
+        'ò' => 'o',
+        'ó' => 'o',
+        'ọ' => 'o',
+        'ỏ' => 'o',
+        'õ' => 'o',
+        'ô' => 'o',
+        'ồ' => 'o',
+        'ố' => 'o',
+        'ộ' => 'o',
+        'ổ' => 'o',
+        'ỗ' => 'o',
+        'ơ' => 'o',
+        'ờ' => 'o',
+        'ớ' => 'o',
+        'ợ' => 'o',
+        'ở' => 'o',
+        'ỡ' => 'o',
+        'ù' => 'u',
+        'ú' => 'u',
+        'ụ' => 'u',
+        'ủ' => 'u',
+        'ũ' => 'u',
+        'ư' => 'u',
+        'ừ' => 'u',
+        'ứ' => 'u',
+        'ự' => 'u',
+        'ử' => 'u',
+        'ữ' => 'u',
+        'ỳ' => 'y',
+        'ý' => 'y',
+        'ỵ' => 'y',
+        'ỷ' => 'y',
+        'ỹ' => 'y',
         'đ' => 'd'
     ];
-    
+
     // Convert to lowercase and replace diacritics
     $string = mb_strtolower($string, 'UTF-8');
     return strtr($string, $transliteration);
@@ -96,8 +152,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'exdaytime' => $exdaytime,
             'diagnose' => $_POST['diagnose'],
             'results' => $_POST['prescription'],
-            'heartrate'=> $_POST['heartrate'],
-            'bloodpressure'=>$_POST['bloodpressure']
+            'heartrate' => $_POST['heartrate'],
+            'bloodpressure' => $_POST['bloodpressure']
         ];
 
         try {
@@ -107,7 +163,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sdata = [
                 'userviceID' => $userviceID,
                 'EXID' => $EXID,
-                'serviceID' => $serviceID
+                'serviceID' => $serviceID,
+                'totalprice' => $_POST['price']
             ];
 
             if ($khambenh->createUseservice($sdata)) {
@@ -299,13 +356,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </select>
 
                     <label for="serviceID">Dịch vụ sử dụng:</label>
-                    <select id="serviceID" name="serviceID" required>
+                    <select id="serviceID" name="serviceID" required onchange="updatePrice(this)">
                         <?php foreach ($allServices as $service): ?>
-                            <option value="<?php echo $service['serviceID']; ?>">
+                            <option value="<?php echo $service['serviceID']; ?>" data-price="<?php echo $service['price']; ?>">
                                 <?php echo $service['servicename']; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
+
+                    <input type="hidden" name="price" id="price" value="">
+
 
                     <label for="visittype">Hình thức:</label>
                     <input type="text" id="visittype" name="visittype" value="Không hẹn trước" readonly>
@@ -339,6 +399,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     document.querySelector(".calendar-icon").addEventListener("click", () => {
         dateInput.open();
     });
+
+    function updatePrice(selectElement) {
+    const price = selectElement.options[selectElement.selectedIndex].getAttribute('data-price');
+    document.getElementById('price').value = price;
+}
+
 </script>
 
 </html>

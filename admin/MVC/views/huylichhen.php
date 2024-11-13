@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../model/lichhenmodel.php';
+require_once __DIR__ . '../../model/lichhenmodel.php';
 
 if (isset($_GET['id'])) {
     $appointmentID = $_GET['id'];

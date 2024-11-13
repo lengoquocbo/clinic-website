@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\thuocmodel.php';
+require_once __DIR__ .'../../../../model/thuocmodel.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

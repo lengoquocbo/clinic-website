@@ -1,6 +1,9 @@
 <?php
-require_once 'C:/xampp/htdocs/clinic-website/admin/MVC/model/khambenhmodel.php';
-require_once 'C:/xampp/htdocs/clinic-website/admin/MVC/model/thuocmodel.php';
+
+require_once __DIR__ .'../../../model/khambenhmodel.php';
+require_once __DIR__ .'../../../model/thuocmodel.php';
+
+
 
 function generateUsemedicine($userviceID = '000')
 {

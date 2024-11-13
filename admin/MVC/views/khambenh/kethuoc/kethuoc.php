@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\thuocmodel.php';
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\dichvumodel.php';
+require_once __DIR__ .'../../../../model/thuocmodel.php';
+require_once __DIR__ .'../../../../model/dichvumodel.php';
+
 
 // Lấy serviceID và useServiceID từ query string
 $userviceID = $_GET['us'];

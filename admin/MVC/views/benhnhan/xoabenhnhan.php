@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\benhnhanmodel.php';
+require_once __DIR__ .'../../../model/benhnhanmodel.php';
 if(isset($_GET['id'])){
     $patientID = $_GET['id'];
     $patient = new  benhnhan();
