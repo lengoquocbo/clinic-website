@@ -1,10 +1,11 @@
 <?php
 session_start();
-require_once __DIR__ .'../../../../model/thuocmodel.php';
-require_once __DIR__ .'../../../../model/dichvumodel.php';
+require_once __DIR__ . '../../../../model/thuocmodel.php';
+require_once __DIR__ . '../../../../model/dichvumodel.php';
 
 
 // Lấy serviceID và useServiceID từ query string
+$patientID = $_GET['p'];
 $userviceID = $_GET['us'];
 $serviceID = $_GET['s'];
 
@@ -15,6 +16,7 @@ $thuoc = new Medicine();
 // Lấy danh sách tất cả dịch vụ và thuốc theo serviceID
 $allServices = $serviceModel->getAll();
 $thuoc_list = $thuoc->getbyServiceID($serviceID);
+
 ?>
 
 <!DOCTYPE html>
@@ -425,7 +427,8 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                                             alert('Kê toa thành công!');
                                             emptycart();
                                             setTimeout(function() {
-                                                window.location.href = 'index.php?mod=lichhen&act=list';
+                                                window.location.href = 'index.php?mod=kethuoc&act=in&p=<?php echo $patientID; ?>';
+
                                             }, 500);
                                         } else {
                                             alert('Có lỗi xảy ra. Vui lòng thử lại!');
@@ -449,6 +452,8 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                     }
                 });
             });
+
+           
 
         });
     </script>

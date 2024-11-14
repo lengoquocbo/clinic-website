@@ -157,6 +157,8 @@ $medicineList = $benhnhan->getmedicine($userviceID);
                 <a href="index.php?mod=benhnhan&act=list" class="medicine-list__action-btn">Quay lại</a>
                 <a style="background-color:#f6c23e;" href="index.php?mod=benhnhan&act=edit&id=<?php echo $data[0]['patientID']; ?>" class="medicine-list__action-btn">Sửa</a>
                 <a style="background-color:green;"  href="index.php?mod=benhnhan&act=in&id=<?php echo $data[0]['patientID']; ?>" class="medicine-list__action-btn" style="background-color: red;">Xuất PDF</a>
+                <a style="background-color:green;"  href="index.php?mod=kethuoc&act=in&p=<?php echo $data[0]['patientID']; ?>" class="medicine-list__action-btn" style="background-color: red;">Xem thanh toán</a>
+
 
             </div>
         </div>

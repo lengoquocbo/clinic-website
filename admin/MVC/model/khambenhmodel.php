@@ -69,7 +69,21 @@ class khambenh
     
     return true;
 }
-
+public function createpayment($paydata)
+{
+    $stmt = $this->db->prepare("INSERT INTO payments (payID, EXID) VALUES (?, ?)");
+    if (!$stmt) {
+        throw new Exception("Prepare failed: " . $this->db->error);
+    }
+    
+    $stmt->bind_param("ss", $paydata['payID'], $paydata['EXID']);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Execute failed: " . $stmt->error);
+    }
+    
+    return true;
+}
 
     // Hàm lấy bệnh nhân bằng số điện thoại
     public function getPatientByPhone($phone)

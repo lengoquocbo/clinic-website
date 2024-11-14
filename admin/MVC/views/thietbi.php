@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php 
-    include '../../../src/Views/Pages/error.php'
+    include '../../../src/Views/error.php';
     ?>
 </body>
 </html>

@@ -24,6 +24,13 @@ function generatepatientID($fullName)
 
     return 'PAID' . $shortName . $randomNumbers;
 }
+function  gennerPayiD($EXID){
+    $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
+     return"PAY". $EXID . $randomNumbers;
+
+}
+
+
 
 // Function to remove diacritics
 function removeDiacritics($string)
@@ -123,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $patientID = generatepatientID($fullname);
         $userviceID = generateUseservice($EXID, $patientID);
         $staffID = $khambenh->getstaffID($serviceID);
+        $payID = gennerPayiD($EXID);
 
         // Thông tin bệnh nhân
         $pdata = [
@@ -166,11 +174,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'serviceID' => $serviceID,
                 'totalprice' => $_POST['price']
             ];
-
+             $paydata =[
+                'payID'=> $payID,
+                'EXID' => $EXID
+             ];
+            $khambenh->createpayment($paydata);
             if ($khambenh->createUseservice($sdata)) {
                 if (isset($_POST["prescribe"])) {
                     // Nếu nhấn "Kê Thuốc", điều hướng đến trang kê thuốc với `userviceID`
-                    header("Location: index.php?mod=khambenh&act=kethuoc&us=$userviceID&s=$serviceID");
+                    header("Location: index.php?mod=khambenh&act=kethuoc&us=$userviceID&s=$serviceID&p=$patientID");
                     exit;
                 } else {
                     // Nếu nhấn "Hoàn Thành", điều hướng đến danh sách lịch hẹn

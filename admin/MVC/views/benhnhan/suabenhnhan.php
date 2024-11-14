@@ -172,7 +172,7 @@ border: 1px solid gray;
                     </div>
                     <div class="btn">
                         <button type="submit" class="medicine-listbtn">Lưu</button>
-                        <a href="index.php?mod=benhnhan&act=edit" class="medicine-list__action-btn">Hủy</a>
+                        <a href="index.php?mod=benhnhan&act=list" class="medicine-list__action-btn">Hủy</a>
                     </div>
                 </form>
             <?php else: ?>

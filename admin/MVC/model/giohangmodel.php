@@ -139,6 +139,24 @@ if (isset($_POST['action'])) {
 
             $stmt_update_total->close();
 
+            $query_update_money_examine = "UPDATE examine e
+                                          JOIN useservices us ON e.EXID = us.EXID 
+                                          SET e.price = us.totalprice";
+            $stmt_update_money_examine = $db->prepare($query_update_money_examine);
+
+            if (!$stmt_update_money_examine->execute()) {
+                echo 'error: Unable to update total price in examine table';
+                exit;
+            }
+            $stmt_update_money_examine->close();
+            $query_update_payment = "UPDATE payments p
+                        JOIN examine e ON p.EXID = e.EXID 
+                        SET p.total = e.price";
+            $stmt_update_payment = $db->prepare($query_update_payment);
+            if (!$stmt_update_payment->execute()) {
+                throw new Exception('Unable to update total in payments table');
+            }
+            $stmt_update_payment->close();
 
             // Cập nhật số lượng tồn kho của thuốc trong bảng `medicines`
             $query_update_quantity = "UPDATE medicines SET quantity = quantity - ? WHERE medicineID = ?";

@@ -14,7 +14,7 @@ foreach ($benhnhan_list as $benhnhan) {
             <td>{$benhnhan['phone']}</td>
             <td>{$benhnhan['address']}</td>
             <td>
-                <a href='index.php?mod=benhnhan&act=edit&id={$benhnhan['patientID']}' class='medicine-list__action-btn'>Xem</a>
+                <a href='index.php?mod=benhnhan&act=see&id={$benhnhan['patientID']}' class='medicine-list__action-btn'>Xem</a>
                 <a href='index.php?mod=benhnhan&act=edit&id={$benhnhan['patientID']}' class='medicine-list__action-btn'>Sửa</a>
                 <a href='index.php?mod=benhnhan&act=delete&id={$benhnhan['patientID']}' onclick='return confirm(\"Bạn có chắc muốn xóa người này?\")' class='medicine-list__action-btn'>Xóa</a>
             </td>

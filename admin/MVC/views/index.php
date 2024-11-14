@@ -1,4 +1,5 @@
 <?php
+session_start();
 $mod = isset($_GET['mod']) ? $_GET['mod'] : '';
 $act = isset($_GET['act']) ? $_GET['act'] : '';
 
@@ -115,6 +116,10 @@ function loadContent($mod, $act)
     }else if ($mod === 'benhnhan' && $act === 'in'){
         ob_start();
         include '../views/benhnhan/export_pdf.php';
+        return ob_get_clean();
+    }else if ($mod === 'kethuoc' && $act === 'in'){
+        ob_start();
+        include '../views/khambenh/kethuoc/export_bil.php';
         return ob_get_clean();
     }
      else {
