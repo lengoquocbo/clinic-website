@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // $medicineModel->createUsemedicine($mdata);
             $examinationModel->updateAppointmentStatus($appointmentID);
             echo "<script>alert('Hoàn thành hồ sơ');</script>";
-            echo "<script> location.href='index.php?mod=khambenh&act=kethuoc&us=$userviceID&s=$serviceID';</script>";
+            echo "<script> location.href='index.php?mod=khambenh&act=kethuoc&us=$userviceID&s=$serviceID&p=$patientID';</script>";
         } else {
             echo "<script>alert('Lỗi khi cập nhật hồ sơ'); location.href='index.php?mod=lichhen&act=list';</script>";
         }

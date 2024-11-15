@@ -14,15 +14,18 @@ function generateEXID($exdaytime, $fullname)
     return "EX" . $day . $month . $namePrefix . $randomNumber;
 }
 
-function generatepatientID($fullName)
+function generatepatientID($fullName, $exdaytime, $EXID)
 {
+    $date = new DateTime($exdaytime);
+    $day = $date->format('d');
+    $month = $date->format('m');
     // Normalize the name by removing diacritics
     $nameParts = explode(' ', removeDiacritics($fullName));
     $lastName = end($nameParts);
     $shortName = substr($lastName, 0, 3);
     $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
 
-    return 'PAID' . $shortName . $randomNumbers;
+    return 'PAID' . $shortName . $randomNumbers. $day. $month.$EXID;
 }
 function  gennerPayiD($EXID){
     $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
@@ -127,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Tạo EXID 
         $EXID = generateEXID($exdaytime, $fullname);
-        $patientID = generatepatientID($fullname);
+        $patientID = generatepatientID($fullname, $exdaytime, $EXID);
         $userviceID = generateUseservice($EXID, $patientID);
         $staffID = $khambenh->getstaffID($serviceID);
         $payID = gennerPayiD($EXID);

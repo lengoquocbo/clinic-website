@@ -121,6 +121,10 @@ function loadContent($mod, $act)
         ob_start();
         include '../views/khambenh/kethuoc/export_bil.php';
         return ob_get_clean();
+    }else if ($mod === 'thongke' && $act === 'list'){
+        ob_start();
+        include '../views/thongke/bieudo.php';
+        return ob_get_clean();
     }
      else {
         ob_start();
@@ -390,7 +394,7 @@ $content = loadContent($mod, $act);
                     <li><a href="index.php">Trang chủ</a></li>
                     <li><a href="index.php?mod=thuoc&act=list">Thuốc</a></li>
                     <li><a href="index.php?mod=dichvu&act=list">Dịch vụ</a></li>
-                    <li><a href="#statistic">Thống kê</a></li>
+                    <li><a href="index.php?mod=thongke&act=list">Thống kê</a></li>
                 </ul>
             </nav>
             <div class="header-right">

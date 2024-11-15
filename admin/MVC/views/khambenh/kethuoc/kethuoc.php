@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '../../../../model/thuocmodel.php';
 require_once __DIR__ . '../../../../model/dichvumodel.php';
 
