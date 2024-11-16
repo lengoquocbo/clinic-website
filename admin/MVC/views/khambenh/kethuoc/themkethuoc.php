@@ -1,10 +1,13 @@
 <?php
-session_start();
-require_once __DIR__ .'../../../../model/thuocmodel.php';
-require_once __DIR__ .'../../../../model/dichvumodel.php';
+require_once __DIR__ . '../../../../model/thuocmodel.php';
+require_once __DIR__ . '../../../../model/dichvumodel.php';
+function  gennerUservices(){
+    $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
+     return"PAY". $randomNumbers;
 
+}
 
-$userviceID = $_POST['userviceID'] ?? null; // Đảm bảo nhận userviceID từ form hoặc session
+$userviceID = gennerUservices(); // Đảm bảo nhận userviceID từ form hoặc session
 $serviceID = $_POST['serviceID'] ?? null;   // Đảm bảo nhận serviceID từ form hoặc session
 
 $serviceModel = new Services();
@@ -235,6 +238,8 @@ $allServices = $serviceModel->getAll();
     </div>
 
     <script>
+    
+
         $(document).ready(function() {
             loadMedicineList();
             loadCart();
@@ -244,7 +249,7 @@ $allServices = $serviceModel->getAll();
             });
 
             $(document).on('click', '.add-to-cart', function() {
-                const userviceID = Math.floor(Math.random() * 1000000);
+                const userviceID = <?php echo json_encode($userviceID); ?>;
                 const medicineID = $(this).data('id');
                 const quantity = $(this).closest('tr').find('input[name="quantity"]').val();
                 const note = $(this).closest('tr').find('input[name="note"]').val();
@@ -256,7 +261,7 @@ $allServices = $serviceModel->getAll();
                 }
 
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'add',
@@ -285,7 +290,7 @@ $allServices = $serviceModel->getAll();
                 const medicineID = $(this).data('id');
 
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'remove',
@@ -307,7 +312,7 @@ $allServices = $serviceModel->getAll();
 
             $('#empty-cart').click(function() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'empty'
@@ -358,7 +363,7 @@ $allServices = $serviceModel->getAll();
             $('#ketoa').click(function() {
                 // Lấy dữ liệu giỏ hàng từ session
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'getCart'
@@ -371,7 +376,7 @@ $allServices = $serviceModel->getAll();
                             if (cartData.length > 0) {
                                 // Thực hiện gọi AJAX để lưu đơn thuốc vào cơ sở dữ liệu
                                 $.ajax({
-                                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
                                     method: 'POST',
                                     data: {
                                         action: 'ketoa',
@@ -409,9 +414,10 @@ $allServices = $serviceModel->getAll();
                     }
                 });
             });
+
             function emptycart() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'empty'

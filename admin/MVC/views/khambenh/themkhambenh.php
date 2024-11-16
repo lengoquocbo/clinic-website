@@ -25,7 +25,7 @@ function generatepatientID($fullName, $exdaytime, $EXID)
     $shortName = substr($lastName, 0, 3);
     $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
 
-    return 'PAID' . $shortName . $randomNumbers. $day. $month.$EXID;
+    return 'PAD' . $shortName . $randomNumbers. $day. $month.$EXID;
 }
 function  gennerPayiD($EXID){
     $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);

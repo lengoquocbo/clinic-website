@@ -1,5 +1,4 @@
 <?php
-session_start();
 $mod = isset($_GET['mod']) ? $_GET['mod'] : '';
 $act = isset($_GET['act']) ? $_GET['act'] : '';
 
