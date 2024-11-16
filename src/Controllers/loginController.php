@@ -1,11 +1,15 @@
 <?php
+    session_start();
+
     // Cho phép CORS nếu cần
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Content-Type');
     header('Content-Type: application/json');
 
-    require_once  __DIR__.'\..\Models\usermodel.php';
+    require_once __DIR__.'\..\Models\usermodel.php';
+    require_once __DIR__.'\..\Services\RedisServer.php';
+    require_once __DIR__.'\..\Services\TokenService';
 
     // Nếu là OPTIONS request (preflight), trả về 200 OK
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -25,6 +29,8 @@
 
     try {
         $usermodel = new User();
+        $Redis = new RedisService();
+        $token = new TokenService();
         // Đọc JSON từ request body
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
@@ -43,16 +49,45 @@
 
         $user = $usermodel->checkuser($phone, $password);
 
-        if ($user!=NULL && $password == $user['pass']) {
+        if ($user!=NULL) {
             // Đăng nhập thành công
-            session_start();
-            $_SESSION['user_id'] = $user['userID'];
-            $_SESSION['user_name'] = $user['username'];
+           
 
-            echo json_encode([
-                'success' => true,
-                'message' => 'Đăng nhập thành công',
-            ]);
+            if($user['role'] == 1) {
+                $_SESSION['isLogin_Admin'] = true;
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Đăng nhập thành công',
+                    'URL' => '?act=....'
+                ]);
+            } else {
+                
+
+                if($user['role'] == 2){
+                $_SESSION['isLogin_Nhanvien'] = true;
+                $_SESSION['userID'] = $user['userID'];
+
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Đăng nhập thành công',
+                    'URL' => '?act=....',
+                    'token' => $tokenLG
+                ]);
+
+                } else {
+                    $tokenLG = $token->generateToken($user);
+                    $Redis->saveUserToken($user['userID'], $tokenLG, 60*60*2);
+                    $_SESSION['isLogin'] = true;
+                    $_SESSION['userID'] = $user['userID'];
+
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'Đăng nhập thành công',
+                        'URL' => '?act=....',
+                        'token' => $tokenLG
+                    ]);
+                }  
+            }
         } else {
             // Đăng nhập thất bại
             echo json_encode([

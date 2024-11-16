@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     // Cho phép CORS nếu cần
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: POST');
@@ -6,6 +8,9 @@
     header('Content-Type: application/json');
 
     require_once  __DIR__.'\..\Models\usermodel.php';
+    require_once __DIR__.'\..\Services\TokenService';
+    require_once __DIR__.'\..\Services\RedisServer.php';
+
 
 
     // Nếu là OPTIONS request (preflight), trả về 200 OK
@@ -25,7 +30,10 @@
     }
 
     try {
+        $token = new TokenService();
         $usermodel = new User();
+        $Redis = new RedisService();
+
         // Đọc JSON từ request body
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
@@ -50,18 +58,13 @@
             $result = $usermodel->addUser($data);
             if($result){
                 $user = $usermodel->findUserByPhone($data['phone']);
-                session_start();
-                $_SESSION['user_id'] = $user['userID'];
-                $_SESSION['user_name'] = $user['username'];
-
+                $token = $token->generateToken($user);
+                $Redis->saveUserToken($user['userID'], $token, 60*60*2);
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng ký thành công',
-                    'data' => [
-                        'user_id' => $user['userID'],
-                        'name' => $user['username']
-                        
-                    ]
+                    'URL' => '?act=...',
+                    'token' => $token
                 ]);
             } else {
                 echo json_encode([

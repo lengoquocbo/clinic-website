@@ -10,11 +10,18 @@ const app = express();
 const PORT = 3001; // Đổi sang port khác vì PHP đang chạy ở 3000
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: '*', // Hoặc chỉ định domain cụ thể
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(bodyParser.json());
 
 // Cấu hình
-const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
+// const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
+const PHP_BASE_URL = 'http://192.168.56.1:80'; 
+
 
 
 
