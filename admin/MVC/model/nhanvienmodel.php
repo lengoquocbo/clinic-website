@@ -23,6 +23,13 @@ class Nhanvien {
         return $stmt->get_result()->fetch_assoc();
     }
 
+    public function getByPosition($position) {
+        $stmt = $this->db->prepare("SELECT * FROM staffs WHERE position = ?");
+        $stmt->bind_param("s", $position);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
     // Thêm mới nhân viên
     public function addStaff($data) {
         // Kiểm tra nếu không có hình ảnh được chọn

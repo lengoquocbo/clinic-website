@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'\..\..\admin\MVC\model\connectdb.php';
+require_once 'connection.php';
 class User{
 
     private $db;

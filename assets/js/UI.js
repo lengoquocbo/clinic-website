@@ -16,6 +16,15 @@ menuToggle.addEventListener('click', () => {
     }
 });
 
+
+const navItems = navMenu.querySelectorAll('li a');
+    navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        navMenu.classList.remove('show'); // Đóng menu khi nhấn vào một mục
+    });
+});
+
+
 // phan slides
 let slideIndex = 0;
     showSlides();
@@ -87,3 +96,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+//đặt lịch hẹn
+const hovaten = document.getElementById("name").value;
+const CCCD = document.getElementById("CCCD").value;
+const gender = document.getElementById("gender").value;
+const dateofbitrh = document.getElementById("service").value;
+const address = document.getElementById("address").value;
+const message = document.getElementById("message").value;
+const submit = document.getElementById("submit").value;
+const errorres = document.getElementById()
+
+submit.addEventListener("click", async (e) => {
+    if(!hovaten || !CCCD || !gender || !dateofbirth || !address || !message){
+        
+    }
+})

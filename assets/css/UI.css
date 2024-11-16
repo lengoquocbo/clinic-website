@@ -12,6 +12,7 @@
 }
 header {
     background-color: white;
+    
     padding: 1rem;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -43,7 +44,7 @@ nav ul li a {
     color: rgb(0, 0, 0);
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 1.2rem;
+    font-size: 15px;
     padding: 10px 20px;
     border-radius: 30px;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -645,6 +646,10 @@ button:hover, input[type="submit"]:hover {
 }
 
 /* Hiệu ứng cho footer */
+footer{
+    bottom: 0;
+}
+
 /* Container của footer */
 .container-footer {
     background-color: #333;

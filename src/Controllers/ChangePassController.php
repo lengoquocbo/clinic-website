@@ -8,7 +8,7 @@
 
     require_once __DIR__.'\..\Models\usermodel.php';
     require_once __DIR__.'\..\..\assets\Mail\Mail.php';
-    require_once 'CodeStorage.php';
+    require_once __DIR__.'\..\Services\RedisServer.php';
 
 
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -28,7 +28,7 @@
 
     $usermodel = new User();
     $Mailer = new Mail();
-    $codeStorage = new CodeStorage();
+    $codeStorage = new RedisService();
 
     try {
         error_log("Received request data: " . print_r(file_get_contents('php://input'), true));
