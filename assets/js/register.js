@@ -49,7 +49,7 @@ submit.addEventListener('click', async (e)=>{
             pass: password
         }
         try { 
-            // const response = await fetch('http://192.168.56.1:3001/api/register', {
+            // const response = await fetch('http://192.168.35.234/api/register', {
 
             const response = await fetch('http://localhost:3001/api/register', {
                 method: 'POST',

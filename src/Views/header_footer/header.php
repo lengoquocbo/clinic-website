@@ -12,7 +12,7 @@
                 <li><a href="#contact">Liên hệ</a></li>
                 <?php
                     if (!isset($_SESSION['user_id'])) {
-                        echo '<li><a href="login.php" class="link">Đăng nhập</a></li>';
+                        echo '<li><a href="?mod=login" class="link">Đăng nhập</a></li>';
                         echo '<li><a href="register.php" class="link">Đăng ký</a></li>';
                     } else {
                         echo 

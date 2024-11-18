@@ -28,9 +28,9 @@ btmail.addEventListener('click', async function(event) {
 
     //khôi phục lại các hiển thị thông báo
     
-    const response = await fetch('http://192.168.56.1/api/mailchangepass', {
+    // const response = await fetch('http://192.168.35.234/api/mailchangepass', {
 
-    // const response = await fetch('http://localhost:3001/api/mailchangepass', {
+    const response = await fetch('http://localhost:3001/api/mailchangepass', {
         method: 'POST',
         headers: {
             'Content-Type':'application/json',

@@ -19,8 +19,8 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Cấu hình
-// const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
-const PHP_BASE_URL = 'http://192.168.56.1:80'; 
+const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
+// const PHP_BASE_URL = 'http://192.168.35.234'; 
 
 
 
