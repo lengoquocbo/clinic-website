@@ -17,7 +17,7 @@ showBtn.addEventListener('click', (e) => {
 // end hiện mật khẩu
 
 // Start submit
-const submit = document.getElementById('submit');
+const submit = document.getElementById('dangnhap');
 submit.addEventListener('click', async (e)=>{
     e.preventDefault();
 
@@ -35,8 +35,7 @@ submit.addEventListener('click', async (e)=>{
    
 
     try { 
-        // const response = await fetch('http://192.168.35.234/api/login', {
-
+        // const response = await fetch('http://192.168.56.1/api/login', {
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
             headers: {
@@ -47,15 +46,21 @@ submit.addEventListener('click', async (e)=>{
                 password: password
             })
         });
+        console.log("post thanh cong");
 
         const data = await response.json();
+        console.log(data);
 
         if (data.success) {
             // Hiển thị thông báo thành công
             sessionStorage.setItem('token', data.token);
             document.getElementById('successMessage').textContent = data.message;
             document.getElementById('successMessage').style.display = 'block';
-            window.location.href = data.URL;
+            console.log('hello response');
+            const currentUrl = window.location.href;
+            const newUrl = currentUrl.replace("?mod=taikhoan&act=login", "?mod=home#home");
+            window.location.href = newUrl;
+            history.replaceState(null, "", "http://localhost/clinic-website/?mod=home#home");
         } else {
             // hiển thị lỗi
             document.getElementById('errorMessage').textContent = data.message;

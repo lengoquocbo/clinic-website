@@ -1,10 +1,13 @@
 <?php
-require_once 'connection.php';
-class User{
+
+require_once 'Database.php';
+
+class UserModel {
 
     private $db;
+    
     public function __construct() {
-        $this->db = Database::getInstance()->getConection();
+        $this->db = Database::getInstance()->getConnection(); // Sửa thành getConection()
     }
     
     // hàm lấy tất cả user

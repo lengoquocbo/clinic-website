@@ -7,6 +7,7 @@
     <title>Phòng Khám Sức Khỏe</title>
     <link rel="stylesheet" href="assets/css/UI.css">
     <link rel="stylesheet" href="assets/css/responsiveUI.css">
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
 </head>
@@ -16,6 +17,12 @@
     require_once("header_footer/header.php")
     ?>
     <!-- header section end -->
+
+    <!-- home section start -->
+    <?php
+        require_once 'dieuhuong.php';
+    ?>
+    <!-- home section end -->
 
     <!-- footer section start -->
     <?php

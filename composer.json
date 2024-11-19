@@ -2,7 +2,7 @@
     "name": "admin/clinic-website",
     "autoload": {
         "psr-4": {
-            "Admin\\ClinicWebsite\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [

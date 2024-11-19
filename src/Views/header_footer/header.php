@@ -5,18 +5,20 @@
                 <i class='bx bx-menu-alt-right'></i>
             </div>
             <ul id="nav-menu">
-                <li><a href="#home">Trang chủ</a></li>
-                <li><a href="#services">Dịch vụ</a></li>
-                <li><a href="#team">Đội ngũ nhân viên</a></li>
-                <li><a href="#appointment">Đặt lịch</a></li>
-                <li><a href="#contact">Liên hệ</a></li>
+                <li><a href="?mod=home#home">Trang chủ</a></li>
+                <li><a href="?mod=home#services">Dịch vụ</a></li>
+                <li><a href="?mod=home#team">Đội ngũ nhân viên</a></li>
+                <li><a href="?mod=home#appointment">Đặt lịch</a></li>
+                <li><a href="?mod=home#contact">Liên hệ</a></li>
                 <?php
                     if (!isset($_SESSION['user_id'])) {
-                        echo '<li><a href="?mod=login" class="link">Đăng nhập</a></li>';
-                        echo '<li><a href="register.php" class="link">Đăng ký</a></li>';
+                        ?>
+                        <li><a href="?mod=taikhoan&act=login" class="link">Đăng nhập</a></li>
+                        <li><a href="?mod=taikhoan&act=register" class="link">Đăng ký</a></li>
+                    <?php
                     } else {
-                        echo 
-                        '<li class="dropdown">
+                        ?>
+                        <li class="dropdown">
                                 <a href="#" class="dropdown-toggle">
                                     Tài khoản của tôi
                                     <i class="fas fa-chevron-down"></i>
@@ -27,9 +29,9 @@
                                     <li><a href="appointments.php">Lịch hẹn của tôi</a></li>
                                     <li><a href="logout.php" class="link">Đăng xuất</a></li>
                                 </ul>
-                         </li>';
-                    }
-                ?>
+                         </li>;
+                         <?php
+                    }?>
             </ul>
         </nav>
     </header>

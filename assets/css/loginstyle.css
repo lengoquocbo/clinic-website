@@ -1,7 +1,4 @@
 /* Đảm bảo bạn đã sử dụng đúng module CSS */
-body{
-    font-family: var(--default-font);
-}
 
   .error-message {
       color: red;
@@ -16,6 +13,7 @@ body{
 
   .login {
       max-width: 350px;
+      font-family: var(--default-font);
       margin: 0 auto;
       padding: 40px;
       border: 1px solid #ccc;

@@ -8,7 +8,7 @@
     header('Content-Type: application/json');
 
     require_once  __DIR__.'\..\Models\usermodel.php';
-    require_once __DIR__.'\..\Services\TokenService';
+    require_once __DIR__.'\..\Services\TokenService.php';
     require_once __DIR__.'\..\Services\RedisServer.php';
 
 
@@ -31,7 +31,7 @@
 
     try {
         $token = new TokenService();
-        $usermodel = new User();
+        $usermodel = new UserModel();
         $Redis = new RedisService();
 
         // Đọc JSON từ request body

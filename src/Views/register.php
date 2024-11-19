@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Ký</title>
-    <link rel="stylesheet" href="../../assets/css/registerstyle.css">
-    <link rel="stylesheet" href="../../assets/css/styleglobal.css">
+    <link rel="stylesheet" href="assets/css/registerstyle.css">
+    <link rel="stylesheet" href="assets/css/styleglobal.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -62,6 +62,6 @@
             <div id="successMessage" class="success-message"></div>
         </form>
     </div>
-    <script src="../../assets/js/register.js"></script>
+    <script src="assets/js/register.js"></script>
 </body>
 </html>
