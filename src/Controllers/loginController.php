@@ -8,8 +8,8 @@
     header('Content-Type: application/json');
 
     require_once __DIR__.'\..\Models\usermodel.php';
-    require_once __DIR__.'\..\Services\RedisServer.php';
-    require_once __DIR__.'\..\Services\TokenService';
+    require_once __DIR__.'\..\Services\RedisService.php';
+    require_once __DIR__.'\..\Services\TokenService.php';
 
     // Nếu là OPTIONS request (preflight), trả về 200 OK
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -28,7 +28,7 @@
     }
 
     try {
-        $usermodel = new User();
+        $usermodel = new UserModel();
         $Redis = new RedisService();
         $token = new TokenService();
         // Đọc JSON từ request body
@@ -58,7 +58,7 @@
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng nhập thành công',
-                    'URL' => '?act=....'
+                    'URL' => '?mod=homne'
                 ]);
             } else {
                 
@@ -70,8 +70,7 @@
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng nhập thành công',
-                    'URL' => '?act=....',
-                    'token' => $tokenLG
+                    'URL' => '?mod=home',
                 ]);
 
                 } else {
@@ -83,8 +82,9 @@
                     echo json_encode([
                         'success' => true,
                         'message' => 'Đăng nhập thành công',
-                        'URL' => '?act=....',
-                        'token' => $tokenLG
+                        'token' => $tokenLG,
+                        'URL' => '?mod=home'
+                        
                     ]);
                 }  
             }

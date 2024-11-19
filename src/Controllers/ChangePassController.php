@@ -6,9 +6,9 @@
     header('Content-Type: application/json');
     header("Access-Control-Allow-Credentials: true");
 
-    require_once __DIR__.'\..\Models\usermodel.php';
+    require_once __DIR__.'\..\Models\Database.php';
     require_once __DIR__.'\..\..\assets\Mail\Mail.php';
-    require_once __DIR__.'\..\Services\RedisServer.php';
+    require_once __DIR__.'\..\Services\RedisService.php';
 
 
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

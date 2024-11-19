@@ -1,3 +1,8 @@
+<?php
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -5,8 +10,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
-    <link rel="stylesheet" href="../../assets/css/loginstyle.css">
-    <link rel="stylesheet" href="../../assets/css/styleglobal.css">
+    <link rel="stylesheet" href="assets/css/loginstyle.css">
+    <link rel="stylesheet" href="assets/css/styleglobal.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
 </head>
@@ -33,7 +38,7 @@
                 </label>
                 <a href="#">Quên mật khẩu?</a>
             </div>
-            <button type="submit" class="btnlogin" id="submit">Đăng Nhập</button>
+            <button type="submit" class="btnlogin" id="dangnhap">Đăng Nhập</button>
         </form>
         <div class="login__divide">
             <span>OR</span>
@@ -51,6 +56,6 @@
         <div id="errorMessage" class="error-message"></div>
         <div id="successMessage" class="success-message"></div>
     </div>
-    <script src="../../assets/js/login.js"></script>
+    <script src="assets/js/login.js"></script>
 </body>
 </html>

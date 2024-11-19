@@ -49,7 +49,7 @@ submit.addEventListener('click', async (e)=>{
             pass: password
         }
         try { 
-            // const response = await fetch('http://192.168.35.234/api/register', {
+            // const response = await fetch('http://192.168.56.1:3001/api/register', {
 
             const response = await fetch('http://localhost:3001/api/register', {
                 method: 'POST',
@@ -65,11 +65,11 @@ submit.addEventListener('click', async (e)=>{
                 // Hiển thị thông báo thành công
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.replace("?mod=taikhoan&act=register", "?mod=home#home");
+                window.location.href = newUrl;
+                history.replaceState(null, "", "http://localhost/clinic-website/?mod=home#home");   
                     
-                // Redirect sau 1 giây
-                setTimeout(() => {
-                    window.location.href = 'index.php'; // Thay đổi URL theo nhu cầu
-                }, 1000);
             } else {
                 // hiển thị lỗi
                 document.getElementById('errorMessage').textContent = data.message;

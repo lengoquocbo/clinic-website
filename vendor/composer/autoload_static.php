@@ -38,7 +38,7 @@ class ComposerStaticInitd66ef71106f127859dac92417214da04
         ),
         'A' => 
         array (
-            'Admin\\ClinicWebsite\\' => 20,
+            'App\\' => 4,
         ),
     );
 
@@ -75,7 +75,7 @@ class ComposerStaticInitd66ef71106f127859dac92417214da04
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'Admin\\ClinicWebsite\\' => 
+        'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

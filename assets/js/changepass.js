@@ -28,7 +28,7 @@ btmail.addEventListener('click', async function(event) {
 
     //khôi phục lại các hiển thị thông báo
     
-    // const response = await fetch('http://192.168.35.234/api/mailchangepass', {
+    // const response = await fetch('http://192.168.56.1/api/mailchangepass', {
 
     const response = await fetch('http://localhost:3001/api/mailchangepass', {
         method: 'POST',
@@ -72,9 +72,9 @@ btcode.addEventListener('click', async function(event) {
         //code đối chiếu mã code
         document.getElementById('errorMessage2').style.display = 'none';
 
-        const response = await fetch('http://192.168.56.1:3001/api/checkcode', {
+        // const response = await fetch('http://192.168.56.1:3001/api/checkcode', {
 
-        // const response = await fetch('http://localhost:3001/api/checkcode', {
+        const response = await fetch('http://localhost:3001/api/checkcode', {
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
@@ -149,9 +149,9 @@ btchange.addEventListener('click', async function(event) {
         if(passField.value == repassField.value) {
             document.getElementById('errorMessage3').style.display = 'none';
 
-            const response = await fetch('http://192.168.56.1:3001/api/updatepass', {
+            // const response = await fetch('http://192.168.56.1:3001/api/updatepass', {
 
-            // const response = await fetch('http://localhost:3001/api/updatepass', {
+            const response = await fetch('http://localhost:3001/api/updatepass', {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/json',

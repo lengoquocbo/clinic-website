@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // Cấu hình
 const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
-// const PHP_BASE_URL = 'http://192.168.35.234'; 
+// const PHP_BASE_URL = 'http://192.168.56.1:80'; 
 
 
 
@@ -37,12 +37,16 @@ app.post('/api/login', async (req, res) => {
                 message: 'Thiếu thông tin đăng nhập'
             });
         }
-
+        console.log(phone);
+        console.log(password);
         // Gọi đến PHP backend
         const response = await axios.post(
             `${PHP_BASE_URL}/clinic-website/src/Controllers/LoginController.php`,
             { phone, password }
         );
+
+        console.log('PHP Response:', response.data);
+
 
         // Trả về kết quả từ PHP
         res.json(response.data);
@@ -53,9 +57,13 @@ app.post('/api/login', async (req, res) => {
         // Xử lý các loại lỗi khác nhau
         if (error.response) {
             // Lỗi từ PHP server
+
+            console.log('Error status:', error.response.status);
+            console.log('Error data:', error.response.data);
+            console.log('Error headers:', error.response.headers);
             res.status(error.response.status).json({
                 success: false,
-                message: error.response.data.message || 'Lỗi từ server PHP'
+                message: error.response.data
             });
         } else if (error.request) {
             // Không thể kết nối đến PHP server
@@ -102,6 +110,31 @@ app.post('/api/register', async (req, res) => {
             res.status(error.response.status).json({
                 success: false,
                 message: error.response.data.message || 'Lỗi từ server PHP'
+            });
+        } else if (error.request) {
+            res.status(503).json({
+                success: false,
+                message: 'Không thể kết nối đến server'
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                message: 'Lỗi server'
+            });
+        }
+    }
+});
+
+app.post('/api/logout', async (req, res) =>{
+    try{
+    //...............................................
+    } catch(error) {
+        
+        if (error.response) {
+            res.status(error.response.status).json({
+                success: false,
+                message: error.response.data.message || 'Lỗi từ server PHP',
+                error: error
             });
         } else if (error.request) {
             res.status(503).json({

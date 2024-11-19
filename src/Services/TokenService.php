@@ -1,8 +1,10 @@
 <?php
+
+
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-require_once 'RedisServer.php';
+require_once 'RedisService.php';
 
 class TokenService {
     private $secretKey;
@@ -10,7 +12,7 @@ class TokenService {
     private $redisService;
 
     public function __construct() {
-        $this->secretKey = $_ENV['JWT_SECRET_KEY'];
+        $this->secretKey = '0e#$gsj_ncs5-6at9+d1dplyf0evc%';
         $this->algorithm = 'HS256';
         $this->redisService = new RedisService(); // Khởi tạo RedisService
     }
