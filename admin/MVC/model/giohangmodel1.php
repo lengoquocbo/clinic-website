@@ -72,6 +72,13 @@ if (isset($_POST['action'])) {
             echo 'error: Invalid cart data';
             exit;
         }
+        $userviceID = $cartData[0]['userviceID']; // Giả sử tất cả các thuốc đều thuộc cùng 1 `userviceID`
+        function  gennerEXID($userviceID)
+        {
+            $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
+            return "EX" . $userviceID . $randomNumbers;
+        }
+        $EXID = gennerEXID($userviceID);
         $totalAmount = 0;
 
         foreach ($cartData as $item) {
@@ -115,12 +122,7 @@ if (isset($_POST['action'])) {
             }
             $stmt->close();
 
-            function  gennerEXID($userviceID)
-            {
-                $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
-                return "EX" . $userviceID . $randomNumbers;
-            }
-            $EXID = gennerEXID($userviceID);
+           
             $serviceID= 0;
             $query_price_EXID = "INSERT INTO examine (EXID) VALUES (?)";
             $stmt_price_EXID = $db->prepare($query_price_EXID);

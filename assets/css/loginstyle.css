@@ -12,7 +12,7 @@
   }
 
   .login {
-      max-width: 350px;
+    width: 450px;
       font-family: var(--default-font);
       margin: 0 auto;
       padding: 40px;
@@ -20,7 +20,7 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       background-color: #fff;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .login__title {
@@ -38,12 +38,17 @@
     }
     .login__icon-button {
       position: absolute;
-      margin-top: -50px;
+      margin-top: -60px;
       margin-left: 320px;
       font-size:var(--font-size-medium);
       border: none;
       background-color: transparent;
       cursor: pointer;
+      width: 20px;
+      height: 30px;
+    }
+    .login__icon-button:hover{
+      background-color: #fff;
     }
 
     .login__input {
@@ -56,7 +61,7 @@
 
     .login__input input {
 
-      height: 25px;
+      height: 50px;
       padding: 10px 10px 10px 40px;
       /* Tạo khoảng trống cho icon bên trái */
       border: 1px solid #ccc;
@@ -138,6 +143,7 @@
     }
 
     .login__methodlogin i {
+      color: blue;
       margin: 20px;
     }
 
