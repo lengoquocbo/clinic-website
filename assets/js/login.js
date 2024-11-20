@@ -38,6 +38,7 @@ submit.addEventListener('click', async (e)=>{
         // const response = await fetch('http://192.168.56.1/api/login', {
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type':'application/json',
             },
@@ -46,8 +47,6 @@ submit.addEventListener('click', async (e)=>{
                 password: password
             })
         });
-        console.log("post thanh cong");
-
         const data = await response.json();
         console.log(data);
 
@@ -56,11 +55,9 @@ submit.addEventListener('click', async (e)=>{
             sessionStorage.setItem('token', data.token);
             document.getElementById('successMessage').textContent = data.message;
             document.getElementById('successMessage').style.display = 'block';
-            console.log('hello response');
             const currentUrl = window.location.href;
-            const newUrl = currentUrl.replace("?mod=taikhoan&act=login", "?mod=home#home");
-            window.location.href = newUrl;
-            history.replaceState(null, "", "http://localhost/clinic-website/?mod=home#home");
+            window.location.href = "http://localhost/clinic-website"+data.URL;
+            history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
         } else {
             // hiển thị lỗi
             document.getElementById('errorMessage').textContent = data.message;

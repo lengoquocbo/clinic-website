@@ -1,4 +1,10 @@
 <?php
+// Đặt ở đầu file login.php
+
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once 'Database.php';
 

@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -27,20 +28,16 @@ class TokenService {
             'iat' => $issuedAt,
             'exp' => $expire,
             'data' => [
-                'user_id' => $user->userID,
-                'email' => $user->mail,
-                'role' => $user->role
+                'user_id' => $user['userID'],
+                'email' => $user['mail'],
+                'role' => $user['role']
             ]
         ];
 
         try {
             $token = JWT::encode($payload, $this->secretKey, $this->algorithm);
-            $this->redisService->set('user_token:' . $user->id, $token, $expire - time());
-
-            return [
-                'token' => $token,
-                'expires' => $expire
-            ];
+            $this->redisService->saveUserToken($user['userID'], $token, $expire - time());
+            return $token;
         } catch (Exception $e) {
             throw new Exception('Error generating token: ' . $e->getMessage());
         }

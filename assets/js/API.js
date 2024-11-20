@@ -11,7 +11,8 @@ const PORT = 3001; // Đổi sang port khác vì PHP đang chạy ở 3000
 
 // Middleware
 app.use(cors({
-    origin: '*', // Hoặc chỉ định domain cụ thể
+    origin: 'http://localhost', // Hoặc chỉ định domain cụ thể
+    credentials: true,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -42,7 +43,13 @@ app.post('/api/login', async (req, res) => {
         // Gọi đến PHP backend
         const response = await axios.post(
             `${PHP_BASE_URL}/clinic-website/src/Controllers/LoginController.php`,
-            { phone, password }
+            { phone, password },
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
         );
 
         console.log('PHP Response:', response.data);

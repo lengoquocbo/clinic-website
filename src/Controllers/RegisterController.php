@@ -9,7 +9,7 @@
 
     require_once  __DIR__.'\..\Models\usermodel.php';
     require_once __DIR__.'\..\Services\TokenService.php';
-    require_once __DIR__.'\..\Services\RedisServer.php';
+    require_once __DIR__.'\..\Services\RedisService.php';
 
 
 

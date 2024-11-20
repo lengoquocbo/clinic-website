@@ -105,11 +105,26 @@ const gender = document.getElementById("gender").value;
 const dateofbitrh = document.getElementById("service").value;
 const address = document.getElementById("address").value;
 const message = document.getElementById("message").value;
-const submit = document.getElementById("submit").value;
-const errorres = document.getElementById()
+const datlich = document.getElementById("datlich").value;
 
-submit.addEventListener("click", async (e) => {
+datlich.addEventListener("click", async (e) => {
+    e.preventDefault();
     if(!hovaten || !CCCD || !gender || !dateofbirth || !address || !message){
         
     }
 })
+
+//xử lý li đặt lihcj
+function checkSession(){
+    fetch('http://localhost:80/clinic-website/src/Controllers/CheckSession.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.session_exists) {
+                window.location.href = "http://localhost/clinic-website/?mod=home#appointment";
+            } else {
+                // Nếu session không tồn tại
+                alert('Vui lòng đăng nhập');
+                window.location.href = 'http://localhost/clinic-website/?mod=taikhoan&act=login';
+            }
+        });
+}
