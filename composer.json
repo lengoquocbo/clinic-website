@@ -1,10 +1,11 @@
 {
-    "name": "admin/clinic-website",
+    
     "autoload": {
         "psr-4": {
             "App\\": "src/"
         }
     },
+
     "authors": [
         {
             "name": "lengoquocbo",

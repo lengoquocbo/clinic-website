@@ -39,7 +39,7 @@
         if (!isset($data['phone']) || !isset($data['password'])) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Thiếu thông tin đăng nhập'
+                'message' => 'Thiếu thông tin đăng nhập', 
             ]);
             exit();
         }
@@ -50,44 +50,44 @@
         $user = $usermodel->checkuser($phone, $password);
 
         if ($user!=NULL) {
-            // Đăng nhập thành công
            
-
-            if($user['role'] == 1) {
+            if($user['role'] == 3) {
                 $_SESSION['isLogin_Admin'] = true;
+
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng nhập thành công',
-                    'URL' => '?mod=homne'
+                    'URL' => '/admin/MVC/views/index.php'
                 ]);
-            } else {
+            
+            } else if($user['role'] == 2) {
                 
-
-                if($user['role'] == 2){
                 $_SESSION['isLogin_Nhanvien'] = true;
                 $_SESSION['userID'] = $user['userID'];
-
+                
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng nhập thành công',
-                    'URL' => '?mod=home',
+                    'URL' => '/admin/MVC/views/index.php',
                 ]);
 
-                } else {
-                    $tokenLG = $token->generateToken($user);
-                    $Redis->saveUserToken($user['userID'], $tokenLG, 60*60*2);
-                    $_SESSION['isLogin'] = true;
-                    $_SESSION['userID'] = $user['userID'];
-
-                    echo json_encode([
-                        'success' => true,
-                        'message' => 'Đăng nhập thành công',
-                        'token' => $tokenLG,
-                        'URL' => '?mod=home'
-                        
-                    ]);
-                }  
-            }
+            } else {
+                $_SESSION['isLogin'] = true;
+                $_SESSION['userID'] = $user['userID'];
+    
+                $tokenLG = $token->generateToken($user);
+                $Redis->saveUserToken($user['userID'], $tokenLG, 60*60*2);
+               
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Đăng nhập thành công',
+                    'token' => $tokenLG,
+                    'URL' => '?mod=home',
+                    'sessionlogin' => $_SESSION['isLogin'],
+                ]);
+            }  
+            session_write_close();
+            
         } else {
             // Đăng nhập thất bại
             echo json_encode([

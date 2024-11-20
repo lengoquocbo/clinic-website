@@ -1,4 +1,7 @@
 /* Hiệu ứng cho header */
+
+
+
 .menu-toggle {
     display: none;
     font-size: 2rem;
@@ -54,6 +57,60 @@ nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.2);
     color: #FFD700;
     transform: scale(1.05);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.dropdown-menu {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1;
+    top: 100%;
+    right: 0;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 8px 15px;
+}
+
+.dropdown-menu li a {
+    font-weight: 20px;
+    color: #555;
+    transition: all 0.3s ease;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f1f1f1;
+    color: #007bff;
+    font-weight: 500;
 }
 
 /* trang chu va dich vu */

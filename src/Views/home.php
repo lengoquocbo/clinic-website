@@ -112,68 +112,65 @@
 
 <!-- Phần Đặt lịch -->
 <?php
-if (!isset($_SESSION['isLogin'])) {
-    // Chuyển hướng sang giao diện đăng nhập nếu chưa đăng nhập
-    header("Location: ?mod=taikhoan&act=login");
-} else {
+if (isset($_SESSION['isLogin'])) {
 ?>
-    <section id="appointment">
-        <div class="appointment-header">
-            <h2>Đặt Lịch Hẹn</h2>
-            <p>Hãy điền thông tin vào form bên dưới để đặt lịch hẹn với chúng tôi. Chúng tôi sẽ liên hệ với bạn để xác nhận lịch hẹn.</p>
-        </div>
-        <div class="appointment-form">
-            <form action="#" method="post">
-                <div class="row">
-                    <div>
-                        <label for="name">Họ và tên:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div>
-                        <label for="CCCD">CCCD:</label>
-                        <input type="text" id="CCCD" name="CCCD" required>
-                    </div>
-                    <div>
-                        <label for="gender">Giới tính:</label>
-                        <select name="gender" id="gender" required>
-                            <option value="">Chọn giới tính</option>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div>
-                        <label for="date">Ngày khám:</label>
-                        <input type="date" id="date" name="date" required>
-                    </div>
-                    <div>
-                    <label for="dateofbirth">Ngày sinh:</label>
-                    <input type="date" id="dateofbirth" name="dateofbirth" required>
-                    </div>
-                    <div>
-                        <label for="service">Dịch vụ:</label>
-                        <select id="ID" name="ID" required>
-                            <option value="">Chọn dịch vụ</option>
-                            <option value="Dịch vụ A">Dịch vụ A</option>
-                            <option value="Dịch vụ B">Dịch vụ B</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div>
-                        <label for="address">Địa chỉ:</label>
-                        <input type="text" id="address" name="address" required>
-                    </div>
+<section id="appointment">
+    <div class="appointment-header">
+        <h2>Đặt Lịch Hẹn</h2>
+        <p>Hãy điền thông tin vào form bên dưới để đặt lịch hẹn với chúng tôi. Chúng tôi sẽ liên hệ với bạn để xác nhận lịch hẹn.</p>
+    </div>
+    <div class="appointment-form">
+        <form action="#" method="post">
+            <div class="row">
+                <div>
+                    <label for="name">Họ và tên:</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div>
-                    <label for="message">Nội dung:</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Nhập nội dung yêu cầu hoặc câu hỏi của bạn"></textarea>
+                    <label for="CCCD">CCCD:</label>
+                    <input type="text" id="CCCD" required>
                 </div>
-                <button type="submit" id="submit">Gửi Đặt Lịch</button>
-            </form>
-        </div>
-    </section>
+                <div>
+                    <label for="gender">Giới tính:</label>
+                    <select name="gender" id="gender" required>
+                        <option value="">Chọn giới tính</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="date">Ngày khám:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                <label for="dateofbirth">Ngày sinh:</label>
+                <input type="date" id="dateofbirth" name="dateofbirth" required>
+                </div>
+                <div>
+                    <label for="service">Dịch vụ:</label>
+                    <select id="service" name="service" required>
+                        <option value="">Chọn dịch vụ</option>
+                        <option value="Dịch vụ A">Dịch vụ A</option>
+                        <option value="Dịch vụ B">Dịch vụ B</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="address">Địa chỉ:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+            </div>
+            <div>
+                <label for="message">Nội dung:</label>
+                <textarea id="message" name="message" rows="4" placeholder="Nhập nội dung yêu cầu hoặc câu hỏi của bạn"></textarea>
+            </div>
+            <button type="submit" id="datlich">Gửi Đặt Lịch</button>
+        </form>
+    </div>
+</section>
 <?php
 }
 ?>

@@ -1,8 +1,6 @@
 <?php
     session_start();
-
     
-
     require_once 'vendor/autoload.php';
 
     require_once 'config.php';
@@ -24,14 +22,14 @@
             break;  
         case 'taikhoan':
             $act = isset($_GET['act']) ? $_GET['act'] : 'login';
-
+            
             if((isset($_SESSION['isLogin']) && $_SESSION['isLogin'] == true)){
                 switch($act) {
                     case 'account':
-                        account();
+                        require_once __DIR__.'/src/Views/index.php';
                         break;
                     case 'login':
-                        require_once 'Views/index.php';
+                        require_once __DIR__.'/src/Views/index.php';
                         break;
                     default: 
                         header('Location: ?mod=error');
