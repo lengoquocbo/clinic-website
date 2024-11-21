@@ -58,15 +58,17 @@
             $result = $usermodel->addUser($data);
             if($result){
                 $user = $usermodel->findUserByPhone($data['phone']);
+                $_SESSION['isLogin'] = true;
+                $_SESSION['userID'] = $user['userID'];
                 $token = $token->generateToken($user);
                 $Redis->saveUserToken($user['userID'], $token, 60*60*2);
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng ký thành công',
-                    'URL' => '?act=...',
+                    'URL' => '?mod=home',
                     'token' => $token
                 ]);
-            } else {
+            } else {    
                 echo json_encode([
                     'success' => false,
                     'message' => 'Đăng ký không thành công'
