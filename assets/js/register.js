@@ -70,6 +70,7 @@ submit.addEventListener('click', async (e)=>{
             
             if (data.success) {
                 // Hiển thị thông báo thành công
+                sessionStorage.setItem('token', data.token);
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
                 window.location.href = "http://localhost/clinic-website/?mod=home";

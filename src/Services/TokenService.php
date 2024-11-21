@@ -30,7 +30,7 @@ class TokenService {
             'data' => [
                 'user_id' => $user['userID'],
                 'email' => $user['mail'],
-                'role' => $user['role']
+                'phone' => $user['phone']
             ]
         ];
 

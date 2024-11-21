@@ -141,7 +141,13 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/reservation', async (req, res) => {
     try {
         // Validate input
-        const requiredFields = ['token', 'name', 'mail', 'pass'];
+        // hovaten: hovaten,
+        //         CCCD: CCCD,
+        //         gender: gender, 
+        //         dateofbirth: dateofbirth, 
+        //         address: address,
+        //         message: message
+        const requiredFields = ['token', 'hovaten', 'CCCD', 'gender', 'dateofbirth', 'address', 'message'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 return res.status(400).json({
@@ -190,7 +196,11 @@ app.post('/api/reservation', async (req, res) => {
 
 app.post('/api/logout', async (req, res) =>{
     try{
-    //...............................................
+        
+        decodeJwtToken(token)
+        
+            
+        
     } catch(error) {
         
         if (error.response) {
@@ -212,6 +222,8 @@ app.post('/api/logout', async (req, res) =>{
         }
     }
 });
+
+
 
 app.post('/api/mailchangepass', async (req, res) => {
     try{
@@ -380,5 +392,15 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Node.js server running on port ${PORT}`);
 });
+
+function decodeJwtToken(token, secretKey) {
+    try {
+        const decoded = jwt.verify(token, secretKey, { algorithms: ['HS256'] });
+        return decoded; // Trả về payload nếu thành công
+    } catch (err) {
+        console.error('Giải mã thất bại:', err.message);
+        return null; // Trả về null nếu token không hợp lệ
+    }
+}
 
 

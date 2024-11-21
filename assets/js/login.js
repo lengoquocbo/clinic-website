@@ -71,21 +71,3 @@ submit.addEventListener('click', async (e)=>{
         document.getElementById('errorMessage').style.display = 'block';
     }
 });
-
-function setAuthTokenCookie(token, expirationDays) {
-    const expires = new Date();
-    expires.setDate(expires.getDate() + expirationDays);
-    document.cookie = `auth_token=${token}; expires=${expires.toUTCString()}; path=/; HttpOnly; Secure`;
-  }
-  
-  // Lấy token từ cookie
-  function getAuthTokenFromCookie() {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith('auth_token=')) {
-        return cookie.substring('auth_token='.length, cookie.length);
-      }
-    }
-    return null;
-  }

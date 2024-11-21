@@ -1,4 +1,7 @@
 // menu
+
+const jwt = require('jsonwebtoken');
+
 const menuToggle = document.querySelector('.menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
@@ -145,20 +148,14 @@ datlich.addEventListener("click", async (e) => {
         if (data.success) {
             // Hiển thị thông báo thành công
             sessionStorage.setItem('token', data.token);
-            document.getElementById('successMessage').textContent = data.message;
-            document.getElementById('successMessage').style.display = 'block';
-            const currentUrl = window.location.href;
             window.location.href = "http://localhost/clinic-website"+data.URL;
             history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
         } else {
-            // hiển thị lỗi
-            document.getElementById('errorMessage').textContent = data.message;
-            document.getElementById('errorMessage').style.display = 'block';
+           console.log(data.message);
         }
     } catch(error) {
         console.error('Error:', error);
-        document.getElementById('errorMessage').textContent = 'Đã xảy ra lỗi khi đặt lịch';
-        document.getElementById('errorMessage').style.display = 'block';
+        
     }
 });
 
@@ -176,3 +173,34 @@ function checkSession(){
             }
         });
 }
+
+const dangxuat = document.getElementById('logout');
+dangxuat.addEventListener("click", async (e) =>{
+    e.preventDefault();
+    try {
+        const response =  await fetch('http://localhost:3001/api/logout', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({
+                token: sessionStorage.getItem['token']
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            // Hiển thị thông báo thành công
+            window.location.href = "http://localhost/clinic-website"+data.URL;
+            history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
+        } else {
+            // hiển thị lỗi
+           console.log(data.message);
+        }
+    } catch(error) {
+        console.error('Error:', error);
+       
+    }
+});

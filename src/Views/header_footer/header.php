@@ -28,7 +28,7 @@
                                     <li><a href="profile.php">Quản lý hồ sơ</a></li>
                                     <li><a href="medical-history.php">Lịch sử khám bệnh</a></li>
                                     <li><a href="appointments.php">Lịch hẹn của tôi</a></li>
-                                    <li><a href="" class="link">Đăng xuất</a></li>
+                                    <li><a href="#" class="link" id="logout" id="logout">Đăng xuất</a></li>
                                 </ul>
                          </li>
                          <?php
