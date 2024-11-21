@@ -99,22 +99,70 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //đặt lịch hẹn
-const hovaten = document.getElementById("name").value;
-const CCCD = document.getElementById("CCCD").value;
-const gender = document.getElementById("gender").value;
-const dateofbitrh = document.getElementById("service").value;
-const address = document.getElementById("address").value;
-const message = document.getElementById("message").value;
+
 const datlich = document.getElementById("datlich").value;
 
 datlich.addEventListener("click", async (e) => {
     e.preventDefault();
-    if(!hovaten || !CCCD || !gender || !dateofbirth || !address || !message){
-        
-    }
-})
 
-//xử lý li đặt lihcj
+    const hovaten = document.getElementById("name").value;
+    const CCCD = document.getElementById("CCCD").value;
+    const gender = document.getElementById("gender").value;
+    const dateofbitrh = document.getElementById("service").value;
+    const address = document.getElementById("address").value;
+    const message = document.getElementById("message").value;
+
+
+    if(!hovaten || !CCCD || !gender || !dateofbirth || !address || !message){
+        e.preventDefault();
+
+        // Hiển thị thông báo lỗi
+        alert("Vui lòng nhập đầy đủ thông tin");
+        exit();
+    }
+
+    try { 
+        // const response = await fetch('http://192.168.56.1/api/login', {
+        const response = await fetch('http://localhost:3001/api/reservation', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({
+                token: sessionStorage.getItem['token'],
+                hovaten: hovaten,
+                CCCD: CCCD,
+                gender: gender, 
+                dateofbirth: dateofbirth, 
+                address: address,
+                message: message
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            // Hiển thị thông báo thành công
+            sessionStorage.setItem('token', data.token);
+            document.getElementById('successMessage').textContent = data.message;
+            document.getElementById('successMessage').style.display = 'block';
+            const currentUrl = window.location.href;
+            window.location.href = "http://localhost/clinic-website"+data.URL;
+            history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
+        } else {
+            // hiển thị lỗi
+            document.getElementById('errorMessage').textContent = data.message;
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+    } catch(error) {
+        console.error('Error:', error);
+        document.getElementById('errorMessage').textContent = 'Đã xảy ra lỗi khi đặt lịch';
+        document.getElementById('errorMessage').style.display = 'block';
+    }
+});
+
+//xử lý li đặt lihc
 function checkSession(){
     fetch('http://localhost:80/clinic-website/src/Controllers/CheckSession.php')
         .then(response => response.json())

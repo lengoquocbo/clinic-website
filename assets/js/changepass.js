@@ -32,6 +32,7 @@ btmail.addEventListener('click', async function(event) {
 
     const response = await fetch('http://localhost:3001/api/mailchangepass', {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type':'application/json',
         },
@@ -76,6 +77,7 @@ btcode.addEventListener('click', async function(event) {
 
         const response = await fetch('http://localhost:3001/api/checkcode', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type':'application/json',
             },
@@ -153,6 +155,7 @@ btchange.addEventListener('click', async function(event) {
 
             const response = await fetch('http://localhost:3001/api/updatepass', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type':'application/json',
                 },

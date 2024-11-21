@@ -28,11 +28,14 @@ submit.addEventListener('click', async (e)=>{
     const phone = document.getElementById('phone').value;
     const password = document.getElementById('password').value;
 
-    //xử lý checkbox để xem thử có lưu vào cookie hay không
-    const remember = document.getElementById('remember');
-    // const result = checkbox.checked ? 'True' : 'False';
+    if(phone.trim() === "" || password.trim() === "") {
+        
+        e.preventDefault();
 
-   
+        // Hiển thị thông báo lỗi
+        alert("Vui lòng nhập đầy đủ thông tin");
+        exit();
+    }
 
     try { 
         // const response = await fetch('http://192.168.56.1/api/login', {
@@ -55,7 +58,6 @@ submit.addEventListener('click', async (e)=>{
             sessionStorage.setItem('token', data.token);
             document.getElementById('successMessage').textContent = data.message;
             document.getElementById('successMessage').style.display = 'block';
-            const currentUrl = window.location.href;
             window.location.href = "http://localhost/clinic-website"+data.URL;
             history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
         } else {
@@ -69,3 +71,21 @@ submit.addEventListener('click', async (e)=>{
         document.getElementById('errorMessage').style.display = 'block';
     }
 });
+
+function setAuthTokenCookie(token, expirationDays) {
+    const expires = new Date();
+    expires.setDate(expires.getDate() + expirationDays);
+    document.cookie = `auth_token=${token}; expires=${expires.toUTCString()}; path=/; HttpOnly; Secure`;
+  }
+  
+  // Lấy token từ cookie
+  function getAuthTokenFromCookie() {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith('auth_token=')) {
+        return cookie.substring('auth_token='.length, cookie.length);
+      }
+    }
+    return null;
+  }

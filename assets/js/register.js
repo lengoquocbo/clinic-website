@@ -34,8 +34,14 @@ submit.addEventListener('click', async (e)=>{
     const repassword = document.getElementById('repassword').value;
     const remember = document.getElementById('remember').vlaue;
     
-    console.log(phone, name, mail, password);
-    
+    if(phone.trim() === "" || password.trim() === "" || name.trim() === "" || mail.trim() === "" || repassword.trim() === "") {
+        
+        e.preventDefault();
+
+        // Hiển thị thông báo lỗi
+        alert("Vui lòng nhập đầy đủ thông tin");
+        exit();
+    }
 
     //xử lý checkbox để xem thử có lưu vào cookie hay không
     // const remember = document.getElementById('remember');
@@ -53,6 +59,7 @@ submit.addEventListener('click', async (e)=>{
 
             const response = await fetch('http://localhost:3001/api/register', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type':'application/json',
                 },
@@ -65,9 +72,7 @@ submit.addEventListener('click', async (e)=>{
                 // Hiển thị thông báo thành công
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
-                const currentUrl = window.location.href;
-                const newUrl = currentUrl.replace("?mod=taikhoan&act=register", "?mod=home#home");
-                window.location.href = newUrl;
+                window.location.href = "http://localhost/clinic-website/?mod=home";
                 history.replaceState(null, "", "http://localhost/clinic-website/?mod=home#home");   
                     
             } else {

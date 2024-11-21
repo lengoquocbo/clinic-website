@@ -104,7 +104,63 @@ app.post('/api/register', async (req, res) => {
         // Gọi đến PHP backend
         const response = await axios.post(
             `${PHP_BASE_URL}/clinic-website/src/Controllers/RegisterController.php`,
-            req.body
+            req.body,
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
+        );
+
+        // Trả về kết quả từ PHP
+        res.json(response.data);
+
+    } catch (error) {
+        console.error('Registration error:', error);
+        
+        if (error.response) {
+            res.status(error.response.status).json({
+                success: false,
+                message: error.response.data.message || 'Lỗi từ server PHP'
+            });
+        } else if (error.request) {
+            res.status(503).json({
+                success: false,
+                message: 'Không thể kết nối đến server'
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                message: 'Lỗi server'
+            });
+        }
+    }
+});
+
+app.post('/api/reservation', async (req, res) => {
+    try {
+        // Validate input
+        const requiredFields = ['token', 'name', 'mail', 'pass'];
+        for (const field of requiredFields) {
+            if (!req.body[field]) {
+                return res.status(400).json({
+                    success: false,
+                    message: `Thiếu thông tin: ${field}`
+                });
+            }
+        }
+
+        // Gọi đến PHP backend
+        const response = await axios.post(
+            `${PHP_BASE_URL}/clinic-website/src/Controllers/RegisterController.php`,
+            req.body,
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
         );
 
         // Trả về kết quả từ PHP
@@ -172,7 +228,13 @@ app.post('/api/mailchangepass', async (req, res) => {
         // Gọi đến PHP backend
         const response = await axios.post(
             `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangePassController.php`,
-            { mail, inputtype }
+            { mail, inputtype },
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
         );
         console.log('PHP Response:', response.data);
 
@@ -217,7 +279,13 @@ app.post('/api/updatepass', async (req, res) =>{
         // Gọi đến PHP backend
         const response = await axios.post(
             `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangePassController.php`,
-            { mail, password, inputtype }
+            { mail, password, inputtype },
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
         );
 
         // Trả về kết quả từ PHP
@@ -259,7 +327,13 @@ app.post('/api/checkcode', async (req, res) =>{
         // Gọi đến PHP backend
         const response = await axios.post(
             `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangePassController.php`,
-            { mail, code , inputtype }
+            { mail, code , inputtype },
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
         );
         console.log('PHP Response:', response.data);
         // Trả về kết quả từ PHP
