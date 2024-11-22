@@ -140,13 +140,6 @@ app.post('/api/register', async (req, res) => {
 
 app.post('/api/reservation', async (req, res) => {
     try {
-        // Validate input
-        // hovaten: hovaten,
-        //         CCCD: CCCD,
-        //         gender: gender, 
-        //         dateofbirth: dateofbirth, 
-        //         address: address,
-        //         message: message
         const requiredFields = ['token', 'hovaten', 'CCCD', 'gender', 'dateofbirth', 'address', 'message'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
@@ -159,7 +152,7 @@ app.post('/api/reservation', async (req, res) => {
 
         // Gọi đến PHP backend
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/RegisterController.php`,
+            `${PHP_BASE_URL}/clinic-website/src/Controllers/ReservationController.php`,
             req.body,
             {
                 withCredentials: true,

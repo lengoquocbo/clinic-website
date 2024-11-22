@@ -1,6 +1,6 @@
 // menu
 
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 const menuToggle = document.querySelector('.menu-toggle');
 const navMenu = document.getElementById('nav-menu');

@@ -33,7 +33,5 @@ if (session_status() === PHP_SESSION_NONE) {
     require_once("header_footer/footer.php")
     ?>
     <!-- footer section end -->
-     
-    
 </body>
 </html>
