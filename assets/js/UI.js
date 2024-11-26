@@ -103,20 +103,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //đặt lịch hẹn
 
-const datlich = document.getElementById("datlich").value;
+const datlich = document.getElementById("datlich");
 
 datlich.addEventListener("click", async (e) => {
     e.preventDefault();
-
+    
+    alert(localStorage.getItem('token'));
     const hovaten = document.getElementById("name").value;
     const CCCD = document.getElementById("CCCD").value;
     const gender = document.getElementById("gender").value;
-    const dateofbitrh = document.getElementById("service").value;
+    const ngaykham = document.getElementById("ngaykham").value;
+    const dateofbirth = document.getElementById("dateofbirth").value;
+    const service = document.getElementById('service').value;
     const address = document.getElementById("address").value;
     const message = document.getElementById("message").value;
 
 
-    if(!hovaten || !CCCD || !gender || !dateofbirth || !address || !message){
+    if(hovaten.trim() === '' || CCCD.trim() === '' || gender.trim() === '' || ngaykham.trim() === '' || dateofbirth.trim() === '' || address.trim() === '' || message.trim() === '' || service.trim() === ''){
         e.preventDefault();
 
         // Hiển thị thông báo lỗi
@@ -125,6 +128,17 @@ datlich.addEventListener("click", async (e) => {
     }
 
     try { 
+        const requestdata = {
+            token: localStorage.getItem('token'),
+            hovaten: hovaten,
+            CCCD: CCCD,
+            gender: gender, 
+            ngaykham: ngaykham,
+            dateofbirth: dateofbirth,
+            service : service,
+            address: address,
+            message: message
+        }
         // const response = await fetch('http://192.168.56.1/api/login', {
         const response = await fetch('http://localhost:3001/api/reservation', {
             method: 'POST',
@@ -132,27 +146,18 @@ datlich.addEventListener("click", async (e) => {
             headers: {
                 'Content-Type':'application/json',
             },
-            body: JSON.stringify({
-                token: sessionStorage.getItem['token'],
-                hovaten: hovaten,
-                CCCD: CCCD,
-                gender: gender, 
-                dateofbirth: dateofbirth, 
-                address: address,
-                message: message
-            })
+            body: JSON.stringify(requestdata)
         });
 
         const data = await response.json();
 
         if (data.success) {
             // Hiển thị thông báo thành công
-            sessionStorage.setItem('token', data.token);
-            window.location.href = "http://localhost/clinic-website"+data.URL;
-            history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
+            alert('dat lich thanh cong');
         } else {
-           console.log(data.message);
+            alert('dat lih that bai');
         }
+
     } catch(error) {
         console.error('Error:', error);
         

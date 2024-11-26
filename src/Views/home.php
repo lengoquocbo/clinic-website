@@ -97,15 +97,24 @@
     <div class="team-members">
         <?php
         foreach($data_nhanvien as $nhanvien){
+            if (isset($nhanvien) && !empty($nhanvien)) {
+                
         ?> 
             <div class="team-member">
-                <img src="<? echo STAFF_UPLOAD_PATH.$nhanvien['hinhanh']; ?>" alt="<?php $nhanvien['fullname']; ?>">
-                <h3><?php $nhanvien['fullname']; ?></h3>
-                <p><?php $nhanvien['status']; ?></p>
+                <img 
+                    src="<?php echo UPLOAD_DIR . $nhanvien['hinhanh']; ?>" 
+                    alt="<?php echo $nhanvien['fullname']; ?>"
+                >
+                <h3><?php echo $nhanvien['fullname']; ?></h3>
+                <p><?php echo $nhanvien['status']; ?></p>        
             </div>
         <?php
+            } else {
+                // Hiển thị ảnh mặc định hoặc thông báo
+            echo "Không có thông tin nhân viên";
+            }
         }
-        ?>
+        ?>          
     </div>
 </section>
 
@@ -141,8 +150,8 @@ if (isset($_SESSION['isLogin'])) {
             </div>
             <div class="row">
                 <div>
-                    <label for="date">Ngày khám:</label>
-                    <input type="date" id="date" name="date" required>
+                    <label for="ngaykham">Ngày khám:</label>
+                    <input type="date" id="ngaykham" name="ngaykham" required>
                 </div>
                 <div>
                 <label for="dateofbirth">Ngày sinh:</label>
@@ -152,8 +161,11 @@ if (isset($_SESSION['isLogin'])) {
                     <label for="service">Dịch vụ:</label>
                     <select id="service" name="service" required>
                         <option value="">Chọn dịch vụ</option>
-                        <option value="Dịch vụ A">Dịch vụ A</option>
-                        <option value="Dịch vụ B">Dịch vụ B</option>
+                        <?php foreach($data_dichvu as $dichvu): ?>
+                            <option value="<?php echo $dichvu['serviceID']; ?>">
+                                <?php echo $dichvu['servicename']; ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
@@ -167,7 +179,7 @@ if (isset($_SESSION['isLogin'])) {
                 <label for="message">Nội dung:</label>
                 <textarea id="message" name="message" rows="4" placeholder="Nhập nội dung yêu cầu hoặc câu hỏi của bạn"></textarea>
             </div>
-            <button type="submit" id="datlich">Gửi Đặt Lịch</button>
+            <button  id="datlich">Gửi Đặt Lịch</button>
         </form>
     </div>
 </section>

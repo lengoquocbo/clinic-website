@@ -27,9 +27,17 @@ class Nhanvien {
         $stmt = $this->db->prepare("SELECT * FROM staffs WHERE position = ?");
         $stmt->bind_param("s", $position);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        
+        $result = $stmt->get_result();
+        $staffs = array();
+        
+        // Lấy tất cả các dòng kết quả vào mảng
+        while($row = $result->fetch_assoc()) {
+            $staffs[] = $row;
+        }
+        
+        return $staffs;
     }
-
     // Thêm mới nhân viên
     public function addStaff($data) {
         // Kiểm tra nếu không có hình ảnh được chọn

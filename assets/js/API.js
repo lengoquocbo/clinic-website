@@ -5,13 +5,16 @@ const cors = require('cors');
 const axios = require('axios');
 const redis = require('redis');
 const client = redis.createClient();
+const jwt = require('jsonwebtoken');
+const secretkey = "0e#$gsj_ncs5-6at9+d1dplyf0evc%";
 
 const app = express();
 const PORT = 3001; // Đổi sang port khác vì PHP đang chạy ở 3000
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost', // Hoặc chỉ định domain cụ thể
+    origin: 'http://localhost',
+    // origin: 'http://192.168.1.8', // Hoặc chỉ định domain cụ thể
     credentials: true,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -38,11 +41,11 @@ app.post('/api/login', async (req, res) => {
                 message: 'Thiếu thông tin đăng nhập'
             });
         }
-        console.log(phone);
+        console.log(phone); 
         console.log(password);
-        // Gọi đến PHP backend
+        // Gọi đến PHP backend  
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/LoginController.php`,
+            `${PHP_BASE_URL}/clinic-website/src/Controllers/loginController.php`,
             { phone, password },
             {
                 withCredentials: true,
@@ -58,6 +61,8 @@ app.post('/api/login', async (req, res) => {
         // Trả về kết quả từ PHP
         res.json(response.data);
 
+
+
     } catch (error) {
         console.error('Login error:', error);
 
@@ -70,7 +75,7 @@ app.post('/api/login', async (req, res) => {
             console.log('Error headers:', error.response.headers);
             res.status(error.response.status).json({
                 success: false,
-                message: error.response.data
+                message: 'loi tu server php'
             });
         } else if (error.request) {
             // Không thể kết nối đến PHP server
@@ -140,14 +145,9 @@ app.post('/api/register', async (req, res) => {
 
 app.post('/api/reservation', async (req, res) => {
     try {
-        // Validate input
-        // hovaten: hovaten,
-        //         CCCD: CCCD,
-        //         gender: gender, 
-        //         dateofbirth: dateofbirth, 
-        //         address: address,
-        //         message: message
-        const requiredFields = ['token', 'hovaten', 'CCCD', 'gender', 'dateofbirth', 'address', 'message'];
+
+        const requiredFields = ['token', 'hovaten', 'CCCD', 'gender', 'ngaykham', 'dateofbirth', 'service', 'address', 'message'];
+
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 return res.status(400).json({
@@ -157,10 +157,39 @@ app.post('/api/reservation', async (req, res) => {
             }
         }
 
-        // Gọi đến PHP backend
+        const { token, hovaten, CCCD, gender, ngaykham, dateofbirth, service, address, message} = req.body;
+
+        
+        const payload = jwt.decode(token);
+        if (!payload) {
+            return res.status(414).json({
+                success: false,
+                message: `khong the giai ma token`
+            });
+        }
+
+        const currentTime = Math.floor(Date.now() / 1000);
+        const expirationTime = payload.exp;
+
+        // So sánh thời gian
+        if (currentTime >= expirationTime) {
+            console.log('Token đã hết hạn');
+            return res.status(414).json({
+                success: false,
+                message: `token da het han`
+            });
+        }
+
+        userID = payload.user_id;
+        mail = payload.email;
+        phone = payload.phone;
+
+      
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/RegisterController.php`,
-            req.body,
+
+            `${PHP_BASE_URL}/clinic-website/src/Controllers/ReservationController.php`,
+            {phone, mail, userID, hovaten, CCCD, gender, ngaykham, dateofbirth, service, address, message},
+ 
             {
                 withCredentials: true,
                 headers: {
@@ -169,7 +198,7 @@ app.post('/api/reservation', async (req, res) => {
             }
         );
 
-        // Trả về kết quả từ PHP
+        
         res.json(response.data);
 
     } catch (error) {
@@ -188,7 +217,7 @@ app.post('/api/reservation', async (req, res) => {
         } else {
             res.status(500).json({
                 success: false,
-                message: 'Lỗi server'
+                message: 'Lỗi kiem tra token'
             });
         }
     }
@@ -197,7 +226,6 @@ app.post('/api/reservation', async (req, res) => {
 app.post('/api/logout', async (req, res) =>{
     try{
         
-        decodeJwtToken(token)
         
             
         
@@ -393,13 +421,32 @@ app.listen(PORT, () => {
     console.log(`Node.js server running on port ${PORT}`);
 });
 
-function decodeJwtToken(token, secretKey) {
+function checkTokenExpiration(token) {
     try {
-        const decoded = jwt.verify(token, secretKey, { algorithms: ['HS256'] });
-        return decoded; // Trả về payload nếu thành công
-    } catch (err) {
-        console.error('Giải mã thất bại:', err.message);
-        return null; // Trả về null nếu token không hợp lệ
+        // Giải mã token (không cần secret key để kiểm tra hết hạn)
+        const decoded = jwt.decode(token);
+
+        if (!decoded) {
+            console.log('Token không hợp lệ');
+            return false;
+        }
+
+        // Lấy thời gian hết hạn
+        const currentTime = Math.floor(Date.now() / 1000);
+        const expirationTime = decoded.exp;
+
+        // So sánh thời gian
+        if (currentTime >= expirationTime) {
+            console.log('Token đã hết hạn');
+            return false;
+        } else {
+            const timeRemaining = expirationTime - currentTime;
+            console.log(`Token còn hiệu lực: ${timeRemaining} giây`);
+            return true;
+        }
+    } catch (error) {
+        console.error('Lỗi kiểm tra token:', error);
+        return false;
     }
 }
 

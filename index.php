@@ -1,9 +1,11 @@
 <?php
     session_start();
-    require_once 'vendor/autoload.php';
+    // session_destroy();
 
+    require_once 'vendor/autoload.php';
+    
     require_once 'config.php';
-    define('SECURE_ACCESS', true);
+    define('SECURE_ACCESS', true);  
     
     use Dotenv\Dotenv;
 
@@ -18,6 +20,7 @@
             require_once __DIR__.'/src/Controllers/HomeController.php';
             $Home_ob = new Home();
             $Home_ob->list();
+            
             break;  
         case 'taikhoan':
             $act = isset($_GET['act']) ? $_GET['act'] : 'login';

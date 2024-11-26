@@ -31,6 +31,16 @@ class khambenh
     
         return true;
     }
+
+    public function crtEmptyEx($exdata) {
+        if( empty($exdata['EXID']) || empty($exdata['patientID'])){
+            throw new Exception("Thiếu thông tin cần thiết để tạo hồ sơ khám bệnh.");
+        }
+
+        $stmt = $this->db->prepare("INSERT INTO examine (EXID, patientID) VALUES (?, ?)");
+        $stmt->bind_param("ss", $exdata['EXID'], $exdata['patientID']);
+        return $stmt->execute();
+    }
     
     public function createPatient($pdata) {
         // Kiểm tra dữ liệu bệnh nhân
@@ -86,26 +96,26 @@ public function createpayment($paydata)
 }
 
     // Hàm lấy bệnh nhân bằng số điện thoại
-    public function getPatientByPhone($phone)
-    {
-        $sql = "SELECT * FROM patients WHERE phone = ?";
-        $stmt = $this->db->prepare($sql);
+public function getPatientByPhone($phone)
+{
+    $sql = "SELECT * FROM patients WHERE phone = ?";
+    $stmt = $this->db->prepare($sql);
 
-        if ($stmt) {
-            $stmt->bind_param("s", $phone);
-            $stmt->execute();
-            $result = $stmt->get_result();
+    if ($stmt) {
+        $stmt->bind_param("s", $phone);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-            if ($result->num_rows > 0) {
-                return $result->fetch_assoc();
-            } else {
-                return null; // Không tìm thấy bệnh nhân
-            }
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
         } else {
-            error_log("Error in getPatientByPhone: " . $this->db->error);
-            return null;
+            return null; // Không tìm thấy bệnh nhân
         }
+    } else {
+        error_log("Error in getPatientByPhone: " . $this->db->error);
+        return null;
     }
+}
 
     public function update($EXID, $data)
 {

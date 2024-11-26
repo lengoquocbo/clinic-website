@@ -19,24 +19,15 @@ class TokenService {
     }
 
     public function generateToken($user) {
-        $issuedAt = time();
-        $expire = $issuedAt + (60 * 60);
-
         $payload = [
-            'iss' => 'clinic_website',
-            'aud' => 'api_client',
-            'iat' => $issuedAt,
-            'exp' => $expire,
-            'data' => [
-                'user_id' => $user['userID'],
-                'email' => $user['mail'],
-                'phone' => $user['phone']
-            ]
+            'user_id' => $user['userID'],
+            'email' => $user['mail'],
+            'phone' => $user['phone'],
+            'exp' => time() + 3600
         ];
 
         try {
             $token = JWT::encode($payload, $this->secretKey, $this->algorithm);
-            $this->redisService->saveUserToken($user['userID'], $token, $expire - time());
             return $token;
         } catch (Exception $e) {
             throw new Exception('Error generating token: ' . $e->getMessage());
