@@ -1,5 +1,26 @@
 <?php
+$mod = isset($_GET['mod']) ? $_GET['mod'] : '';
+$act = isset($_GET['act']) ? $_GET['act'] : '';
+$id = isset($_GET['id']) ? $_GET['id'] : '';
 
+
+
+// Hàm để tải nội dung của trang
+function loadContentnhanvien($mod, $act)
+{
+    if ($mod === 'nhanvien' && $act === 'edit') {
+        ob_start();
+        include '../views/nhanvien/suanhanvien,php';
+        return ob_get_clean();
+    } elseif ($mod === 'thuoc' && $act === 'add') {
+        ob_start();
+        include '../views/thuoc/themthuoc.php';
+        return ob_get_clean();
+    } elseif ($mod === 'thuoc' && $act === 'delete') {
+        //    .....
+    }
+}
+$content = loadContentnhanvien($mod, $act);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +40,7 @@
             justify-content: center;
             width: 100%;
             margin-top: 30px;
+
         }
 
         .table_wrapper {
@@ -29,11 +51,13 @@
 
         .table_wrapper::-webkit-scrollbar {
             display: none;
+            /* Ẩn thanh cuộn cho Chrome, Safari */
         }
 
         .table {
             width: 100%;
             border-collapse: collapse;
+
         }
 
         .medicine-list__title {
@@ -49,9 +73,15 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-bottom: 20px;
+            display: block;
+            height: 25px;
             text-decoration: none;
-            margin-left: auto;
+            width: 80px;
         }
+        
+            
+
 
         .table th,
         .table td {
@@ -97,36 +127,14 @@
             background-color: #d4edda;
             border-color: #c3e6cb;
         }
-
-        .btn {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .btn button,
-        .btn a {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            color: white;
-            background-color: #007bff;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn button {
-            background-color: #28a745;
-        }
     </style>
 </head>
 
 <body>
     <div class="around">
+
         <div class="table_container">
-            <h2 class="medicine-list__title">Danh Sách Lịch Hẹn</h2>
+            <h2 class="medicine-list__title">Danh sách nhân viên</h2>
 
             <?php if (isset($_COOKIE['msg'])) { ?>
                 <div class="alert alert--success">
@@ -134,42 +142,31 @@
                 </div>
             <?php } ?>
 
-            <div class="btn">
-                <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Khám trực tiếp</a>
-            </div>
 
+            <a href="index.php?mod=nguoidung&act=add" class="medicine-list__add-btn">Thêm Mới</a>
+
+            <!-- Bảng có thanh cuộn -->
             <div class="table_wrapper">
                 <table class="table">
                     <tr>
-                        <th>ID</th>
-                        <th>Thứ tự</th>
-                        <th>Họ và tên</th>
-                        <th>Ngày giờ đặt</th>
+                        <th>Username</th>
+                        <th>Email</th>
                         <th>Số điện thoại</th>
-                        <th>Dịch vụ</th>
-                        <th>Mô tả</th>
-                        <th>Trạng thái</th>
+                        <th>Vai trò</th>
                         <th>Thao tác</th>
                     </tr>
                     <?php
-
-                    require_once __DIR__ . '../../model/lichhenmodel.php';
-
-                    $lichhenmodel = new Appointment();
-                    $lichhen_list = $lichhenmodel->getALL();
-                    foreach ($lichhen_list as $lichhen) { ?>
+                    require_once __DIR__ . '/../../model/nguoidungmodel.php';
+                    $nguoidung = new Nguoidung();
+                    $nguoidunglist = $nguoidung->getALL();
+                    foreach ($nguoidunglist as $nguoidung) { ?>
                         <tr>
-                            <td><?= $lichhen['appointmentID'] ?></td>
-                            <td><?= $lichhen['ordernumber'] ?></td>
-                            <td><?= $lichhen['fullname'] ?></td>
-                            <td><?= $lichhen['appointmentday'] ?></td>
-                            <td><?= $lichhen['phone'] ?></td>
-                            <td><?= $lichhen['serviceName'] ?></td>
-                            <td><?= $lichhen['description'] ?></td>
-                            <td><?= $lichhen['confirm'] ?></td>
+                            <td><?= $nguoidung['username'] ?></td>
+                            <td><?= $nguoidung['mail'] ?></td>
+                            <td><?= $nguoidung['phone'] ?></td>
+                            <td><?= $nguoidung['role'] ?></td>
                             <td>
-                                <a href='index.php?mod=lichhen&act=xacnhan&id=<?= $lichhen['appointmentID'] ?>' class="medicine-list__action-btn">Xong</a>
-                                <a style="background-color:#f6c23e ;" href='index.php?mod=lichhen&act=huy&id=<?= $lichhen['appointmentID'] ?>' onclick='return confirm("Bạn có chắc muốn hủy lịch hẹn này không?")' class="medicine-list__action-btn">Hủy</a>
+                                <a style="background-color: red;" href='index.php?mod=nguoidung&act=delete&id=<?= $nguoidung['userID'] ?>' onclick='return confirm("Bạn có chắc muốn xóa tài khoản này?")' class="medicine-list__action-btn">Xóa</a>
                             </td>
                         </tr>
                     <?php  } ?>
@@ -177,6 +174,8 @@
             </div>
         </div>
     </div>
+
+
 </body>
 
 </html>

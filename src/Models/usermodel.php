@@ -69,12 +69,12 @@ class UserModel {
     }
     
     // Sửa thông tin người dùng
-    function updateUser($data) {
-        $stmt = $this->db->prepare("UPDATE user SET username = ?, phone = ?, pass = ? WHERE userID = ?");
-        $stmt->bind_param("sssi", $username, $phone, $password, $userID);
-        $result = $stmt->execute();
-        return $result;
-    }
+    // function updateUser($data) {
+    //     $stmt = $this->db->prepare("UPDATE user SET username = ?, phone = ?, pass = ? WHERE userID = ?");
+    //     $stmt->bind_param("sssi", $username, $phone, $password, $userID);
+    //     $result = $stmt->execute();
+    //     return $result;
+    // }
 
     function updatePass($data) {
         $stmt = $this->db->prepare("UPDATE user SET pass = ? WHERE mail = ?");

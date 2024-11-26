@@ -56,6 +56,7 @@
 
                 echo json_encode([
                     'success' => true,
+                    
                     'message' => 'Đăng nhập thành công',
                     'URL' => '/admin/MVC/views/index.php'
                 ]);
@@ -64,7 +65,8 @@
                 
                 $_SESSION['isLogin_Nhanvien'] = true;
                 $_SESSION['userID'] = $user['userID'];
-                
+                $_SESSION['username'] = $user['username'];
+
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng nhập thành công',

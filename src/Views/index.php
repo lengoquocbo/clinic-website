@@ -37,3 +37,4 @@ if (session_status() === PHP_SESSION_NONE) {
     
 </body>
 </html>
+<script src="assets/js/UI.js"></script>

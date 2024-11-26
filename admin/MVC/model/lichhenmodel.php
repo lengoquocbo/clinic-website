@@ -16,6 +16,8 @@ class Appointment
         $query = "SELECT 
     a.appointmentID,
     p.fullname,
+    a.description,
+    a.confirm,
     p.birthdate, 
     a.appointmentday,
     p.phone,

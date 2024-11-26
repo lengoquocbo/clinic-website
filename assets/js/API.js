@@ -403,4 +403,3 @@ function decodeJwtToken(token, secretKey) {
     }
 }
 
-

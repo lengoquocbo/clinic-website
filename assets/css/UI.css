@@ -7,15 +7,16 @@
     font-size: 2rem;
     cursor: pointer;
 }
+
 .home-link a {
     text-decoration: none;
     color: #000;
     text-decoration: dted;
     text-transform: uppercase;
 }
+
 header {
     background-color: white;
-    
     padding: 1rem;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,6 +30,7 @@ header:hover {
     background-color: rgba(255, 255, 255, 0.8);
     transform: scale(1.02);
 }
+
 /* Hiệu ứng cho menu */
 nav ul {
     list-style-type: none;
@@ -59,21 +61,34 @@ nav ul li a:hover {
     transform: scale(1.05);
 }
 
+nav ul li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+
+}
+
 .dropdown {
-    position: relative;
-    display: inline-block;
+    /* position: relative;
+    display: inline-block; */
+    position: absolute;
+    right: 9%;
+    top: 12px;
 }
 
 .dropdown-toggle {
+    position: absolute;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
     font-family: 'Arial', sans-serif;
-    font-size: 16px;
+    font-size: 30px;
     font-weight: 600;
     color: #333;
+    text-decoration: none;
+    top: 0;
 }
+
 
 .dropdown-menu {
     font-family: 'Arial', sans-serif;
@@ -81,21 +96,33 @@ nav ul li a:hover {
     display: none;
     position: absolute;
     background-color: #ffffff;
-    min-width: 200px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    min-width: 260px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1;
-    top: 100%;
+    /* Đặt menu ngay dưới biểu tượng */
+    left: 50%;
+    /* Đặt điểm giữa của menu ở giữa icon */
+    transform: translateX(-50%);
+    /* Dịch chuyển menu để căn giữa hoàn toàn */
     right: 0;
     border-radius: 5px;
     padding: 10px 0;
+    right: auto;
+    margin-top: 30px;
 }
+
 
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+.dropdown:hover .dropdown-menu {
+    
+}
+
 
 .dropdown-menu li {
     padding: 8px 15px;
+    width: 100%;
 }
 
 .dropdown-menu li a {
@@ -117,10 +144,13 @@ nav ul li a:hover {
 /* Phần Trang chủ */
 #home {
     position: relative;
-    padding: 2rem; /* Thêm padding nếu cần khoảng cách bên trong */
-    margin: 0 auto; /* Thay đổi margin nếu cần khoảng cách bên ngoài */
+    padding: 2rem;
+    /* Thêm padding nếu cần khoảng cách bên trong */
+    margin: 0 auto;
+    /* Thay đổi margin nếu cần khoảng cách bên ngoài */
     background-color: #f9f9f9;
 }
+
 /* Slideshow */
 .home-slideshow {
     position: relative;
@@ -131,7 +161,8 @@ nav ul li a:hover {
 .slideshow-container {
     position: relative;
     width: 100%;
-    height: 400px; /* Kích thước của slideshow */
+    height: 400px;
+    /* Kích thước của slideshow */
 }
 
 .mySlides {
@@ -173,6 +204,7 @@ nav ul li a:hover {
 .cta-button:hover {
     background-color: #0056b3;
 }
+
 /* Nội dung */
 .home-content {
     padding: 2rem 1rem;
@@ -312,15 +344,22 @@ nav ul li a:hover {
 .cta-button:hover {
     background-color: #FFA500;
 }
+
 /* Slideshow Animation */
 @keyframes slide-left {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
-.slide-left   {
+.slide-left {
     animation: slide-left 3s ease-in-out;
 }
+
 /* phan dat lich */
 /* Đặt lịch hẹn */
 #appointment {
@@ -365,7 +404,7 @@ nav ul li a:hover {
     gap: 1rem;
 }
 
-.appointment-form .row > div {
+.appointment-form .row>div {
     flex: 1;
 }
 
@@ -410,7 +449,8 @@ nav ul li a:hover {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
     width: 100%;
-    margin-top: 1rem; /* Khoảng cách giữa textarea và button */
+    margin-top: 1rem;
+    /* Khoảng cách giữa textarea và button */
 }
 
 .appointment-form button:hover {
@@ -449,7 +489,8 @@ body {
 .content {
     display: flex;
     align-items: stretch;
-    height: 250px; /* Điều chỉnh chiều cao nhỏ hơn */
+    height: 250px;
+    /* Điều chỉnh chiều cao nhỏ hơn */
 }
 
 .department-list {
@@ -493,8 +534,10 @@ body {
 }
 
 #department-info img {
-    width: 45%; /* Ảnh chiếm gần nửa chiều ngang */
-    height: 100%; /* Chiều cao ảnh bằng phần chứa */
+    width: 45%;
+    /* Ảnh chiếm gần nửa chiều ngang */
+    height: 100%;
+    /* Chiều cao ảnh bằng phần chứa */
     object-fit: cover;
     border-radius: 8px;
 }
@@ -503,7 +546,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 50%; /* Chiều rộng của phần văn bản */
+    width: 50%;
+    /* Chiều rộng của phần văn bản */
 }
 
 #department-info h2 {
@@ -517,6 +561,7 @@ body {
     color: #666;
     line-height: 1.4;
 }
+
 /* đội ngũ */
 #team {
     padding: 3rem 1rem;
@@ -576,6 +621,7 @@ body {
     transform: translateY(-10px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
 /* liên hệ */
 /* Phần Liên hệ */
 #contact {
@@ -647,7 +693,7 @@ body {
     align-items: center;
 }
 
-.map-container iframe {                
+.map-container iframe {
     width: 100%;
     height: 100%;
     border: none;
@@ -687,7 +733,8 @@ section img:hover {
 }
 
 /* Hiệu ứng cho nút bấm */
-button, input[type="submit"] {
+button,
+input[type="submit"] {
     background-color: #FFD700;
     border: none;
     padding: 10px 20px;
@@ -697,13 +744,14 @@ button, input[type="submit"] {
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover,
+input[type="submit"]:hover {
     background-color: #FFA500;
     transform: scale(1.05);
 }
 
 /* Hiệu ứng cho footer */
-footer{
+footer {
     bottom: 0;
 }
 
@@ -719,9 +767,12 @@ footer{
     display: flex;
     justify-content: space-between;
     gap: 2rem;
-    max-width: 1200px; /* Giới hạn chiều rộng */
-    margin: 0 auto; /* Căn giữa nội dung */
-    padding: 0 2rem; /* Thêm padding để tránh sát viền */
+    max-width: 1200px;
+    /* Giới hạn chiều rộng */
+    margin: 0 auto;
+    /* Căn giữa nội dung */
+    padding: 0 2rem;
+    /* Thêm padding để tránh sát viền */
 }
 
 /* Phần newsletter */
@@ -733,11 +784,14 @@ footer{
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 2rem;
-    max-width: 1200px; /* Giới hạn chiều rộng */
-    margin: 0 auto 2rem auto; /* Căn giữa và thêm khoảng cách */
+    max-width: 1200px;
+    /* Giới hạn chiều rộng */
+    margin: 0 auto 2rem auto;
+    /* Căn giữa và thêm khoảng cách */
 }
 
-.newsletter-left h2, .newsletter-left h1 {
+.newsletter-left h2,
+.newsletter-left h1 {
     margin: 0;
 }
 
@@ -788,7 +842,7 @@ footer{
 .links {
     display: flex;
     flex-direction: column;
-}   
+}
 
 .links p {
     margin-bottom: 1rem;
@@ -831,6 +885,7 @@ footer{
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

@@ -26,6 +26,12 @@
             align-items: center;
             padding: 0 20px;
         }
+        .dropdown{
+            position: absolute;
+            right: 20%;
+            top: 15px;
+            z-index: 1;
+        }
 
         .home-link {
             display: flex;
@@ -42,7 +48,7 @@
             width: 100%;
             background-color: #f8f8f8;
             padding: 10px 0;
-            z-index: 10;
+            z-index: -1;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng cho menu */
         }
 

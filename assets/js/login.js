@@ -38,7 +38,7 @@ submit.addEventListener('click', async (e)=>{
     }
 
     try { 
-        // const response = await fetch('http://192.168.56.1/api/login', {
+        // const response = await fetch('http://192.168.35.234/api/login', {
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
             credentials: 'include',

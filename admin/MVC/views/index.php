@@ -1,4 +1,31 @@
 <?php
+
+session_start();
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+if (!isset($_SESSION['isLogin_Admin']) && !isset($_SESSION['isLogin_Nhanvien'])) {
+    // Chuyển hướng tới trang đăng nhập
+    header("Location: /clinic-website/index.php");
+    exit();
+}
+
+// Lấy vai trò người dùng
+$isAdmin = isset($_SESSION['isLogin_Admin']);
+$isNhanVien = isset($_SESSION['isLogin_Nhanvien']);
+
+
+// Ẩn hoặc hiển thị các mục điều hướng dựa trên quyền
+function checkPermission($roleRequired)
+{
+    global $isAdmin, $isNhanVien;
+
+    if ($roleRequired === 'admin') {
+        return $isAdmin;
+    }
+    if ($roleRequired === 'nhanvien') {
+        return $isNhanVien;
+    }
+    return false;
+}
 $mod = isset($_GET['mod']) ? $_GET['mod'] : '';
 $act = isset($_GET['act']) ? $_GET['act'] : '';
 
@@ -90,42 +117,53 @@ function loadContent($mod, $act)
         ob_start();
         include '../views/huylichhen.php';
         return ob_get_clean();
-    } else if ($mod === 'khambenh' && $act === 'kethuoc'){
-       ob_start();
-       include '../views/khambenh/kethuoc/kethuoc.php';
-       return ob_get_clean();
-    }
-    else if ($mod === 'benhnhan' && $act === 'list'){
+    } else if ($mod === 'khambenh' && $act === 'kethuoc') {
+        ob_start();
+        include '../views/khambenh/kethuoc/kethuoc.php';
+        return ob_get_clean();
+    } else if ($mod === 'benhnhan' && $act === 'list') {
         ob_start();
         include '../views/benhnhan/benhnhan.php';
         return ob_get_clean();
-    }
-    else if ($mod === 'benhnhan' && $act === 'delete'){
+    } else if ($mod === 'benhnhan' && $act === 'delete') {
         ob_start();
         include '../views/benhnhan/xoabenhnhan.php';
         return ob_get_clean();
-    }else if ($mod === 'benhnhan' && $act === 'see'){
+    } else if ($mod === 'benhnhan' && $act === 'see') {
         ob_start();
         include '../views/benhnhan/xembenhnhan.php';
         return ob_get_clean();
-    }else if ($mod === 'benhnhan' && $act === 'edit'){
+    } else if ($mod === 'benhnhan' && $act === 'edit') {
         ob_start();
         include '../views/benhnhan/suabenhnhan.php';
         return ob_get_clean();
-    }else if ($mod === 'benhnhan' && $act === 'in'){
+    } else if ($mod === 'benhnhan' && $act === 'in') {
         ob_start();
         include '../views/benhnhan/export_pdf.php';
         return ob_get_clean();
-    }else if ($mod === 'kethuoc' && $act === 'in'){
+    } else if ($mod === 'kethuoc' && $act === 'in') {
         ob_start();
         include '../views/khambenh/kethuoc/export_bil.php';
         return ob_get_clean();
-    }else if ($mod === 'thongke' && $act === 'list'){
+    } else if ($mod === 'thongke' && $act === 'list') {
         ob_start();
         include '../views/thongke/bieudo.php';
         return ob_get_clean();
     }
-     else {
+    // Người dùng
+    else if ($mod === 'nguoidung' && $act === 'list') {
+        ob_start();
+        include '../views/nguoidung/nguoidung.php';
+        return ob_get_clean();
+    } else if ($mod === 'nguoidung' && $act === 'add') {
+        ob_start();
+        include '../views/nguoidung/themnguoidung.php';
+        return ob_get_clean();
+    } else if ($mod === 'nguoidung' && $act === 'delete') {
+        ob_start();
+        include '../views/nguoidung/xoanguoidung.php';
+        return ob_get_clean();
+    } else {
         ob_start();
         include 'home.php';
         return ob_get_clean();
@@ -134,7 +172,12 @@ function loadContent($mod, $act)
 
 // Lấy nội dung trang dựa trên mod và act
 $content = loadContent($mod, $act);
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: /clinic-website/index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -153,7 +196,7 @@ $content = loadContent($mod, $act);
             height: 100%;
             box-sizing: border-box;
             font-family: var(--default-font);
-            background-color: white  ;
+            background-color: white;
         }
 
         .container {
@@ -201,7 +244,7 @@ $content = loadContent($mod, $act);
         }
 
         .header .nav ul li a {
-            font-size: 20px;
+            font-size: 18px;
             height: 50px;
             width: 150px;
             display: flex;
@@ -210,6 +253,7 @@ $content = loadContent($mod, $act);
             text-decoration: none;
             color: #ffffff;
             transition: color 0.3s ease;
+            text-transform: uppercase;
         }
 
         .header-right {
@@ -381,13 +425,43 @@ $content = loadContent($mod, $act);
             font-size: 12px;
             color: #666;
         }
+
+        .role-div {
+            border: 1px solid white;
+            border-radius: 20px;
+            height: 30px;
+        }
+
+        .role {
+            font-size: 14px;
+            font-weight: 900px;
+            color: #ffffff;
+            margin-top: 2px;
+            cursor: pointer;
+            margin: 5px 10px 10px 10px;
+        }
+        .btn-menu{
+            margin-left: 20px;
+        }
+        .role-div:hover{
+        background-color: #ffffff;
+      
+        }
+        .role:hover{
+            color: var(--color-accent);
+        }
+        
     </style>
 </head>
 
 <body>
+    <?php $role = $isAdmin ? 'admin' : ($isNhanVien ? 'nhanvien' : '');
+    ?>
     <div class="container">
         <div class="header">
             <h1 class="logo">Vinmeclatest</h1>
+
+
             <nav class="nav">
                 <ul>
                     <li><a href="index.php">Trang chủ</a></li>
@@ -401,9 +475,19 @@ $content = loadContent($mod, $act);
                     <input type="search" placeholder="Tìm kiếm..." aria-label="Search">
                     <button type="submit"><i class='bx bx-search'></i></button>
                 </form>
+                <div class="role-div">
+                    <?php if ($role === 'admin'): ?>
+                        <p class="role">ADMIN</p>
+                    <?php elseif ($role === 'nhanvien'): ?>
+                        <p class="role">NHÂN VIÊN</p>
+                    <?php endif; ?>
+                </div>
+                <div class="btn-menu">
                 <label for="menu_list_check" class="menu_list_button"><i class='bx bx-menu'></i></label>
+                </div>
             </div>
         </div>
+
 
         <input type="checkbox" id="menu_list_check" class="menu_list_button_check">
         <label for="menu_list_check" class="overlay"></label>
@@ -411,23 +495,37 @@ $content = loadContent($mod, $act);
         <div class="menu">
             <div class="menuleft">
                 <label for="menu_list_check" class="exit_menu_list"><i class='bx bx-x'></i></label>
+
                 <nav class="menuleft-nav">
-                    <ul>
-                        <li><a href="index.php?mod=lichhen&act=list" id="lichhen"><i class='bx bx-calendar'></i> Lịch hẹn</a></li>
-                        <li><a href="index.php?mod=lichhen&act=add"><i class='bx bxs-heart'></i> Khám bệnh</a></li>
-                        <li><a href="index.php?mod=thuoc&act=ketoa"><i class='bx bxs-capsule'></i></i> Kê Thuốc</a></li>
-                        <li><a href="index.php?mod=nguoidung&act=list"><i class='bx bxs-group'></i> Quản lí người dùng</a></li>
-                        <li><a href="index.php?mod=benhnhan&act=list"><i class='bx bxs-duplicate'></i> Quản lí bệnh nhân</a></li>
-                        <li><a href="index.php?mod=nhanvien&act=list"><i class='bx bxs-group'></i> Quản lí nhân viên</a></li>
-                        <li><a href="index.php?mod=thietbi"><i class='bx bxs-server'></i> Quản lí thiết bị</a></li>
-                    </ul>
-                    <div class="menuleft_button">
+                    <nav class="menuleft-nav">
                         <ul>
-                            <li style="margin-top: 250px;"><button><i class='bx bx-log-out'></i> Đăng xuất</button></li>
-                            <li style="margin-top: 20px;"><button><i class='bx bx-revision'></i> Tải lại</button></li>
+                            <?php if ($role === 'admin'): ?>
+                                <li><a href="index.php?mod=lichhen&act=list"><i class='bx bx-calendar'></i> Lịch hẹn</a></li>
+                                <li><a href="index.php?mod=lichhen&act=add"><i class='bx bxs-heart'></i> Khám bệnh</a></li>
+                                <li><a href="index.php?mod=thuoc&act=ketoa"><i class='bx bxs-capsule'></i></i> Kê Thuốc</a></li>
+                                <li><a href="index.php?mod=nguoidung&act=list"><i class='bx bxs-group'></i> Quản lí người dùng</a></li>
+                                <li><a href="index.php?mod=benhnhan&act=list"><i class='bx bxs-duplicate'></i> Quản lí bệnh nhân</a></li>
+                                <li><a href="index.php?mod=nhanvien&act=list"><i class='bx bxs-group'></i> Quản lí nhân viên</a></li>
+                                <li><a href="index.php?mod=thietbi"><i class='bx bxs-server'></i> Quản lí thiết bị</a></li>
+                            <?php elseif ($role === 'nhanvien'): ?>
+                                <li><a href="index.php?mod=lichhen&act=list"><i class='bx bx-calendar'></i> Lịch hẹn</a></li>
+                                <li><a href="index.php?mod=thuoc&act=ketoa"><i class='bx bxs-capsule'></i></i> Kê Thuốc</a></li>
+                                <li><a href="index.php?mod=lichhen&act=add"><i class='bx bxs-heart'></i> Khám bệnh</a></li>
+                                <li><a href="index.php?mod=benhnhan&act=list"><i class='bx bxs-duplicate'></i> Quản lí bệnh nhân</a></li>
+                            <?php endif; ?>
+                            <div class="menuleft_button">
+                                <ul>
+                                    <li style="margin-top: 250px;">
+                                        <form method="POST">
+                                            <button type="submit" name="logout"><i class='bx bx-log-out'></i> Đăng xuất</button>
+                                        </form>
+                                    </li>
+                                    <li style="margin-top: 20px;"><button><i class='bx bx-revision'></i> Tải lại</button></li>
+                                </ul>
+                            </div>
                         </ul>
-                    </div>
-                </nav>
+                    </nav>
+
             </div>
         </div>
         <div id="tabbarright" class="tabbarright">
@@ -435,7 +533,7 @@ $content = loadContent($mod, $act);
         </div>
 
         <div class="footer">
-            <span>By quocbo - quanghuy - tanphat @ vku-23JIT | <?php echo date("d/m/Y"); ?></span>
+            <span>By quocbo - quanghuy @ vku-23JIT | <?php echo date("d/m/Y"); ?></span>
         </div>
     </div>
 
