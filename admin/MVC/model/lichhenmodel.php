@@ -30,8 +30,9 @@ FROM appointments a
 INNER JOIN patients p ON a.patientID = p.patientID 
 INNER JOIN examine e ON a.EXID = e.EXID
 INNER JOIN services s ON e.EXID = s.serviceID
-WHERE a.status = 'waiting'
-ORDER BY e.exdaytime DESC
+WHERE a.status = 'waiting' AND a.confirm=0
+
+ORDER BY a.appointmentday DESC
 LIMIT 0, 25";
         $result = $this->db->query($query);
 
@@ -261,4 +262,55 @@ LIMIT 0, 25";
             if (isset($deletePatientStmt)) $deletePatientStmt->close();
         }
     }
+    public function updateConfirmStatus($appointmentID) {
+        $sql = "UPDATE appointments SET confirm = 1 WHERE appointmentID = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("s" ,$appointmentID);
+        return $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            echo "Cập nhật thành công!";
+        } else {
+            echo "Không có bản ghi nào được cập nhật.";
+        }
+        $stmt->close();
+    }
+    public function getByStatus($confirm) {
+        $query = "
+            SELECT 
+                a.appointmentID,
+                p.fullname,
+                a.description,
+                a.confirm,
+                p.birthdate, 
+                a.appointmentday,
+                p.phone,
+                s.servicename as serviceName,
+                a.status,
+                e.visittype,
+                e.ordernumber,
+                e.exdaytime     
+            FROM appointments a
+            INNER JOIN patients p ON a.patientID = p.patientID 
+            INNER JOIN examine e ON a.EXID = e.EXID
+            INNER JOIN services s ON e.EXID = s.serviceID
+            WHERE a.status = 'waiting' AND a.confirm = ?
+            ORDER BY a.appointmentday DESC
+            LIMIT 0, 25";
+    
+        $stmt = $this->db->prepare($query);
+        if (!$stmt) {
+            die("Error preparing query: " . $this->db->error);
+        }
+    
+        $stmt->bind_param("i", $confirm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if (!$result) {
+            die("Error executing query: " . $this->db->error);
+        }
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
 }

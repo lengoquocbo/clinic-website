@@ -1,13 +1,10 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Danh Sách Lịch Hẹn</title>
     <style>
         .table_container {
             padding: 20px;
@@ -17,7 +14,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 100%;
+            width: 90%;
             margin-top: 30px;
         }
 
@@ -85,61 +82,34 @@
             background-color: #0056b3;
         }
 
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-
-        .alert--success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
-
         .btn {
             display: flex;
             gap: 10px;
             align-items: center;
             margin-bottom: 20px;
         }
-
-        .btn button,
-        .btn a {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            color: white;
-            background-color: #007bff;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn button {
-            background-color: #28a745;
+        .select-div{
+            height: 30px;
+            border-radius: 5px;
         }
     </style>
 </head>
 
 <body>
-    <div class="around">
-        <div class="table_container">
-            <h2 class="medicine-list__title">Danh Sách Lịch Hẹn</h2>
+    <div class="table_container">
+        <h2 class="medicine-list__title">Danh Sách Lịch Hẹn</h2>
 
-            <?php if (isset($_COOKIE['msg'])) { ?>
-                <div class="alert alert--success">
-                    <strong>Thông báo</strong> <?= $_COOKIE['msg'] ?>
-                </div>
-            <?php } ?>
+        <div class="btn">
+            <select class="select-div" name="confirm" id="confirm">
+                <option value="0">CHƯA DUYỆT</option>
+                <option value="1">ĐÃ DUYỆT</option>
+            </select>
+            <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Khám trực tiếp</a>
+        </div>
 
-            <div class="btn">
-                <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Khám trực tiếp</a>
-            </div>
-
-            <div class="table_wrapper">
-                <table class="table">
+        <div class="table_wrapper">
+            <table class="table">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>Thứ tự</th>
@@ -151,32 +121,29 @@
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
-                    <?php
-
-                    require_once __DIR__ . '../../model/lichhenmodel.php';
-
-                    $lichhenmodel = new Appointment();
-                    $lichhen_list = $lichhenmodel->getALL();
-                    foreach ($lichhen_list as $lichhen) { ?>
-                        <tr>
-                            <td><?= $lichhen['appointmentID'] ?></td>
-                            <td><?= $lichhen['ordernumber'] ?></td>
-                            <td><?= $lichhen['fullname'] ?></td>
-                            <td><?= $lichhen['appointmentday'] ?></td>
-                            <td><?= $lichhen['phone'] ?></td>
-                            <td><?= $lichhen['serviceName'] ?></td>
-                            <td><?= $lichhen['description'] ?></td>
-                            <td><?= $lichhen['confirm'] ?></td>
-                            <td>
-                                <a href='index.php?mod=lichhen&act=xacnhan&id=<?= $lichhen['appointmentID'] ?>' class="medicine-list__action-btn">Xong</a>
-                                <a style="background-color:#f6c23e ;" href='index.php?mod=lichhen&act=huy&id=<?= $lichhen['appointmentID'] ?>' onclick='return confirm("Bạn có chắc muốn hủy lịch hẹn này không?")' class="medicine-list__action-btn">Hủy</a>
-                            </td>
-                        </tr>
-                    <?php  } ?>
-                </table>
-            </div>
+                </thead>
+                <tbody id="appointment-body">
+                    <!-- Nội dung sẽ được cập nhật bằng AJAX -->
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <script>
+        document.getElementById('confirm').addEventListener('change', function () {
+            const confirmStatus = this.value;
+
+            fetch(`/clinic-website/admin/MVC/views/danhsachlichhen.php?confirm=${confirmStatus}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('appointment-body').innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Tải dữ liệu mặc định khi trang được load
+        document.getElementById('confirm').dispatchEvent(new Event('change'));
+    </script>
 </body>
 
 </html>

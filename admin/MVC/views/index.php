@@ -110,12 +110,32 @@ function loadContent($mod, $act)
         include '../views/khambenh/themkhambenh.php';
         return ob_get_clean();
     } else if ($mod === 'lichhen' && $act === 'xacnhan') {
-        ob_start();
-        include '../views/khambenh/khambenh.php';
-        return ob_get_clean();
+        $appointmentID = $_GET['id'];
+    
+        require_once __DIR__ . '../../model/lichhenmodel.php';
+        $lichhenmodel = new Appointment();
+    
+        // Cập nhật trạng thái xác nhận
+        $result = $lichhenmodel->updateConfirmStatus($appointmentID, 1); // 1 là trạng thái "Đã duyệt"
+    
+        // Đặt thông báo dựa trên kết quả cập nhật
+        if ($result) {
+            setcookie('msg', 'Xác nhận lịch hẹn thành công!', time() + 5, '/');
+        } else {
+            setcookie('msg', 'Không thể xác nhận lịch hẹn, vui lòng thử lại.', time() + 5, '/');
+        }
+    
+        // Điều hướng về trang danh sách lịch hẹn
+        header('Location: index.php?mod=lichhen&act=list');
+        exit;
+    
     } else if ($mod === 'lichhen' && $act === 'huy') {
         ob_start();
         include '../views/huylichhen.php';
+        return ob_get_clean();
+    }else if ($mod === 'lichhen' && $act === 'khambenh') {
+        ob_start();
+        include '../views/khambenh/khambenh.php';
         return ob_get_clean();
     } else if ($mod === 'khambenh' && $act === 'kethuoc') {
         ob_start();
