@@ -68,6 +68,28 @@ class benhnhan
     
         return $data;
     }
+
+    public function addPatient($pdata) {
+        // Kiểm tra dữ liệu bệnh nhân
+        if (empty($pdata['patientID']) || empty($pdata['fullname']) || empty($pdata['phone']) || empty($pdata['cccd'])) {
+            throw new Exception("Thiếu thông tin bệnh nhân cần thiết.");
+        }
+    
+        $stmt = $this->db->prepare("INSERT INTO patients (patientID, userID, fullname, cccd,  birthdate, sex, phone, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        
+        if (!$stmt) {
+            throw new Exception("Prepare failed: " . $this->db->error);
+        }
+    
+        // Bind các tham số
+        $stmt->bind_param("sissssss", $pdata['patientID'], $pdata['userID'], $pdata['fullname'], $pdata['cccd'], $pdata['birthdate'], $pdata['sex'], $pdata['phone'], $pdata['address']);
+        
+        if (!$stmt->execute()) {
+            throw new Exception("Execute failed: " . $stmt->error);
+        }
+    
+        return true;
+    }
     
     // Hoặc nếu bạn muốn tách riêng thông tin khám bệnh và dịch vụ
     public function getPatientExamInfo($patientID)

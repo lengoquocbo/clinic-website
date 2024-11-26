@@ -30,6 +30,8 @@ class Services{
         return $statement->execute();
     }
 
+   
+
     // Edit service by ID
     public function editById($id, $data) {
         $statement = $this->db->prepare(

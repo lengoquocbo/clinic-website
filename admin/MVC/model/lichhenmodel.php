@@ -14,6 +14,7 @@ class Appointment
     public function getAll()
     {
         $query = "SELECT 
+
     a.appointmentID,
     p.fullname,
     a.description,
@@ -34,6 +35,7 @@ WHERE a.status = 'waiting' AND a.confirm=0
 
 ORDER BY a.appointmentday DESC
 LIMIT 0, 25";
+
         $result = $this->db->query($query);
 
         if (!$result) {
@@ -184,14 +186,14 @@ LIMIT 0, 25";
     public function create($data)
     {
         $stmt = $this->db->prepare(
-            "INSERT INTO appointments (appointmentID, patientID, serviceID, appoitmentday, status) 
-             VALUES (?, ?, ?, ?, ?)"
+            "INSERT INTO appointments (appointmentID, patientID, EXID , appointmentday, status) 
+            VALUES (?, ?, ?, ?, ?)"
         );
         $stmt->bind_param(
             "sssss",
             $data['appointmentID'],
             $data['patientID'],
-            $data['serviceID'],
+            $data['EXID'],
             $data['appoitmentday'],
             $data['status']
         );

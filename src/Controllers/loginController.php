@@ -19,7 +19,7 @@
 
     // Chỉ cho phép POST request
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        
+
         echo json_encode([
             'success' => false,
             'message' => 'Phương thức không được chấp nhận'
@@ -84,8 +84,7 @@
                     'success' => true,
                     'message' => 'Đăng nhập thành công',
                     'token' => $tokenLG,
-                    'URL' => '?mod=home',
-                    'sessionlogin' => $_SESSION['isLogin'],
+                    'URL' => '?mod=home'
                 ]);
             }  
             session_write_close();

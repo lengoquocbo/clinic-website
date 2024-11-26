@@ -38,7 +38,9 @@ submit.addEventListener('click', async (e)=>{
     }
 
     try { 
-        // const response = await fetch('http://192.168.35.234/api/login', {
+
+        // const response = await fetch('http://192.168.1.8:3001/api/login', {
+
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
             credentials: 'include',
@@ -50,15 +52,20 @@ submit.addEventListener('click', async (e)=>{
                 password: password
             })
         });
+        console.log('post thanh cong');
+
         const data = await response.json();
         console.log(data);
 
         if (data.success) {
             // Hiển thị thông báo thành công
-            sessionStorage.setItem('token', data.token);
+            localStorage.setItem('token', data.token);
             document.getElementById('successMessage').textContent = data.message;
             document.getElementById('successMessage').style.display = 'block';
+            // window.location.href = "http://192.168.1.8"+data.URL;
+            // history.replaceState(null, "", "http://192.168.1.8"+data.URL);
             window.location.href = "http://localhost/clinic-website"+data.URL;
+            alert(localStorage.getItem('token'));
             history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
         } else {
             // hiển thị lỗi
