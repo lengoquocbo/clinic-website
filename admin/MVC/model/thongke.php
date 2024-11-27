@@ -12,11 +12,25 @@ $result1 = $conn->query($sql1);
 $revenueData = [];
 
 if ($result1 && $result1->num_rows > 0) {
-    // Đưa dữ liệu vào mảng $revenueData
+    $groupedData = []; // Mảng trung gian để nhóm doanh thu theo ngày
+
     while ($row = $result1->fetch_assoc()) {
+        // Lấy ngày từ `exdaytime`
+        $date = date('Y-m-d', strtotime($row["exdaytime"]));
+
+        // Nếu ngày đã tồn tại trong mảng thì cộng thêm giá trị, nếu chưa thì khởi tạo
+        if (isset($groupedData[$date])) {
+            $groupedData[$date] += (int)$row["price"];
+        } else {
+            $groupedData[$date] = (int)$row["price"];
+        }
+    }
+
+    // Chuyển dữ liệu từ mảng nhóm sang mảng `revenueData`
+    foreach ($groupedData as $date => $totalRevenue) {
         $revenueData[] = [
-            "date" => $row["exdaytime"],
-            "revenue" => (int)$row["price"]
+            "date" => $date,
+            "revenue" => $totalRevenue
         ];
     }
 }

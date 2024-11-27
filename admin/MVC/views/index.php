@@ -4,7 +4,7 @@ session_start();
 // Kiểm tra xem người dùng đã đăng nhập hay chưa
 if (!isset($_SESSION['isLogin_Admin']) && !isset($_SESSION['isLogin_Nhanvien'])) {
     // Chuyển hướng tới trang đăng nhập
-    header("Location: /clinic-website/index.php");
+    header("Location: /clinic-website/");
     exit();
 }
 

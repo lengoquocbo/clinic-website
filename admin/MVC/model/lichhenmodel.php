@@ -281,7 +281,7 @@ LIMIT 0, 25";
             SELECT * FROM patients p 
             JOIN appointments a ON a.patientID=p.patientID 
             JOIN examine e ON e.EXID=a.EXID JOIN useservices us ON us.EXID=e.EXID 
-            JOIN services s ON s.serviceID=us.serviceID WHERE a.confirm = ?
+            JOIN services s ON s.serviceID=us.serviceID WHERE a.confirm = ? AND a.status= 'waiting'
             ORDER BY a.appointmentday DESC
             LIMIT 0, 25";
     
