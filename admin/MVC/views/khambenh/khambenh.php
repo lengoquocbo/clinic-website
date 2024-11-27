@@ -4,7 +4,7 @@ require_once __DIR__ .'../../../model/khambenhmodel.php';
 require_once __DIR__ .'../../../model/thuocmodel.php';
 
 
-
+$patientID= $_GET['p'];
 function generateUsemedicine($userviceID = '000')
 {
     $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
@@ -51,8 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // $medicineModel->createUsemedicine($mdata);
             $examinationModel->updateAppointmentStatus($appointmentID);
             echo "<script>alert('Hoàn thành hồ sơ');</script>";
-            echo "<script> location.href='index.php?mod=khambenh&act=kethuoc&us=$userviceID&s=$serviceID&p=$patientID';</script>";
-        } else {
+            header("Location: index.php?mod=khambenh&act=kethuoc&us=$userviceID&s=$serviceID&p=$patientID");
+            exit;
+            } else {
             echo "<script>alert('Lỗi khi cập nhật hồ sơ'); location.href='index.php?mod=lichhen&act=list';</script>";
         }
     }

@@ -14,7 +14,7 @@ foreach ($lichhen_list as $lichhen) { ?>
         <td><?= htmlspecialchars($lichhen['fullname']) ?></td>
         <td><?= htmlspecialchars($lichhen['appointmentday']) ?></td>
         <td><?= htmlspecialchars($lichhen['phone']) ?></td>
-        <td><?= htmlspecialchars($lichhen['serviceName']) ?></td>
+        <td><?= htmlspecialchars($lichhen['servicename']) ?></td>
         <td><?= htmlspecialchars($lichhen['description']) ?></td>
         <td>
             <?= $lichhen['confirm'] == 1 ? '<span style="color:green;">ĐÃ DUYỆT</span>' : '<span style="color:red;">CHƯA DUYỆT</span>' ?>
@@ -27,7 +27,7 @@ foreach ($lichhen_list as $lichhen) { ?>
                    onclick="return confirm('Bạn có chắc muốn hủy lịch hẹn này không?')" 
                    class="medicine-list__action-btn">Hủy</a>
             <?php else: ?>
-                <a href="index.php?mod=lichhen&act=khambenh&id=<?= $lichhen['appointmentID'] ?>" class="medicine-list__action-btn">Khám bệnh</a>
+                <a href="index.php?mod=lichhen&act=khambenh&id=<?= $lichhen['appointmentID'] ?>&p=<?=$lichhen['patientID'] ?>" class="medicine-list__action-btn">Khám bệnh</a>
                 <a style="background-color:#f6c23e;" 
                    href="index.php?mod=lichhen&act=huy&id=<?= $lichhen['appointmentID'] ?>" 
                    onclick="return confirm('Bạn có chắc muốn hủy lịch hẹn này không?')" 

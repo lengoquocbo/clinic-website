@@ -60,12 +60,14 @@ submit.addEventListener('click', async (e)=>{
         if (data.success) {
             // Hiển thị thông báo thành công
             localStorage.setItem('token', data.token);
+            console.log(localStorage.getItem('token'));
             document.getElementById('successMessage').textContent = data.message;
             document.getElementById('successMessage').style.display = 'block';
             // window.location.href = "http://192.168.1.8"+data.URL;
             // history.replaceState(null, "", "http://192.168.1.8"+data.URL);
             window.location.href = "http://localhost/clinic-website"+data.URL;
             alert(localStorage.getItem('token'));
+            alert('hello');
             history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
         } else {
             // hiển thị lỗi
