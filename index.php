@@ -27,11 +27,16 @@
             
             if((isset($_SESSION['isLogin']) && $_SESSION['isLogin'] == true)){
                 switch($act) {
-                    case 'account':
-                        require_once __DIR__.'/src/Views/index.php';
+                    case 'profile':
+                        require_once __DIR__.'/src/Controllers/AccountController.php';
+                        $Account = new Account();
+                        $Account->profile();
                         break;
-                    case 'login':
-                        require_once __DIR__.'/src/Views/index.php';
+                    case 'history':
+                        require_once __DIR__."/src/Views/index.php";
+                        break;
+                    case 'appointment':
+                        require_once __DIR__."/src/Views/index.php";
                         break;
                     default: 
                         header('Location: ?mod=error');

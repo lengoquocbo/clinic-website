@@ -25,13 +25,13 @@
 
         <a href="#" class="dropdown-toggle"><i class='bx bxs-user-circle'></i> </a>
         <ul class="dropdown-menu">
-            <li><a href="profile.php">Quản lý hồ sơ</a></li>
-            <li><a href="medical-history.php">Lịch sử khám bệnh</a></li>
-            <li><a href="appointments.php">Lịch hẹn của tôi</a></li>
-            <li><a href="#" class="link" id="logout" id="logout">Đăng xuất</a></li>
+            <li><a href="?mod=taikhoan&act=profile">Quản lý hồ sơ</a></li>
+            <li><a href="?mod=taikhoan&act=history">Lịch sử khám bệnh</a></li>
+            <li><a href="?mod=taikhoan&act=appointment">Lịch hẹn của tôi</a></li>
+            <li><a href="#" class="link" id="logout">Đăng xuất</a></li>
         </ul>
     </div>
 <?php
-            } ?>    </nav>
+} ?>    </nav>
 
 </header>

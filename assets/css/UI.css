@@ -146,7 +146,7 @@ nav ul li:hover {
     position: relative;
     padding: 2rem;
     /* Thêm padding nếu cần khoảng cách bên trong */
-    margin: 0 auto;
+    margin: 20px auto;
     /* Thay đổi margin nếu cần khoảng cách bên ngoài */
     background-color: #f9f9f9;
 }
@@ -156,7 +156,7 @@ nav ul li:hover {
     position: relative;
     width: 100%;
     overflow: hidden;
-}
+}                   
 
 .slideshow-container {
     position: relative;

@@ -41,6 +41,15 @@ class UserModel {
         return $user;
     }
 
+    function findUserByUserID($userID) {
+        $stmt = $this->db->prepare("SELECT userID, username, phone, mail, pass FROM user WHERE userID = ?");
+        $stmt->bind_param("s", $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        return $user;
+    }
+
     function findUserByPhone($phone) {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE phone = ?");
         $stmt->bind_param("s", $phone);
@@ -68,17 +77,16 @@ class UserModel {
         return $result;
     }
     
-    // Sửa thông tin người dùng
-    // function updateUser($data) {
-    //     $stmt = $this->db->prepare("UPDATE user SET username = ?, phone = ?, pass = ? WHERE userID = ?");
-    //     $stmt->bind_param("sssi", $username, $phone, $password, $userID);
-    //     $result = $stmt->execute();
-    //     return $result;
-    // }
+    function updateUser($data) {
+        $stmt = $this->db->prepare("UPDATE user SET phone = ?, mail = ? WHERE userID = ?");
+        $stmt->bind_param("ssi", $data['phone'], $data['mail'], $data['userID']);
+        $result = $stmt->execute();
+        return $result;
+    }
 
     function updatePass($data) {
-        $stmt = $this->db->prepare("UPDATE user SET pass = ? WHERE mail = ?");
-        $stmt->bind_param("ss", $data['pass'], $data['mail']);
+        $stmt = $this->db->prepare("UPDATE user SET pass = ? WHERE userID = ?");
+        $stmt->bind_param("si", $data['newpass'], $data['userID']);
         $result = $stmt->execute();
         return $result;
     }
