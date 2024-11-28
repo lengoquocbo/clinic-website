@@ -1,4 +1,15 @@
-<!-- Phần Trang chủ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng khám</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+    <!-- Phần Trang chủ -->
 <section id="home">
     <div class="home-slideshow">
         <div class="slideshow-container">
@@ -165,10 +176,15 @@ if (isset($_SESSION['isLogin'])) {
                 </div>
             </div>
             <div class="row">
-                <div>
-                    <label for="ngaykham">Ngày khám:</label>
-                    <input type="date" id="ngaykham" name="ngaykham" required>
-                </div>
+            <div>
+                            <label for="ngaykham">Ngày khám:</label>
+                            <div style="position: relative; display: inline-block;">
+                                <input type="text" id="ngaykham" name="ngaykham" placeholder="Chọn ngày giờ" style="padding-right: 30px;">
+                                <i class="fas fa-calendar-alt calendar-icon"
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                            </div>
+
+                        </div>
                 <div>
                 <label for="dateofbirth">Ngày sinh:</label>
                 <input type="date" id="dateofbirth" name="dateofbirth" required>
@@ -268,5 +284,24 @@ if (isset($_SESSION['isLogin'])) {
     }
 
 </script>
+<script>
+        // Khởi tạo Flatpickr
+        const flatpickrInstance = flatpickr("#ngaykham", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            allowInput: true
+        });
+
+        // Thêm sự kiện click cho biểu tượng lịch
+        const calendarIcon = document.querySelector('.calendar-icon');
+        if (calendarIcon) {
+            calendarIcon.addEventListener('click', () => {
+                flatpickrInstance.open(); // Mở Flatpickr khi nhấp vào biểu tượng
+            });
+        }
+    </script>
 <script src="assets/js/UI.js"></script>
 
+
+</body>
+</html>
