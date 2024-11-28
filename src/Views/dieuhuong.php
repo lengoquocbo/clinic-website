@@ -11,10 +11,7 @@ switch($mod) {
         $act = isset($_GET['act']) ? $_GET['act'] : "login";
         if (isset($_SESSION['isLogin']) && $_SESSION['isLogin'] == true) {
             switch($act) {
-                case 'login':
-                    require_once("login.php");
-                    break;
-                case 'account':
+                case 'profile':
                     require_once("account.php");
                     break;
                 default:

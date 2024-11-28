@@ -278,27 +278,14 @@ LIMIT 0, 25";
     }
     public function getByStatus($confirm) {
         $query = "
-            SELECT 
-                a.appointmentID,
-                p.fullname,
-                a.description,
-                a.confirm,
-                p.birthdate, 
-                a.appointmentday,
-                p.phone,
-                s.servicename as serviceName,
-                a.status,
-                e.visittype,
-                e.ordernumber,
-                e.exdaytime     
-            FROM appointments a
-            INNER JOIN patients p ON a.patientID = p.patientID 
-            INNER JOIN examine e ON a.EXID = e.EXID
-            INNER JOIN services s ON e.EXID = s.serviceID
-            WHERE a.status = 'waiting' AND a.confirm = ?
+            
+            SELECT * FROM patients p 
+            JOIN appointments a ON a.patientID=p.patientID 
+            JOIN examine e ON e.EXID=a.EXID JOIN useservices us ON us.EXID=e.EXID 
+            JOIN services s ON s.serviceID=us.serviceID WHERE a.confirm = ? AND a.status= 'waiting'
             ORDER BY a.appointmentday DESC
             LIMIT 0, 25";
-    
+
         $stmt = $this->db->prepare($query);
         if (!$stmt) {
             die("Error preparing query: " . $this->db->error);

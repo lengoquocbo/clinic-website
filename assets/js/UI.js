@@ -53,32 +53,32 @@ document.addEventListener('DOMContentLoaded', function() {
         '1': {
             title: 'Khoa Nội',
             description: 'Chuyên khám và điều trị các bệnh lý về nội khoa, bao gồm các bệnh về tim mạch, hô hấp, tiêu hóa, và thần kinh.',
-            image: 'https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            image: '/clinic-website/assets/images/khoanoi.jpg'
         },
         '2': {
             title: 'Khoa Nhi',
             description: 'Chăm sóc sức khỏe cho trẻ em từ sơ sinh đến 18 tuổi với đội ngũ bác sĩ nhi khoa tận tâm và chuyên nghiệp.',
-            image: 'https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            image: '/clinic-website/assets/images/khoanhi.jpg'
         },
         '3': {
             title: 'Khoa Sản',
             description: 'Cung cấp dịch vụ chăm sóc sức khỏe cho phụ nữ mang thai, sinh nở và các bệnh lý phụ khoa.',
-            image: 'https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            image: '/clinic-website/assets/images/khoaphusan.jpg'
         },
         '4': {
             title: 'Khoa Da Liễu',
             description: 'Chuyên khám và điều trị các bệnh lý về da, tóc, móng và các bệnh lý lây qua đường tình dục.',
-            image: 'https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            image: '/clinic-website/assets/images/khoadalieu.jpg'
         },
         '5': {
             title: 'Khoa Mắt',
             description: 'Chăm sóc và điều trị các bệnh lý về mắt, bao gồm khúc xạ, viêm, và các vấn đề về thị lực.',
-            image: 'https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            image: '/clinic-website/assets/images/khoamat.jpg'
         },
         '6': {
             title: 'Khoa Tai Mũi Họng',
             description: 'Khám và điều trị các vấn đề liên quan đến tai, mũi, họng, và các bệnh lý về đường hô hấp trên.',
-            image: 'https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            image: '/clinic-website/assets/images/khoataimuihong.jpg'
         }
     };
 
@@ -108,7 +108,6 @@ const datlich = document.getElementById("datlich");
 datlich.addEventListener("click", async (e) => {
     e.preventDefault();
     
-    alert(localStorage.getItem('token'));
     const hovaten = document.getElementById("name").value;
     const CCCD = document.getElementById("CCCD").value;
     const gender = document.getElementById("gender").value;
@@ -154,6 +153,7 @@ datlich.addEventListener("click", async (e) => {
         if (data.success) {
             // Hiển thị thông báo thành công
             alert('dat lich thanh cong');
+            location.reload();
         } else {
             alert('dat lih that bai');
         }
@@ -164,7 +164,7 @@ datlich.addEventListener("click", async (e) => {
     }
 });
 
-//xử lý li đặt lihc
+//xử lý li đặt lich
 function checkSession(){
     fetch('http://localhost:80/clinic-website/src/Controllers/CheckSession.php')
         .then(response => response.json())
@@ -179,6 +179,8 @@ function checkSession(){
         });
 }
 
+
+//dangxuat
 const dangxuat = document.getElementById('logout');
 dangxuat.addEventListener("click", async (e) =>{
     e.preventDefault();
@@ -190,7 +192,7 @@ dangxuat.addEventListener("click", async (e) =>{
                 'Content-Type':'application/json',
             },
             body: JSON.stringify({
-                token: sessionStorage.getItem['token']
+                token: localStorage.getItem('token')
             })
         });
 
@@ -198,11 +200,12 @@ dangxuat.addEventListener("click", async (e) =>{
 
         if (data.success) {
             // Hiển thị thông báo thành công
-            window.location.href = "http://localhost/clinic-website"+data.URL;
-            history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
+            localStorage.removeItem('token');
+            window.location.href = "http://localhost/clinic-website";
+            history.replaceState(null, "", "http://localhost/clinic-website");
         } else {
             // hiển thị lỗi
-           console.log(data.message);
+            alert('dang xuat khong thanh cong');
         }
     } catch(error) {
         console.error('Error:', error);

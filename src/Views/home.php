@@ -3,16 +3,16 @@
     <div class="home-slideshow">
         <div class="slideshow-container">
             <div class="mySlides fade">
-                <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2023/8/26/1233821/Giai-Nhi-1--Nang-Tre.jpg" alt="Chăm sóc sức khỏe">
-                <div class="text">Chăm sóc sức khỏe toàn diện</div>
+                <img src=" <?php echo IMAGES."doingu.png"; ?>" alt="Đội ngũ nhân viên">
+                <div class="text">Hỗ trợ tận tâm</div>
             </div>
             <div class="mySlides fade">
-                <img src="https://img.pikbest.com/origin/09/19/03/61zpIkbEsTGjk.jpg!w700wp" alt="Khám bệnh định kỳ">
-                <div class="text">Khám bệnh định kỳ</div>
+                <img src="<?php echo IMAGES."sanhchinh.jpg"; ?>" alt="Không gian sảnh chính">
+                <div class="text">Không gian sảnh chính</div>
             </div>
             <div class="mySlides fade">
-                <img src="https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg" alt="Chăm sóc gia đình">
-                <div class="text">Chăm sóc gia đình</div>
+                <img src="<?php echo IMAGES."sanhcho.jpg"; ?>" alt="Sảnh chờ phòng khám">
+                <div class="text">Sar chờ phòng khám</div>
             </div>
         </div>
         <a href="#services" class="cta-button">Khám phá các dịch vụ</a>
@@ -71,20 +71,36 @@
     </div>
     <div class="services-container">
         <div class="service-item">
-            <img src="https://media.vneconomy.vn/w800/images/upload/2022/09/05/rice-field-terrace-vietnam-shutterstock-554460046-d71ff868b1.jpeg" alt="Khám tổng quát">
-            <h3>Khám Tổng Quát</h3>
-            <p>Chúng tôi cung cấp dịch vụ khám tổng quát định kỳ để đảm bảo sức khỏe của bạn và gia đình.</p>
+            <img src="<?php echo IMAGES."xetnghiemmau.jpg"; ?>" alt="Xét nghiệm máu">
+            <h3><center>Xét nghiệm máu</center></h3>
+            <p>Chúng tôi cung cấp dịch vụ xét nghiệm máu với các thiết bị tiên tiến và năng lực nghiệp vụ cao siêu.</p>
         </div>
         <div class="service-item">
-            <img src="https://media.vneconomy.vn/w800/images/upload/2022/09/05/rice-field-terrace-vietnam-shutterstock-554460046-d71ff868b1.jpeg" alt="Điều trị chuyên sâu">
-            <h3>Điều Trị Chuyên Sâu</h3>
-            <p>Đội ngũ bác sĩ của chúng tôi sẵn sàng điều trị các bệnh lý chuyên sâu với công nghệ tiên tiến.</p>
+            <img src="<?php echo IMAGES."khamrang.webp"; ?>" alt="Dịch vụ khám răng">
+            <h3><center>Dịch vụ khám răng</center></h3>
+            <p>Các bác sĩ phụ trách với chuyên môn cao sẽ cho bạn cảm giác khám răng như đi nghỉ dưỡng.</p>
         </div>
         <div class="service-item">
-            <img src="https://media.vneconomy.vn/w800/images/upload/2022/09/05/rice-field-terrace-vietnam-shutterstock-554460046-d71ff868b1.jpeg" alt="Tư vấn dinh dưỡng">
-            <h3>Tư Vấn Dinh Dưỡng</h3>
-            <p>Chúng tôi cung cấp tư vấn dinh dưỡng và lập kế hoạch chế độ ăn uống phù hợp với nhu cầu của bạn.</p>
+            <img src="<?php echo IMAGES."tiemchung.jpg"; ?>" alt="Dịch vụ tiêm chủng">
+            <h3><center>Dịch vụ tiêm chủng</center></h3>
+            <p>Chúng tôi đảm bảo có thể tiêm chủng cho tất cả các loại bệnh, từ ung thư giai đoạn cuối đến cảm cúm nhẹ.</p>
         </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."xquang.jpg"; ?>" alt="Dịch vụ chụp X - Quang">
+            <h3><center>Dịch vụ chụp X - Quang</center></h3>
+            <p>Với các thiết bị máy móc hiện đại, chúng tôi đảm bảo có thể tìm thấy tất cả xương từ xương cụt đến cái răng.</p>
+        </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."khamtimmach.jpg"; ?>" alt="Dịch vụ khám tim mạch">
+            <h3><center>Dịch vụ khám tim mạch</center></h3>
+            <p>Khám tim mạch thường xuyên để ngăn ngừa các nguy cơ bệnh tìm ẩn.</p>
+        </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."khamtongquat.jpeg"; ?>" alt="Dịch vụ khám tổng quát">
+            <h3><center>Dịch vụ khám tổng quát</center></h3>
+            <p>Khám sức khỏe tổng quát định kỳ là thói quen lành mạnh để có một cuộc sống lâu dài, khỏe mạnh và hạnh phúc.</p>
+        </div>
+        
     </div>
     <div class="cta-container">
         <a href="#contact" class="cta-button">Liên hệ với chúng tôi</a>

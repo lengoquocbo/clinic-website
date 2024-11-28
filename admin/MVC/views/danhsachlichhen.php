@@ -14,7 +14,7 @@ foreach ($lichhen_list as $lichhen) { ?>
         <td><?= htmlspecialchars($lichhen['fullname']) ?></td>
         <td><?= htmlspecialchars($lichhen['appointmentday']) ?></td>
         <td><?= htmlspecialchars($lichhen['phone']) ?></td>
-        <td><?= htmlspecialchars($lichhen['serviceName']) ?></td>
+        <td><?= htmlspecialchars($lichhen['servicename']) ?></td>
         <td><?= htmlspecialchars($lichhen['description']) ?></td>
         <td>
             <?= $lichhen['confirm'] == 1 ? '<span style="color:green;">ĐÃ DUYỆT</span>' : '<span style="color:red;">CHƯA DUYỆT</span>' ?>

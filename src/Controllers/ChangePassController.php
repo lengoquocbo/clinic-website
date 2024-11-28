@@ -31,7 +31,6 @@
     $codeStorage = new RedisService();
 
     try {
-        error_log("Received request data: " . print_r(file_get_contents('php://input'), true));
 
         // Đọc JSON từ request body
         $json = file_get_contents('php://input');

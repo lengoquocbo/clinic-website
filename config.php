@@ -2,6 +2,7 @@
 require_once __DIR__."/vendor/autoload.php";
 define('UPLOAD_DIR', '/clinic-website/admin/MVC/views/nhanvien/uploads/');
 define('MODELADMIN', '/clinic-website/admin/MVC/model/');
+define('IMAGES', '/clinic-website/assets/images/');
 
 class Config{
 

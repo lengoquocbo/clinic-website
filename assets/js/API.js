@@ -226,7 +226,39 @@ app.post('/api/reservation', async (req, res) => {
 app.post('/api/logout', async (req, res) =>{
     try{
         
+        const { token } = req.body;   
+
+        // Validate input
+        if (!token) {
+            return res.status(400).json({
+                success: false,
+                message: 'Thiếu thông tin đăng xuat'
+            });
+        }
+
+        const payload = jwt.decode(token);
+        if (!payload) {
+            return res.status(414).json({
+                success: false,
+                message: `khong the giai ma token`
+            });
+        }
+
+        const response = await axios.post(
+            `${PHP_BASE_URL}/clinic-website/src/Controllers/LogoutController.php`,
+            { payload },
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
+        );
         
+        console.log('PHP Response:', response.data);
+
+        // Trả về kết quả từ PHP
+        res.json(response.data);
             
         
     } catch(error) {
@@ -378,6 +410,147 @@ app.post('/api/checkcode', async (req, res) =>{
         console.log('PHP Response:', response.data);
         // Trả về kết quả từ PHP
         res.json(response.data);
+    } catch(error) {
+        console.error('Registration error:', error);
+        
+        if (error.response) {
+            res.status(error.response.status).json({
+                success: false,
+                message: error.response.data.message || 'Lỗi từ server PHP'
+            });
+        } else if (error.request) {
+            res.status(503).json({
+                success: false,
+                message: 'Không thể kết nối đến server'
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                message: 'Lỗi server'
+            });
+        }
+    }
+});
+
+app.post('/api/updateinfo', async (req, res) =>{
+    try {
+        const { type, token, newphone, newemail } = req.body;
+        console.log('Request body:', req.body);
+        // Validate input
+        if (!type || !token || !newphone || !newemail) {
+            return res.status(400).json({
+                success: false,
+                message: 'Thiếu mã xác nhận'
+            });
+        }
+
+        const payload = jwt.decode(token);
+        if (!payload) {
+            return res.status(414).json({
+                success: false,
+                message: `khong the giai ma token`
+            });
+        }
+
+        const currentTime = Math.floor(Date.now() / 1000);
+        const expirationTime = payload.exp;
+
+        // So sánh thời gian
+        if (currentTime >= expirationTime) {
+            console.log('Token đã hết hạn');
+            return res.status(414).json({
+                success: false,
+                message: `token da het han`
+            });
+        }
+
+        userID = payload.user_id;
+        
+
+        const response = await axios.post(
+            `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangeInfoController.php`,
+            { type , userID , newemail, newphone },
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
+        );
+        console.log('PHP Response:', response.data);
+        // Trả về kết quả từ PHP
+        res.json(response.data);
+
+
+    } catch (error) {
+        console.error('Registration error:', error);
+        
+        if (error.response) {
+            res.status(error.response.status).json({
+                success: false,
+                message: error.response.data.message || 'Lỗi từ server PHP'
+            });
+        } else if (error.request) {
+            res.status(503).json({
+                success: false,
+                message: 'Không thể kết nối đến server'
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                message: 'Lỗi server'
+            });
+        }
+    }
+});
+
+app.post("/api/resetpass", async (req, res) =>{
+    try {
+        const { type, token, oldpassword, newpassword  } = req.body;
+
+        if (!type || !token || !oldpassword || !newpassword) {
+            return res.status(400).json({
+                success: false,
+                message: 'Thiếu mã thong tin'
+            });
+        } 
+
+        const payload = jwt.decode(token);
+        if (!payload) {
+            return res.status(414).json({
+                success: false,
+                message: `khong the giai ma token`
+            });
+        }
+
+        const currentTime = Math.floor(Date.now() / 1000);
+        const expirationTime = payload.exp;
+
+        // So sánh thời gian
+        if (currentTime >= expirationTime) {
+            console.log('Token đã hết hạn');
+            return res.status(414).json({
+                success: false,
+                message: `token da het han`
+            });
+        }
+
+        userID = payload.user_id;
+
+       const response = await axios.post(
+            `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangeInfoController.php`,
+            { type , userID , oldpassword, newpassword },
+            {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie || '', // Truyền cookie từ client tới PHP backend
+                },
+            }
+        );
+        console.log('PHP Response:', response.data);
+        // Trả về kết quả từ PHP
+        res.json(response.data);
+    
     } catch(error) {
         console.error('Registration error:', error);
         
