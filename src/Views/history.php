@@ -3,8 +3,6 @@
     <meta charset="UTF-8">
     <title>Hồ Sơ Bệnh Án</title>
     <style>
-       
-
         .medical-records-container {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -136,21 +134,19 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- foreach in ra dữ liệu ở đây -->
-                ?>
-                <tr>
-                    <td data-label="Mã Hồ Sơ">HS001</td>    
-                    <td data-label="Ngày Khám">01/01/2024</td>
-                    <td data-label="Bác Sĩ">BS. Nguyễn Văn A</td>
-                    <td data-label="Chẩn Đoán">Cảm Cúm</td>
+                <?php foreach ($User as $data) {
+                    ?>
+                    <td data-label="Mã Hồ Sơ"><?php echo $data['EXID']; ?></td>
+                    <td data-label="Ngày Khám"><?php echo $data['exdaytime'] ?></td>
+                    <td data-label="Bác Sĩ"><?php echo $data['fullname'] ?></td>
+                    <td data-label="Chẩn Đoán"><?php echo $data['results'] ?></td>
                     <td data-label="Trạng Thái" class="status-completed">Đã Khám</td>
                     <td>
                         <a href="?mod=taikhoan&act=detail" class="action-btn">Xem chi tiết</a>
                     </td>
-                </tr>
-                
-                <!-- Có thể thêm nhiều dòng khác -->
-            </tbody>
+                <?php
+                } ?>
+                </tbody>
         </table>
     </div>
 </body>

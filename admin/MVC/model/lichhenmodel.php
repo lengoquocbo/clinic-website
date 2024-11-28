@@ -284,7 +284,7 @@ LIMIT 0, 25";
             JOIN services s ON s.serviceID=us.serviceID WHERE a.confirm = ? AND a.status= 'waiting'
             ORDER BY a.appointmentday DESC
             LIMIT 0, 25";
-    
+
         $stmt = $this->db->prepare($query);
         if (!$stmt) {
             die("Error preparing query: " . $this->db->error);

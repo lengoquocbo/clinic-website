@@ -11,7 +11,9 @@ if (session_status() === PHP_SESSION_NONE) {
     <title>Phòng Khám Sức Khỏe</title>
     <link rel="stylesheet" href="assets/css/UI.css">
     <link rel="stylesheet" href="assets/css/responsiveUI.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
 </head>

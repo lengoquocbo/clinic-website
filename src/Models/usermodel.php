@@ -100,5 +100,24 @@ class UserModel {
         $this->db->close();
         return $result;
     }
+
+    function getByUserId($userID){
+        $stmt = $this->db->prepare(
+            "SELECT *, e.price AS tongtienkham
+            FROM user u 
+            JOIN patients p ON p.userID=u.userID
+            JOIN appointments a ON a.patientID=p.patientID
+            JOIN examine e ON e.EXID=a.EXID
+            JOIN useservices us ON us.EXID= e.EXID
+            LEFT JOIN usemedicines um ON um.userviceID=us.userviceID
+            LEFT JOIN medicines m ON m.medicineID=um.medicineID
+            LEFT JOIN services s ON s.serviceID= us.userviceID
+            LEFT JOIN staffs st ON st.staffID=s.staffID
+            WHERE u.userID= ?"
+        );
+        $stmt->bind_param("i", $userID);
+        $result = $stmt->execute();
+        return $result;
+    }
 }
 ?>
