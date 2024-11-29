@@ -36,9 +36,9 @@ class khambenh
         if( empty($exdata['EXID']) || empty($exdata['patientID'])){
             throw new Exception("Thiếu thông tin cần thiết để tạo hồ sơ khám bệnh.");
         }
-
-        $stmt = $this->db->prepare("INSERT INTO examine (EXID, patientID) VALUES (?, ?)");
-        $stmt->bind_param("ss", $exdata['EXID'], $exdata['patientID']);
+        $status = "Hẹn trước";
+        $stmt = $this->db->prepare("INSERT INTO examine (EXID, patientID, visittype) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $exdata['EXID'], $exdata['patientID'], $status);
         return $stmt->execute();
     }
     

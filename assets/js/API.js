@@ -200,6 +200,7 @@ app.post('/api/reservation', async (req, res) => {
 
         
         res.json(response.data);
+        console.log("PHP response: "+response.data)
 
     } catch (error) {
         console.error('Registration error:', error);

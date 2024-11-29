@@ -32,6 +32,9 @@
         </ul>
     </div>
 <?php
-} ?>    </nav>
+} ?>    
+</nav>
+<script src="assets/js/header_footer.js"></script>
+
 
 </header>

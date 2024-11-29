@@ -103,21 +103,73 @@ class UserModel {
 
     function getByUserId($userID){
         $stmt = $this->db->prepare(
-            "SELECT *, e.price AS tongtienkham
+            "SELECT st.staffID AS tennhanvien, e.exdaytime AS ngaykham, e.EXID AS mahoso, e.results AS chuandoan, u.userID AS userID
             FROM user u 
             JOIN patients p ON p.userID=u.userID
             JOIN appointments a ON a.patientID=p.patientID
             JOIN examine e ON e.EXID=a.EXID
             JOIN useservices us ON us.EXID= e.EXID
-            LEFT JOIN usemedicines um ON um.userviceID=us.userviceID
-            LEFT JOIN medicines m ON m.medicineID=um.medicineID
             LEFT JOIN services s ON s.serviceID= us.userviceID
             LEFT JOIN staffs st ON st.staffID=s.staffID
-            WHERE u.userID= ?"
+            WHERE u.userID= ? AND a.status = 'done' "
         );
         $stmt->bind_param("i", $userID);
-        $result = $stmt->execute();
-        return $result;
+        $stmt->execute();  // Just execute the statement
+        $result = $stmt->get_result();
+        $users = $result->fetch_all(MYSQLI_ASSOC);  // Now you can fetch data
+        return $users;
+
     }
+
+    function getByEXID($EXID){
+        $stmt = $this->db->prepare(
+            "SELECT 
+            st.fullname AS tennhanvien,
+             p.fullname AS tenbenhnhan, 
+             p.sex  AS sex,
+             p.birthdate AS ngaysinh, 
+             u.phone AS phone, 
+             p.address AS address, 
+             e.exdaytime AS ngaykham, 
+             s.servicename AS dichvu,
+             e.results AS chuandoan
+            FROM patients p
+            INNER JOIN examine e ON p.patientID = e.patientID
+            INNER JOIN user u ON u.userID = p.userID 
+            LEFT JOIN useservices us ON e.EXID = us.EXID
+            LEFT JOIN services s ON us.serviceID = s.serviceID
+            LEFT JOIN staffs st ON s.staffID = st.staffID
+            WHERE e.EXID = ?"
+        );
+        $stmt->bind_param("s", $EXID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        return $user;
+    }
+
+    function GetMedicine($EXID){
+        $stmt = $this->db->prepare(
+            "SELECT m.name AS tenthuoc,
+             um.quantity AS soluong,
+             um.note AS ghichu 
+             FROM user u JOIN patients p ON p.userID=u.userID 
+             JOIN appointments a ON a.patientID=p.patientID 
+             JOIN examine e ON e.EXID=a.EXID 
+             JOIN useservices us ON us.EXID= e.EXID 
+             LEFT JOIN usemedicines um ON um.userviceID=us.userviceID 
+             LEFT JOIN medicines m ON m.medicineID=um.medicineID 
+             LEFT JOIN services s ON s.serviceID= us.userviceID 
+             LEFT JOIN staffs st ON st.staffID=s.staffID 
+             WHERE e.EXID = ?"
+        );
+        $stmt->bind_param("s", $EXID);
+        $stmt->execute();  // Just execute the statement
+        $result = $stmt->get_result();
+        $UseMedicines = $result->fetch_all(MYSQLI_ASSOC);  // Now you can fetch data
+        return $UseMedicines;
+
+    }
+
 }
 ?>

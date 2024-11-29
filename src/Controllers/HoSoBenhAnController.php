@@ -10,9 +10,15 @@ class Hoso{
     }
 
     function Hoso(){
-        $userID = $_SESSION['userID']; 
+        $userID = $_SESSION['userID'];  
         $User = $this->usermodel->getByUserId($userID);
         require_once __DIR__.'\..\Views\index.php';
+    }
+
+    function detail($EXID){
+        $dt = $this->usermodel->getByEXID($EXID);
+        $medicineList = $this->usermodel->GetMedicine($EXID);
+        require_once __DIR__."\..\Views\index.php";
     }
 }
 ?>

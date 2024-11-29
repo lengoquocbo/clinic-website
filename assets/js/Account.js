@@ -98,3 +98,6 @@ btchangepass.addEventListener('click', async (e)=>{
 
     }
 });
+
+const btback = document.getElementById("back");
+btback.addEventListener('click', )

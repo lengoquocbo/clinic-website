@@ -14,6 +14,12 @@ switch($mod) {
                 case 'profile':
                     require_once("account.php");
                     break;
+                case 'history':
+                    require_once 'history.php';
+                    break;
+                case 'detail':
+                    require_once 'detailHistory.php';
+                    break;
                 default:
                     require_once("login.php");
                     break;

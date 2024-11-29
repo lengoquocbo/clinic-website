@@ -33,10 +33,15 @@
                         $Account->profile();
                         break;
                     case 'history':
-                        require_once __DIR__."/src/Views/index.php";
+                        require_once __DIR__."/src/Controllers/HoSoBenhAnController.php";
+                        $Hoso = new Hoso();
+                        $Hoso->Hoso();
                         break;
-                    case 'appointment':
-                        require_once __DIR__."/src/Views/index.php";
+                    case 'detail':
+                        $id = isset($_GET['id']) ? $_GET['id'] : '1';
+                        require_once __DIR__."/src/Controllers/HoSoBenhAnController.php";
+                        $Hoso = new Hoso();
+                        $Hoso->detail($id);
                         break;
                     default: 
                         header('Location: ?mod=error');

@@ -13,6 +13,8 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             padding: 20px;
+            height: 100vh;
+
         }
 
         .records-table {
@@ -134,18 +136,25 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($User as $data) {
-                    ?>
-                    <td data-label="Mã Hồ Sơ"><?php echo $data['EXID']; ?></td>
-                    <td data-label="Ngày Khám"><?php echo $data['exdaytime'] ?></td>
-                    <td data-label="Bác Sĩ"><?php echo $data['fullname'] ?></td>
-                    <td data-label="Chẩn Đoán"><?php echo $data['results'] ?></td>
-                    <td data-label="Trạng Thái" class="status-completed">Đã Khám</td>
-                    <td>
-                        <a href="?mod=taikhoan&act=detail" class="action-btn">Xem chi tiết</a>
-                    </td>
-                <?php
-                } ?>
+            <?php 
+                if(!empty($User) && is_array($User)) {
+                    foreach ($User as $data) { ?>
+                    <tr>
+                        <td data-label="Mã Hồ Sơ"><?php echo $data['mahoso']; ?></td>
+                        <td data-label="Ngày Khám"><?php echo $data['ngaykham'] ?></td>
+                        <td data-label="Bác Sĩ"><?php echo $data['tennhanvien'] ?></td>
+                        <td data-label="Chẩn Đoán"><?php echo $data['chuandoan'] ?></td>
+                        <td data-label="Trạng Thái" class="status-completed">Đã Khám</td>
+                        <td>
+                            <a href="?mod=taikhoan&act=detail&id=<?php echo $data['mahoso']; ?>" class="action-btn">Xem chi tiết</a>
+                        </td>
+                    </tr>
+                    <?php 
+                    }
+                } else {
+                    echo "Không có dữ liệu";
+                }
+                ?>
                 </tbody>
         </table>
     </div>
