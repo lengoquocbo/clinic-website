@@ -43,6 +43,11 @@
                         $Hoso = new Hoso();
                         $Hoso->detail($id);
                         break;
+                    case 'appointment':
+                        require_once __DIR__.'/src/Controllers/myappoinmentcontroller.php';
+                        $lichhen = new lichhen();
+                        $lichhen->getlichhen();
+                        break;
                     default: 
                         header('Location: ?mod=error');
                         break;

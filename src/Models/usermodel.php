@@ -171,5 +171,43 @@ class UserModel {
 
     }
 
+    function getAppointment($userID) {
+        // Câu truy vấn SQL
+        $sql = "
+           SELECT * 
+FROM user u 
+JOIN patients p ON p.userID = u.userID 
+JOIN appointments a ON a.patientID = p.patientID 
+WHERE u.userID = ? AND a.status='waiting'
+ORDER BY a.appointmentday DESC
+";
+        
+        // Chuẩn bị câu lệnh
+        $stmt = $this->db->prepare($sql);
+
+        // Gán giá trị cho tham số
+        $stmt->bind_param("s", $userID);
+    
+        // Thực thi truy vấn
+        $stmt->execute();
+    
+        // Lấy kết quả
+        $result = $stmt->get_result();
+    
+        // Kiểm tra và trả về dữ liệu
+        if ($result->num_rows > 0) {
+            $appointments = [];
+            while ($row = $result->fetch_assoc()) {
+                $appointments[] = $row;
+            }
+            return $appointments; // Trả về danh sách các cuộc hẹn
+        } else {
+            return []; // Không có dữ liệu
+        }
+    
+        // Đóng câu lệnh
+        $stmt->close();
+    }
+    
 }
 ?>

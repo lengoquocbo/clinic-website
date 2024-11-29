@@ -20,6 +20,9 @@ switch($mod) {
                 case 'detail':
                     require_once 'detailHistory.php';
                     break;
+                case 'appointment' :
+                    require_once 'myAppointMent.php';
+                    break;
                 default:
                     require_once("login.php");
                     break;
