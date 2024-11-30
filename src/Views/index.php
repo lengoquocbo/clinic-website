@@ -15,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
 </head>
 <body>
     <!-- header section start -->
@@ -36,7 +36,7 @@ if (session_status() === PHP_SESSION_NONE) {
     ?>
     <!-- footer section end -->
      
+    <script src="assets/js/UI.js"></script>
     
 </body>
 </html>
-<script src="assets/js/UI.js"></script>

@@ -1,7 +1,4 @@
-<?php
 
-
-?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -12,7 +9,8 @@
     <link rel="stylesheet" href="assets/css/loginstyle.css">
     <link rel="stylesheet" href="assets/css/styleglobal.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
+
 </head>
 
 <body>
@@ -32,10 +30,7 @@
                 <i class="bx bx-hide" id="passwordIcon"></i>
             </button>
             <div class="login__checkbox">
-                <label>
-                    <input type="checkbox" name="remember" id="remember"> Nhớ mật khẩu
-                </label>
-                <a href="#">Quên mật khẩu?</a>
+                <a href="?mod=taikhoan&act=forget">Quên mật khẩu?</a>
             </div>
             <button type="submit" class="btnlogin" id="dangnhap">Đăng Nhập</button>
         </form>
@@ -50,11 +45,12 @@
         </div>
 
         <div class="login__register">
-            <p>Bạn chưa có tài khoản? <a href="register.php"><b>Đăng ký</b></a></p>
+            <p>Bạn chưa có tài khoản? <a href="?mod=taikhoan&act=register"><b>Đăng ký</b></a></p>
         </div>
         <div id="errorMessage" class="error-message"></div>
         <div id="successMessage" class="success-message"></div>
     </div>
+
     <script src="assets/js/login.js"></script>
 </body>
 </html>

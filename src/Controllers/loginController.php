@@ -45,9 +45,9 @@
         }
 
         $phone = $data['phone'];
-        $password = $data['password'];
+        $pass = $data['password'];
 
-        $user = $usermodel->checkuser($phone, $password);
+        $user = $usermodel->checkuser($phone, $pass);
 
         if ($user!=NULL) {
            
@@ -78,8 +78,7 @@
                 $_SESSION['userID'] = $user['userID'];
     
                 $tokenLG = $token->generateToken($user);
-                $Redis->saveUserToken($user['userID'], $tokenLG, 60*60*2);
-               
+                               
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng nhập thành công',

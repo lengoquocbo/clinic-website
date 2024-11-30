@@ -1,7 +1,9 @@
 
-body{
+
+.changepass_container{
     font-family: var(--default-font);
     background: #F5F5F5;
+    height: 100vh;
 }
 h2{
     text-align: center;
@@ -18,7 +20,7 @@ h3{
     max-width: 350px;
     margin: 0 auto;
     padding: 40px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; 
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
@@ -108,7 +110,7 @@ h1{
     width: 100%;
     height: 48px;
     margin: 10px 0 20px 0;
-    background: #CD5B45;
+    background: #273c5c;
     color: white; 
     font-size: 16px;
     font-weight: 450;
@@ -116,6 +118,15 @@ h1{
     align-items: center;
     border-radius: 5px;
     border: #fff;
+    cursor: pointer;
+}
+.bt:hover{
+    background-color: #445970;
+}
+.bt:active{
+    background-color: #081313; /* Changes the background color when the button is clicked */
+    transform: translateY(1px); /* Slightly moves the button down when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 .hidden{
     display: none !important;
@@ -148,3 +159,18 @@ h1{
     }
 }
 
+.back-btn {
+    
+    margin: 10px auto;
+    background-color: #4a87c3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}

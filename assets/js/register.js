@@ -1,4 +1,5 @@
 
+
 const passField = document.getElementById("password");
 const repassField = document.getElementById("repassword")
 const showBtn = document.getElementById("showpassword");
@@ -32,7 +33,6 @@ submit.addEventListener('click', async (e)=>{
     const mail = document.getElementById('mail').value;
     const password = document.getElementById('password').value;
     const repassword = document.getElementById('repassword').value;
-    const remember = document.getElementById('remember').vlaue;
     
     if(phone.trim() === "" || password.trim() === "" || name.trim() === "" || mail.trim() === "" || repassword.trim() === "") {
         
@@ -43,20 +43,29 @@ submit.addEventListener('click', async (e)=>{
         exit();
     }
 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if(!emailRegex.test(mail)){
+        e.preventDefault();
+        alert("Nhập sai định dạng email");
+        exit();
+    }
+
+
     //xử lý checkbox để xem thử có lưu vào cookie hay không
     // const remember = document.getElementById('remember');
     // const result = checkbox.checked ? 'True' : 'False';
-
+    
     if(repassword == password) {
-        const requestdata = {
-            phone: phone,
-            name: name,
-            mail: mail,
-            pass: password
-        }
+        
         try { 
             // const response = await fetch('http://192.168.35.234:3001/api/register', {
-
+            const requestdata = {
+                phone: phone,
+                name: name,
+                mail: mail,
+                pass: password
+            }
             const response = await fetch('http://localhost:3001/api/register', {
                 method: 'POST',
                 credentials: 'include',
@@ -70,7 +79,7 @@ submit.addEventListener('click', async (e)=>{
             
             if (data.success) {
                 // Hiển thị thông báo thành công
-                sessionStorage.setItem('token', data.token);
+                localStorage.setItem('token', data.token);
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
                 window.location.href = "http://localhost/clinic-website/?mod=home";
@@ -90,3 +99,4 @@ submit.addEventListener('click', async (e)=>{
         //
     }
 });    
+

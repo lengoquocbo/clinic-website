@@ -63,6 +63,9 @@
                     case 'register':
                         require_once __DIR__.'/src/Views/index.php';
                         break;
+                    case 'forget':
+                        require_once __DIR__.'/src/Views/changepass.php';
+                        break;
                     default:
                         require_once __DIR__.'/src/Views/index.php';
                         break;

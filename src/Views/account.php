@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Quản Lý Tài Khoản</title>
     <style>
         
@@ -120,7 +121,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="assets/js/Account.js"></script>
     <script>
         function goBack() {

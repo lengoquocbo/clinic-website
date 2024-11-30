@@ -1,5 +1,9 @@
-
 // script send mail
+
+
+document.getElementById('back').addEventListener('click', function() {
+    window.location.href = 'http://localhost/clinic-website';
+});
 const btmail = document.getElementById("enteremail");
 const email = document.getElementById("mail");
 const emailvalue = email.value;
@@ -18,7 +22,7 @@ btmail.addEventListener('click', async function(event) {
         exit();
     }
 
-    if(emailRegex.test(emailvalue)){
+    if(!emailRegex.test(emailvalue)){
         
         event.preventDefault();
         document.getElementById('errorMessage1').innerHTML = "Email không hợp lệ";
@@ -27,6 +31,9 @@ btmail.addEventListener('click', async function(event) {
     }
 
     //khôi phục lại các hiển thị thông báo
+    this.disabled = true;
+    this.classList.add('btn-sending');
+    this.textContent = "Đang gửi..."
     
     // const response = await fetch('http://192.168.35.234/api/mailchangepass', {
 
@@ -48,9 +55,17 @@ btmail.addEventListener('click', async function(event) {
             // hiển thị lỗi
         document.getElementById('errorMessage1').textContent = data.message;
         document.getElementById('errorMessage1').style.display = 'block';
+        this.disabled = false;
+        this.classList.remove('btn-sending');
+        this.textContent = "Tiếp tục với email này";
+        
 
     } else {
-        
+        setTimeout(() => {
+            this.disabled = false;
+            this.classList.remove('btn-sending');
+            this.textContent = "Tiếp tục với email này";
+        }, 3000);
         document.getElementById("formcode").classList.remove("hidden");
         document.getElementById("change").classList.add("hidden");
     }
@@ -172,11 +187,16 @@ btchange.addEventListener('click', async function(event) {
                 // Hiển thị thông báo thành công
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = "http://localhost/clinic-website/?mod=taikhoan&act=login";
+                }, 3000);
+                history.replaceState(null, "", "http://localhost/clinic-website/?mod=taikhoan&act=login");
                     
             } else {
                 // hiển thị lỗi
                 document.getElementById('errorMessage3').textContent = data.message;
                 document.getElementById('errorMessage3').style.display = 'block';
+
             }
         } else {
             document.getElementById('errorMessage3').innerText  = 'Mật khẩu không trùng khớp! Vui lòng nhập lại';

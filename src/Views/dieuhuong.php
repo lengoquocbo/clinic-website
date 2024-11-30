@@ -37,6 +37,9 @@ switch($mod) {
                 case 'register':
                     require_once('register.php');
                     break;
+                case 'forget':
+                    require_once 'changepass.php';
+                    break;
                 default:
                     require_once("login.php");
                     break;

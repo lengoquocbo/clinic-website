@@ -23,12 +23,15 @@ class UserModel {
     }
     // hàm tìm người dùng bằng phone và pass
     function checkuser($phone, $pass) {
-        $stmt = $this->db->prepare("SELECT * FROM user WHERE phone = ? AND pass = ?");
-        $stmt->bind_param("ss", $phone, $pass);
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE phone = ? ");
+        $stmt->bind_param("s", $phone);
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
-        return $user;
+        if(password_verify($pass, $user['pass'])){
+            return $user;
+        } else return NULL;
+        
     }
     
     // Tìm kiếm người dùng bằng username
@@ -72,8 +75,8 @@ class UserModel {
     function addUser($data) {
         $stmt = $this->db->prepare("INSERT INTO user (username, phone, mail, pass, role) VALUES (?, ?, ?, ?, ?)");
         $role = 1;
-        $stmt->bind_param("ssssi", $data['name'], $data['phone'], $data['mail'], $data['pass'], $role);
-        $result = $stmt->execute();
+        $stmt->bind_param("ssssi", $data['name'], $data['phone'], $data['mail'], $data['pwhashed'], $role);
+        $result = $stmt->execute(); 
         return $result;
     }
     
@@ -86,7 +89,7 @@ class UserModel {
 
     function updatePass($data) {
         $stmt = $this->db->prepare("UPDATE user SET pass = ? WHERE userID = ?");
-        $stmt->bind_param("si", $data['newpass'], $data['userID']);
+        $stmt->bind_param("si", $data['npwhashed'], $data['userID']);
         $result = $stmt->execute();
         return $result;
     }

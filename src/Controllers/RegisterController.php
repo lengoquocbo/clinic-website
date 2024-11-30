@@ -21,6 +21,8 @@
 
     // Chỉ cho phép POST request
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+
+
         
         echo json_encode([
             'success' => false,
@@ -39,10 +41,10 @@
         $data = json_decode($json, true);
 
         // Validate input
-        if (!isset($data['phone']) || !isset($data['pass']) || !isset($data['name']) || !isset($data['mail'])) {
+        if (!isset($data['phone']) || !isset($data['pwhashed']) || !isset($data['name']) || !isset($data['mail'])) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Thiếu thông tin đăng nhập'
+                'message' => 'Thiếu thông tin đăng ký'
             ]);
             exit();
         }
@@ -58,10 +60,12 @@
             $result = $usermodel->addUser($data);
             if($result){
                 $user = $usermodel->findUserByPhone($data['phone']);
+
                 $_SESSION['isLogin'] = true;
                 $_SESSION['userID'] = $user['userID'];
+
                 $token = $token->generateToken($user);
-                $Redis->saveUserToken($user['userID'], $token, 60*60*2);
+                
                 echo json_encode([
                     'success' => true,
                     'message' => 'Đăng ký thành công',

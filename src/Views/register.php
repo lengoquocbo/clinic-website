@@ -14,6 +14,8 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+
     </head>
     
 <body>
@@ -44,12 +46,6 @@
             <div class="reg_input">
                 <i class='bx bx-lock-alt'></i>
                 <input type="password" id="repassword" placeholder="Nhập lại mật khẩu" required>
-            </div>
-
-            <div class="reg_checkbox">
-                <label>
-                    <input type="checkbox" id="remember"> Nhớ mật khẩu
-                </label>
             </div>
             <button type="submit" class="btreg" id="submit">Đăng Ký</button>
 

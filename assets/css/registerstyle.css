@@ -85,6 +85,11 @@
     align-items: center;
     border-radius: 5px;
     border: #fff;
+    cursor: pointer;
+}
+
+.btreg:hover {
+    background-color: rgb(24, 58, 68);
 }
 
 .reg_span {

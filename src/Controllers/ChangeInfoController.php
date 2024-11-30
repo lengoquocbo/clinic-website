@@ -75,7 +75,7 @@
                 }
                 break;
             case 'resetpass' :
-                if(!isset($data['userID']) || !isset($data['oldpassword']) || !isset($data['newpassword'])) {
+                if(!isset($data['userID']) || !isset($data['oldpassword']) || !isset($data['npwhashed'])) {
                     echo json_encode([
                         'success' => false,
                         'message' => 'Thiếu thông tin thay doi'
@@ -90,7 +90,7 @@
                     ]);
                     exit();
                 }
-                if($User['pass'] != $data['oldpassword']){
+                if(!password_verify($data['oldpassword'], $User['pass'])){
                     echo json_encode([
                         'success' => false,
                         'message' => 'sai mat khau'
@@ -98,7 +98,7 @@
                     exit();
                 }
                 $ndata = array(
-                    'newpass' => $data['newpassword'],
+                    'newpass' => $data['npwhashed'],
                     'userID' => $data['userID']
                 );
                 

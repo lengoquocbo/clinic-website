@@ -6,7 +6,7 @@
     header('Content-Type: application/json');
     header("Access-Control-Allow-Credentials: true");
 
-    require_once __DIR__.'\..\Models\Database.php';
+    require_once __DIR__.'\..\Models\usermodel.php';
     require_once __DIR__.'\..\..\assets\Mail\Mail.php';
     require_once __DIR__.'\..\Services\RedisService.php';
 
@@ -26,9 +26,8 @@
         exit();
     }
 
-    $usermodel = new User();
+    $usermodel = new UserModel();
     $Mailer = new Mail();
-    $codeStorage = new RedisService();
 
     try {
 
@@ -69,7 +68,8 @@
     
                 $mailaddress = $data['mail'];
                 $code = $Mailer->createcode();
-                $codeStorage->storeCode($mailaddress, $code);
+                $_SESSION['code'] = $code;
+                $_SESSION['code_exp'] = time() + (15 * 60);
 
                 $noidung = "
                     <!DOCTYPE html>
@@ -164,35 +164,7 @@
                     ]);
                 }
                 break;
-
-            case 'updatepass':
-                if(!isset($data['password']) || !isset($data['mail'])) {
-                    echo json_encode([
-                        'success' => false,
-                        'message' => 'Thiếu thông tin mật khẩu.'
-                    ]);
-                    exit();
-                }
-
-                $dataupdate = array(
-                    'pass' => $data['password'],
-                    'mail' => $data['mail']
-                );
-
-                $responseupt = $usermodel->updatepass($dataupdate);
-
-                if(!$responseupt) {
-                    echo json_encode([
-                        'success' => false,
-                        'message' => 'Đổi mật khẩu thất bại.'
-                    ]);
-                } else {
-                    echo json_encode([
-                        'success' => true,
-                        'message' => 'Đổi mật khẩu thành công.'
-                    ]);
-                }
-                break;
+            
             case 'checkcode':
                 if(!isset($data['code']) || !isset($data['mail'])) {
                     echo json_encode([
@@ -202,10 +174,31 @@
                     exit();
                 }
 
+                if(!isset($_SESSION['code']) || !isset($_SESSION['code_exp'])){
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Khong tim thay thong tin trong session'
+                    ]);
+                    exit();
+                }
+
                 $mail = $data['mail'];
                 $resetcode = $data['code'];
+                $currenttime = time();
 
-                if ($codeStorage->verifyCode($mail, $resetcode)) {
+                if($currenttime > $_SESSION['code_exp']){
+                    unset($_SESSION['code']);
+                    unset($_SESSION['code_exp']);
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Mã xác thực đã hết hạn'
+                    ]);
+                    exit();
+                }
+
+                if ($resetcode == $_SESSION['code'] ) {
+                    unset($_SESSION['code']);
+                    unset($_SESSION['code_exp']);
                     echo json_encode([
                         'success' => true,
                         'message' => 'Mã xác thực trùng khớp'
@@ -213,10 +206,39 @@
                 } else {
                     echo json_encode([
                         'success' => false,
-                        'message' => 'Mã xác thực không trùng khớp hoặc đã hết hạn'
+                        'message' => 'Mã xác thực không trùng khớp'
                     ]);
                 }
                     
+                break;
+            
+            case 'updatepass':
+                if(!isset($data['pwhashed']) || !isset($data['mail'])) {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Thiếu thông tin mật khẩu.'
+                    ]);
+                    exit();
+                }
+
+                $dataupdate = array(
+                    'pass' => $data['pwhashed'],
+                    'mail' => $data['mail']
+                );
+
+                $responseupt = $usermodel->updatepass($dataupdate);
+
+                if(!$responseupt) {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Đổi mật khẩu thất bại. Vui lòng thử lại khi khác!'
+                    ]);
+                } else {
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'Đổi mật khẩu thành công.'
+                    ]);
+                }
                 break;
             default:
                 echo json_encode([
@@ -224,6 +246,8 @@
                     'message' => 'Dữ liệu sai định dạng.'
                 ]);
                 break;
+
+            
         }
     } catch (Exception $e) {
         // Log lỗi chung
@@ -238,14 +262,4 @@
         ]);
     }
 
-
-    // function verifyResetCode($email, $code){
-    //     if () {
-    //         // Mã code hợp lệ, cho phép đổi mật khẩu
-    //         return true;
-    //     } else {
-    //         // Mã code không hợp lệ
-    //         return false;
-    //     }
-    // }
 ?>

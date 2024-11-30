@@ -1,3 +1,4 @@
+        
 const btupdate = document.getElementById('update');
 btupdate.addEventListener('click', async (e)=>{
     e.preventDefault();
@@ -5,6 +6,12 @@ btupdate.addEventListener('click', async (e)=>{
     const email = document.getElementById("email").value;
     const phone = document.getElementById("phone").value;
     const token = localStorage.getItem('token');
+
+    if(!emailRegex.test(email)){
+        e.preventDefault();
+        alert("Nhập sai định dạng email");
+        exit();
+    }
 
     try {
 
