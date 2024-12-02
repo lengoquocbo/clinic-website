@@ -10,7 +10,9 @@ class PaymentModel {
     }
     
     public function getPaymentDetailsByPatient($patientID) {
-        $sql = "SELECT p.fullname, e.exdaytime, e.price AS priceexamine, s.price AS priceservice 
+        $sql = "SELECT p.fullname, e.exdaytime, 
+        e.price AS priceexamine, 
+        s.price AS priceservice 
                 FROM examine e 
                 LEFT JOIN payments pa ON pa.EXID = e.EXID 
                 LEFT JOIN patients p ON p.patientID = e.patientID 

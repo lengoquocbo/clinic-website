@@ -36,7 +36,7 @@
   </div>
     <script>
         // Tải dữ liệu từ getRevenueData.php
-        fetch('/clinic-website/admin/MVC/model/thongke.php')
+        fetch('/admin/MVC/model/thongke.php')
             .then(response => response.json())
             .then(data => {
                 // Dữ liệu cho biểu đồ doanh thu

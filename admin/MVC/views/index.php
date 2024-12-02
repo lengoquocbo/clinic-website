@@ -195,7 +195,7 @@ $content = loadContent($mod, $act);
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: /clinic-website/index.php");
+    header("Location: /index.php");
     exit();
 }
 ?>
@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/../clinic-website/assets/css/styleglobal.css">
+    <link rel="stylesheet" href="/../assets/css/styleglobal.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Vinmeclatest xin chào</title>
     <style>

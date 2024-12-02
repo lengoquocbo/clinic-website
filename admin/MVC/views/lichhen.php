@@ -133,7 +133,7 @@
         document.getElementById('confirm').addEventListener('change', function () {
             const confirmStatus = this.value;
 
-            fetch(`/clinic-website/admin/MVC/views/danhsachlichhen.php?confirm=${confirmStatus}`)
+            fetch(`/admin/MVC/views/danhsachlichhen.php?confirm=${confirmStatus}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('appointment-body').innerHTML = data;

@@ -53,32 +53,32 @@ document.addEventListener('DOMContentLoaded', function() {
         '1': {
             title: 'Khoa Nội',
             description: 'Chuyên khám và điều trị các bệnh lý về nội khoa, bao gồm các bệnh về tim mạch, hô hấp, tiêu hóa, và thần kinh.',
-            image: '/clinic-website/assets/images/khoanoi.jpg'
+            image: '/assets/images/khoanoi.jpg'
         },
         '2': {
             title: 'Khoa Nhi',
             description: 'Chăm sóc sức khỏe cho trẻ em từ sơ sinh đến 18 tuổi với đội ngũ bác sĩ nhi khoa tận tâm và chuyên nghiệp.',
-            image: '/clinic-website/assets/images/khoanhi.jpg'
+            image: '/assets/images/khoanhi.jpg'
         },
         '3': {
             title: 'Khoa Sản',
             description: 'Cung cấp dịch vụ chăm sóc sức khỏe cho phụ nữ mang thai, sinh nở và các bệnh lý phụ khoa.',
-            image: '/clinic-website/assets/images/khoaphusan.jpg'
+            image: '/assets/images/khoaphusan.jpg'
         },
         '4': {
             title: 'Khoa Da Liễu',
             description: 'Chuyên khám và điều trị các bệnh lý về da, tóc, móng và các bệnh lý lây qua đường tình dục.',
-            image: '/clinic-website/assets/images/khoadalieu.jpg'
+            image: '/assets/images/khoadalieu.jpg'
         },
         '5': {
             title: 'Khoa Mắt',
             description: 'Chăm sóc và điều trị các bệnh lý về mắt, bao gồm khúc xạ, viêm, và các vấn đề về thị lực.',
-            image: '/clinic-website/assets/images/khoamat.jpg'
+            image: '/assets/images/khoamat.jpg'
         },
         '6': {
             title: 'Khoa Tai Mũi Họng',
             description: 'Khám và điều trị các vấn đề liên quan đến tai, mũi, họng, và các bệnh lý về đường hô hấp trên.',
-            image: '/clinic-website/assets/images/khoataimuihong.jpg'
+            image: '/assets/images/khoataimuihong.jpg'
         }
     };
 
@@ -139,7 +139,7 @@ datlich.addEventListener("click", async (e) => {
             message: message
         }
         // const response = await fetch('http://192.168.56.1/api/login', {
-        const response = await fetch('http://localhost:3001/api/reservation', {
+        const response = await fetch('http://192.168.42.108:3001/api/reservation', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -166,15 +166,15 @@ datlich.addEventListener("click", async (e) => {
 
 //xử lý li đặt lich
 function checkSession(){
-    fetch('http://localhost:80/clinic-website/src/Controllers/CheckSession.php')
+    fetch('http://192.168.42.108:80/src/Controllers/CheckSession.php')
         .then(response => response.json())
         .then(data => {
             if (data.session_exists) {
-                window.location.href = "http://localhost/clinic-website/?mod=home#appointment";
+                window.location.href = "http://192.168.42.108/?mod=home#appointment";
             } else {
                 // Nếu session không tồn tại
                 alert('Vui lòng đăng nhập');
-                window.location.href = 'http://localhost/clinic-website/?mod=taikhoan&act=login';
+                window.location.href = 'http://localhost/?mod=taikhoan&act=login';
             }
         });
 }

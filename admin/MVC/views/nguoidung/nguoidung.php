@@ -1,27 +1,4 @@
-<?php
-$mod = isset($_GET['mod']) ? $_GET['mod'] : '';
-$act = isset($_GET['act']) ? $_GET['act'] : '';
-$id = isset($_GET['id']) ? $_GET['id'] : '';
 
-
-
-// Hàm để tải nội dung của trang
-function loadContentnhanvien($mod, $act)
-{
-    if ($mod === 'nhanvien' && $act === 'edit') {
-        ob_start();
-        include '../views/nhanvien/suanhanvien,php';
-        return ob_get_clean();
-    } elseif ($mod === 'thuoc' && $act === 'add') {
-        ob_start();
-        include '../views/thuoc/themthuoc.php';
-        return ob_get_clean();
-    } elseif ($mod === 'thuoc' && $act === 'delete') {
-        //    .....
-    }
-}
-$content = loadContentnhanvien($mod, $act);
-?>
 <!DOCTYPE html>
 <html lang="en">
 

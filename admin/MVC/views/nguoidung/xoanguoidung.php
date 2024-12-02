@@ -1,6 +1,6 @@
 <?php
 // Yêu cầu tệp chứa class Medicine
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\nguoidungmodel.php';
+require_once __DIR__ . '../../../model/nguoidungmodel.php';
 
 $userID = $_GET['id']; // Lấy medicineID từ tham số GET
 $nguoidung = new Nguoidung();

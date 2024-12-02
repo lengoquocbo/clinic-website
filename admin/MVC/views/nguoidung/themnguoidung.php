@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'username' => htmlspecialchars(trim($_POST['username'])),
         'phone' => htmlspecialchars(trim($_POST['phone'])),
         'mail' => filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL),
-        'pass' => password_hash($_POST['pass'], PASSWORD_DEFAULT), // Hash mật khẩu
+        'pass' => password_hash($_POST['pass'], PASSWORD_BCRYPT), // Hash mật khẩu
         'role' => intval($_POST['role']),
     ];
 
