@@ -43,7 +43,7 @@ submit.addEventListener('click', async (e)=>{
 
         // const response = await fetch('http://192.168.1.8:3001/api/login', {
 
-        const response = await fetch('http://localhost:3001/api/login', {
+        const response = await fetch('http://192.168.42.108:3001/api/login', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -66,8 +66,8 @@ submit.addEventListener('click', async (e)=>{
             document.getElementById('successMessage').style.display = 'block';
             // window.location.href = "http://192.168.1.8"+data.URL;
             // history.replaceState(null, "", "http://192.168.1.8"+data.URL);
-            window.location.href = "http://localhost/clinic-website"+data.URL;
-            history.replaceState(null, "", "http://localhost/clinic-website"+data.URL);
+            window.location.href = "http://192.168.42.108"+data.URL;
+            history.replaceState(null, "", "http://192.168.42.108"+data.URL);
         } else {
             // hiển thị lỗi
             document.getElementById('errorMessage').textContent = data.message;

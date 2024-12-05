@@ -1,7 +1,6 @@
 <?php
 // Yêu cầu tệp chứa class Medicine
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\thuocmodel.php';
-
+require_once __DIR__ . '/../../model/thuocmodel.php';
 $medicineID = $_GET['id']; // Lấy medicineID từ tham số GET
 $thuocmodel = new Medicine();
 

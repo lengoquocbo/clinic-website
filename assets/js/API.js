@@ -13,8 +13,8 @@ const PORT = 3001; // Đổi sang port khác vì PHP đang chạy ở 3000
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost',
-    // origin: 'http://192.168.1.8', // Hoặc chỉ định domain cụ thể
+    // origin: 'http://localhost',
+    origin: 'http://192.168.42.108', // Hoặc chỉ định domain cụ thể
     credentials: true,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -23,8 +23,8 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Cấu hình
-const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
-// const PHP_BASE_URL = 'http://192.168.56.1:80'; 
+// const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
+const PHP_BASE_URL = 'http://192.168.42.108'; 
 
 
 
@@ -44,7 +44,7 @@ app.post('/api/login', async (req, res) => {
        
         // Gọi đến PHP backend  
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/loginController.php`,
+            `${PHP_BASE_URL}/src/Controllers/loginController.php`,
             { phone, password },
             {
                 withCredentials: true,
@@ -108,7 +108,7 @@ app.post('/api/register', async (req, res) => {
         console.log(pwhashed);
         // Gọi đến PHP backend
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/RegisterController.php`,
+            `${PHP_BASE_URL}/src/Controllers/RegisterController.php`,
             { phone, name , mail, pwhashed },
             {
                 withCredentials: true,
@@ -187,7 +187,7 @@ app.post('/api/reservation', async (req, res) => {
       
         const response = await axios.post(
 
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/ReservationController.php`,
+            `${PHP_BASE_URL}/src/Controllers/ReservationController.php`,
             {phone, mail, userID, hovaten, CCCD, gender, ngaykham, dateofbirth, service, address, message},
  
             {
@@ -246,7 +246,7 @@ app.post('/api/logout', async (req, res) =>{
         }
 
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/LogoutController.php`,
+            `${PHP_BASE_URL}/src/Controllers/LogoutController.php`,
             { payload },
             {
                 withCredentials: true,
@@ -300,7 +300,7 @@ app.post('/api/mailchangepass', async (req, res) => {
         
         // Gọi đến PHP backend
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangePassController.php`,
+            `${PHP_BASE_URL}/src/Controllers/ChangePassController.php`,
             { mail, inputtype },
             {
                 withCredentials: true,
@@ -352,7 +352,7 @@ app.post('/api/updatepass', async (req, res) =>{
         const pwhashed = hashPasswordAsync(password);
         // Gọi đến PHP backend
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangePassController.php`,
+            `${PHP_BASE_URL}/src/Controllers/ChangePassController.php`,
             { mail, pwhashed, inputtype },
             {
                 withCredentials: true,
@@ -400,7 +400,7 @@ app.post('/api/checkcode', async (req, res) =>{
 
         // Gọi đến PHP backend
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangePassController.php`,
+            `${PHP_BASE_URL}/src/Controllers/ChangePassController.php`,
             { mail, code , inputtype },
             {
                 withCredentials: true,
@@ -470,7 +470,7 @@ app.post('/api/updateinfo', async (req, res) =>{
         
 
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangeInfoController.php`,
+            `${PHP_BASE_URL}/src/Controllers/ChangeInfoController.php`,
             { type , userID , newemail, newphone },
             {
                 withCredentials: true,
@@ -540,7 +540,7 @@ app.post("/api/resetpass", async (req, res) =>{
         userID = payload.user_id;
         const npwhashed = hashPasswordAsync(newpassword);
         const response = await axios.post(
-            `${PHP_BASE_URL}/clinic-website/src/Controllers/ChangeInfoController.php`,
+            `${PHP_BASE_URL}/src/Controllers/ChangeInfoController.php`,
             { type , userID , oldpassword, npwhashed },
             {
                 withCredentials: true,

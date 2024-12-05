@@ -23,9 +23,9 @@ if (isset($_GET['p'])) {
         
         if (!empty($data)) {
             // Lấy danh sách thuốc và tính tổng tiền thuốc
-            $examinationFee= $data[0]['priceservice'] ;
-            $totalAmount= $data[0]['priceexamine'] ;
-            $totalMedicineCost = $totalAmount -$examinationFee;
+            $tienkham= $data[0]['priceservice'] ;
+            $tongcong= $data[0]['priceexamine'] ;
+            $tienthuoc = $tongcong -$tienkham;
             $style = '
             <style>
                 .header {
@@ -92,15 +92,15 @@ if (isset($_GET['p'])) {
                 <table cellpadding="5" border="0">
                     <tr>
                         <td width="70%">Tiền khám:</td>
-                        <td width="30%" style="text-align: right;">' . number_format($examinationFee, 0, ',', '.') . ' VNĐ</td>
+                        <td width="30%" style="text-align: right;">' . number_format($tienkham, 0, ',', '.') . ' VNĐ</td>
                     </tr>
                     <tr>
                         <td>Tiền thuốc:</td>
-                        <td style="text-align: right;">' . number_format($totalMedicineCost, 0, ',', '.') . ' VNĐ</td>
+                        <td style="text-align: right;">' . number_format($tienthuoc, 0, ',', '.') . ' VNĐ</td>
                     </tr>
                     <tr class="total">
                         <td>TỔNG CỘNG:</td>
-                        <td style="text-align: right;">' . number_format($totalAmount, 0, ',', '.') . ' VNĐ</td>
+                        <td style="text-align: right;">' . number_format($tongcong, 0, ',', '.') . ' VNĐ</td>
                     </tr>
                 </table>
             </div>

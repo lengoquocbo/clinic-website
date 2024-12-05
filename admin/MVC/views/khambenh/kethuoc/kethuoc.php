@@ -266,7 +266,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                 }
 
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/admin/MVC/model/giohangmodel.php',
                     method: 'POST',
                     data: {
                         action: 'add',
@@ -299,7 +299,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                 const medicineId = $(this).data('id');
                 console.log('Medicine ID:', medicineId); // Kiểm tra giá trị medicineId trong console
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/admin/MVC/model/giohangmodel.php',
                     type: 'POST',
                     data: {
                         action: 'remove',
@@ -325,7 +325,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
             // Xóa toàn bộ giỏ hàng
             $('#empty-cart').click(function() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/admin/MVC/model/giohangmodel.php',
                     method: 'POST',
                     data: {
                         action: 'empty'
@@ -346,7 +346,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
 
             function emptycart() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/admin/MVC/model/giohangmodel.php',
                     method: 'POST',
                     data: {
                         action: 'empty'
@@ -369,7 +369,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
             function loadMedicineList() {
                 const serviceID = $('#serviceID').val();
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/views/khambenh/kethuoc/thuocbyid.php',
+                    url: '/admin/MVC/views/khambenh/kethuoc/thuocbyid.php',
                     method: 'POST',
                     data: {
                         serviceID: serviceID
@@ -385,7 +385,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
 
             function loadCart() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/views/khambenh/kethuoc/load_cart.php',
+                    url: '/admin/MVC/views/khambenh/kethuoc/load_cart.php',
                     method: 'GET',
                     success: function(response) {
                         $('#cart-container').html(response);
@@ -399,7 +399,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
             $('#ketoa').click(function() {
                 // Lấy dữ liệu giỏ hàng từ session
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                    url: '/admin/MVC/model/giohangmodel.php',
                     method: 'POST',
                     data: {
                         action: 'getCart'
@@ -412,7 +412,7 @@ $thuoc_list = $thuoc->getbyServiceID($serviceID);
                             if (cartData.length > 0) {
                                 // Thực hiện gọi AJAX để lưu đơn thuốc vào cơ sở dữ liệu
                                 $.ajax({
-                                    url: '/clinic-website/admin/MVC/model/giohangmodel.php',
+                                    url: '/admin/MVC/model/giohangmodel.php',
                                     method: 'POST',
                                     data: {
                                         action: 'ketoa',

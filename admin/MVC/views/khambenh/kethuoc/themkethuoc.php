@@ -261,7 +261,7 @@ $allServices = $serviceModel->getAll();
                 }
 
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
+                    url: '/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'add',
@@ -290,7 +290,7 @@ $allServices = $serviceModel->getAll();
                 const medicineID = $(this).data('id');
 
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
+                    url: '/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'remove',
@@ -312,7 +312,7 @@ $allServices = $serviceModel->getAll();
 
             $('#empty-cart').click(function() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
+                    url: '/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'empty'
@@ -334,7 +334,7 @@ $allServices = $serviceModel->getAll();
             function loadMedicineList() {
                 const serviceID = $('#serviceID').val();
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/views/khambenh/kethuoc/thuocbyid.php',
+                    url: '/admin/MVC/views/khambenh/kethuoc/thuocbyid.php',
                     method: 'POST',
                     data: {
                         serviceID: serviceID
@@ -350,7 +350,7 @@ $allServices = $serviceModel->getAll();
 
             function loadCart() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/views/khambenh/kethuoc/load_cart.php',
+                    url: '/admin/MVC/views/khambenh/kethuoc/load_cart.php',
                     method: 'GET',
                     success: function(response) {
                         $('#cart-container').html(response);
@@ -363,7 +363,7 @@ $allServices = $serviceModel->getAll();
             $('#ketoa').click(function() {
                 // Lấy dữ liệu giỏ hàng từ session
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
+                    url: '/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'getCart'
@@ -376,7 +376,7 @@ $allServices = $serviceModel->getAll();
                             if (cartData.length > 0) {
                                 // Thực hiện gọi AJAX để lưu đơn thuốc vào cơ sở dữ liệu
                                 $.ajax({
-                                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
+                                    url: '/admin/MVC/model/giohangmodel1.php',
                                     method: 'POST',
                                     data: {
                                         action: 'ketoa',
@@ -417,7 +417,7 @@ $allServices = $serviceModel->getAll();
 
             function emptycart() {
                 $.ajax({
-                    url: '/clinic-website/admin/MVC/model/giohangmodel1.php',
+                    url: '/admin/MVC/model/giohangmodel1.php',
                     method: 'POST',
                     data: {
                         action: 'empty'

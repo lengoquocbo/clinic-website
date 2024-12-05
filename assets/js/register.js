@@ -66,7 +66,7 @@ submit.addEventListener('click', async (e)=>{
                 mail: mail,
                 pass: password
             }
-            const response = await fetch('http://localhost:3001/api/register', {
+            const response = await fetch('http://192.168.42.108:3001/api/register', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -82,8 +82,8 @@ submit.addEventListener('click', async (e)=>{
                 localStorage.setItem('token', data.token);
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
-                window.location.href = "http://localhost/clinic-website/?mod=home";
-                history.replaceState(null, "", "http://localhost/clinic-website/?mod=home#home");   
+                window.location.href = "http://192.168.42.108/?mod=home";
+                history.replaceState(null, "", "http://192.168.42.108/?mod=home#home");   
                     
             } else {
                 // hiển thị lỗi

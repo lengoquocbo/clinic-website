@@ -22,7 +22,7 @@ btupdate.addEventListener('click', async (e)=>{
             newemail : email
         }
         
-        const response = await fetch('http://localhost:3001/api/updateinfo', {
+        const response = await fetch('http://192.168.42.108:3001/api/updateinfo', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -82,7 +82,7 @@ btchangepass.addEventListener('click', async (e)=>{
             newpassword : newpw
         }
 
-        const response = await fetch('http://localhost:3001/api/resetpass', {
+        const response = await fetch('http://192.168.42.108:3001/api/resetpass', {
             method: 'POST',
             credentials: 'include',
             headers: {
