@@ -2,7 +2,9 @@
 
 
 document.getElementById('back').addEventListener('click', function() {
-    window.location.href = 'http://192.168.42.108';
+    // window.location.href = 'http://192.168.42.108';
+    window.location.href = 'http://localhost';
+
 });
 const btmail = document.getElementById("enteremail");
 const email = document.getElementById("mail");
@@ -36,8 +38,9 @@ btmail.addEventListener('click', async function(event) {
     this.textContent = "Đang gửi..."
     
     // const response = await fetch('http://192.168.35.234/api/mailchangepass', {
+        const response = await fetch('http://localhost:3001/api/mailchangepass', {
 
-    const response = await fetch('http://192.168.42.108:3001/api/mailchangepass', {
+    // const response = await fetch('http://192.168.42.108:3001/api/mailchangepass', {
         method: 'POST',
         credentials: 'include',
         headers: {

@@ -11,6 +11,8 @@ header('Content-Type: application/json');
 require_once __DIR__.'\..\..\admin\MVC\model\benhnhanmodel.php';
 require_once __DIR__.'\..\..\admin\MVC\model\khambenhmodel.php';
 require_once __DIR__.'\..\..\admin\MVC\model\lichhenmodel.php';
+require_once __DIR__.'\..\..\admin\MVC\model\dichvumodel.php';
+
 
 
 // Nếu là OPTIONS request (preflight), trả về 200 OK
@@ -33,6 +35,7 @@ try {
     $benhnhan = new benhnhan();
     $reservation = new Appointment();
     $khambenh = new khambenh();
+    $dichvu = new Services();
 
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -92,14 +95,14 @@ try {
     
     //KIEM TRA KET QUA TRA VE
     $result3 = $khambenh->crtEmptyEx($exdata) ? 0 : 1;
-
-
+    $id =$data['service'];
+    $totalprice = $dichvu->getById($id)['price']; // or whatever the correct key is
     //khoi tao data su dung dich vu
     $usdata = array(
         'userviceID' => $USVID,
         'EXID' => $EXID,
         'serviceID' => $data['service'],
-        'totalprice' => ''
+        'totalprice' => $totalprice
     );
 
     //KIEM TRA KET QUA TRA VE

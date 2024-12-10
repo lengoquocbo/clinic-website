@@ -21,8 +21,9 @@ btupdate.addEventListener('click', async (e)=>{
             newphone : phone,
             newemail : email
         }
+        const response = await fetch('http://localhost:3001/api/updateinfo', {
         
-        const response = await fetch('http://192.168.42.108:3001/api/updateinfo', {
+        // const response = await fetch('http://192.168.42.108:3001/api/updateinfo', {
             method: 'POST',
             credentials: 'include',
             headers: {

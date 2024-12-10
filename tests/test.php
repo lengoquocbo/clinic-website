@@ -2,10 +2,11 @@
 
 <?php
 
-$password = "123456";
+$password = "123";
 
 // Tạo hai hash khác nhau từ cùng một mật khẩu
-$hash1 = password_hash($password, PASSWORD_BCRYPT);
+// $hash1 = password_hash($password, PASSWORD_BCRYPT);
+$hash1= '$2a$10$v8xIr/r5RTSaeVzLhQHK6uRawGND8rNQIiEaxCR.3oq';
 $hash2 = password_hash($password, PASSWORD_BCRYPT);
 
 echo "Hash 1: " . $hash1 . PHP_EOL;

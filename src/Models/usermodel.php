@@ -28,7 +28,7 @@ class UserModel {
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
-        if(password_verify($pass, $user['pass'])){
+        if(password_verify($pass,  $user['pass'])){
             return $user;
         } else return NULL;
         

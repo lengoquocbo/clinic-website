@@ -300,5 +300,46 @@ LIMIT 0, 25";
     
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public function getByDateAndStatus($day, $month, $year, $confirm) {
+        // Tạo giá trị ngày định dạng `YYYY-MM-DD`
+        $date = sprintf('%04d-%02d-%02d', $year, $month, $day);
+    
+        // Chuẩn bị câu lệnh SQL
+        $sql = "
+            SELECT * 
+            FROM patients p 
+            JOIN appointments a ON a.patientID=p.patientID 
+            JOIN examine e ON e.EXID=a.EXID JOIN useservices us ON us.EXID=e.EXID 
+            JOIN services s ON s.serviceID=us.serviceID 
+            WHERE 
+                SUBSTRING(appointmentday, 1, 10) = ? 
+                AND confirm = ?
+        ";
+    
+        // Chuẩn bị câu lệnh
+        $stmt = $this->db->prepare($sql);
+    
+        // Kiểm tra nếu việc chuẩn bị thất bại
+        if (!$stmt) {
+            throw new Exception("Failed to prepare SQL statement: " . $this->db->error);
+        }
+    
+        // Gắn giá trị tham số vào câu lệnh
+        $stmt->bind_param('si', $date, $confirm);
+    
+        // Thực thi câu lệnh
+        if (!$stmt->execute()) {
+            throw new Exception("Failed to execute SQL statement: " . $stmt->error);
+        }
+    
+        // Lấy kết quả và trả về
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    
+    
+    
+    
     
 }

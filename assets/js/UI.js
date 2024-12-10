@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '1': {
             title: 'Khoa Nội',
             description: 'Chuyên khám và điều trị các bệnh lý về nội khoa, bao gồm các bệnh về tim mạch, hô hấp, tiêu hóa, và thần kinh.',
-            image: '/assets/images/khoanoi.jpg'
+            image: '/clinic-website/assets/images/khoanoi.jpg'
         },
         '2': {
             title: 'Khoa Nhi',
@@ -139,7 +139,7 @@ datlich.addEventListener("click", async (e) => {
             message: message
         }
         // const response = await fetch('http://192.168.56.1/api/login', {
-        const response = await fetch('http://192.168.42.108:3001/api/reservation', {
+        const response = await fetch('http://localhost:3001/api/reservation', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -166,11 +166,11 @@ datlich.addEventListener("click", async (e) => {
 
 //xử lý li đặt lich
 function checkSession(){
-    fetch('http://192.168.42.108:80/src/Controllers/CheckSession.php')
+    fetch('http://localhost/src/Controllers/CheckSession.php')
         .then(response => response.json())
         .then(data => {
             if (data.session_exists) {
-                window.location.href = "http://192.168.42.108/?mod=home#appointment";
+                window.location.href = "http://localhost/?mod=home#appointment";
             } else {
                 // Nếu session không tồn tại
                 alert('Vui lòng đăng nhập');

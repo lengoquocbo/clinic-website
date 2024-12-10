@@ -1,10 +1,10 @@
 <?php
 
-require_once __DIR__ .'../../../model/khambenhmodel.php';
-require_once __DIR__ .'../../../model/thuocmodel.php';
+require_once __DIR__ . '../../../model/khambenhmodel.php';
+require_once __DIR__ . '../../../model/thuocmodel.php';
 
 
-$patientID= $_GET['p'];
+$patientID = $_GET['p'];
 function generateUsemedicine($userviceID = '000')
 {
     $randomNumbers = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
@@ -21,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         'exdaytime' =>  $exdaytime,
         'diagnose' => $_POST['diagnose'],
         'results' => $_POST['prescription'],
-        'bloodpressure'=>$_POST['bloodpressure'],
-        'heartrate'=>$_POST['heartrate']
+        'bloodpressure' => $_POST['bloodpressure'],
+        'heartrate' => $_POST['heartrate']
     ];
     $serviceID = $_POST['serviceID'];
     $appointmentID = $_POST['appointmentID'];
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "<script>alert('Hoàn thành hồ sơ');</script>";
             header("Location: index.php?mod=khambenh&act=kethuoc&us=$userviceID&s=$serviceID&p=$patientID");
             exit;
-            } else {
+        } else {
             echo "<script>alert('Lỗi khi cập nhật hồ sơ'); location.href='index.php?mod=lichhen&act=list';</script>";
         }
     }
@@ -233,7 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <label for="visittype">Hình thức khám:</label>
                             <input type="text" id="visittype" name="visittype" value="<?= $appointment['visittype'] ?>" readonly>
                             <label for="bloodpressure">Huyết áp:</label>
-                            <input type="number" name="bloodpressure" id="bloodpressure" value="118" min="60" style="width: 80px;" > 
+                            <input type="number" name="bloodpressure" id="bloodpressure" value="118" min="60" style="width: 80px;">
                             <span>mmHg</span>
 
 
@@ -250,14 +250,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 </form>
                 <script>
-                    flatpickr("#exdaytime", {
-                        enableTime: true,
-                        dateFormat: "Y-m-d H:i",
-                        allowInput: true
-                    });
-                    const calendarIcon = document.querySelector('.calendar-icon');
-                    calendarIcon.addEventListener('click', () => {
-                        flatpickr("#exdaytime").open();
+                    document.addEventListener('DOMContentLoaded', function() {
+                        flatpickr("#exdaytime", {
+                            enableTime: true,
+                            dateFormat: "Y-m-d H:i",
+                            allowInput: true,
+                            time_24hr: true
+                        });
+
+                        const calendarIcon = document.querySelector('.calendar-icon');
+                        calendarIcon.addEventListener('click', () => {
+                            document.querySelector('#exdaytime')._flatpickr.open();
+                        });
                     });
                 </script>
         <?php
