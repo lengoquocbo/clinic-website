@@ -56,8 +56,8 @@
 <body>
 
     <?php
-    require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\thuocmodel.php';
-    require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\dichvumodel.php'; // Thêm phần lấy danh sách dịch vụ
+                    require_once __DIR__ . '/../../model/thuocmodel.php';
+                    require_once __DIR__ . '/../../model/dichvumodel.php';
 
     if (isset($_GET['id'])) {
         $medicineID = $_GET['id'];

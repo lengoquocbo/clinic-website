@@ -1,4 +1,8 @@
+<html>
+    <script> const port = "192.168.187.166"; </script>
+</html>
 <?php
+    
     session_start();
     // session_destroy();
 

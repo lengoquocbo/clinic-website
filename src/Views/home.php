@@ -14,7 +14,7 @@
         </div>
         <div class="mySlides fade">
             <img src="<?php echo IMAGES."sanhcho.jpg"; ?>" alt="Sảnh chờ phòng khám">
-            <div class="text">Sar chờ phòng khám</div>
+            <div class="text">Sảnh chờ phòng khám</div>
 
         </div>
     </div>
@@ -148,14 +148,13 @@ if (isset($_SESSION['isLogin'])) {
         </div>
         <div class="row">
         <div>
-                        <label for="ngaykham">Ngày khám:</label>
-                        <div style="position: relative; display: inline-block;">
-                            <input type="text" id="ngaykham" name="ngaykham" placeholder="Chọn ngày giờ" style="padding-right: 30px;">
-                            <i class="fas fa-calendar-alt calendar-icon"
-                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
-                        </div>
-
-                    </div>
+            <label for="ngaykham">Ngày khám:</label>
+            <div style="position: relative; display: inline-block;">
+                <input type="text" id="ngaykham" name="ngaykham" placeholder="Chọn ngày giờ" style="padding-right: 30px;">
+                <i class="fas fa-calendar-alt calendar-icon"
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+            </div>
+        </div>
             <div>
             <label for="dateofbirth">Ngày sinh:</label>
             <input type="date" id="dateofbirth" name="dateofbirth" required>

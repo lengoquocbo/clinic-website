@@ -1,6 +1,3 @@
-// menu
-
-// const jwt = require('jsonwebtoken');
 
 const menuToggle = document.querySelector('.menu-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -53,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '1': {
             title: 'Khoa Nội',
             description: 'Chuyên khám và điều trị các bệnh lý về nội khoa, bao gồm các bệnh về tim mạch, hô hấp, tiêu hóa, và thần kinh.',
-            image: '/clinic-website/assets/images/khoanoi.jpg'
+            image: '/assets/images/khoanoi.jpg'
         },
         '2': {
             title: 'Khoa Nhi',
@@ -118,6 +115,7 @@ datlich.addEventListener("click", async (e) => {
     const message = document.getElementById("message").value;
 
 
+
     if(hovaten.trim() === '' || CCCD.trim() === '' || gender.trim() === '' || ngaykham.trim() === '' || dateofbirth.trim() === '' || address.trim() === '' || message.trim() === '' || service.trim() === ''){
         e.preventDefault();
 
@@ -125,6 +123,34 @@ datlich.addEventListener("click", async (e) => {
         alert("Vui lòng nhập đầy đủ thông tin");
         exit();
     }
+
+    //kiểm tra định dạng cccd
+    const CCCDRegex = /^0\d{11}$/;
+    if(!CCCDRegex.test(CCCD)) {
+        e.preventDefault();
+        alert("Vui lòng nhập đúng định dạng CCCD");
+        exit();
+    }
+
+
+    //kiểm tra ngày khám
+    const inputDate = new Date(ngaykham);
+    const currentDate = new Date();
+    if(inputDate < currentDate){
+        e.preventDefault();
+        alert("Vui lòng chọn lại ngày khám phù hợp");
+        exit();
+    }
+
+
+    //kiem tra ngày sinh
+    const ngaysinh = new Date(dateofbirth);
+    if(ngaysinh > currentDate) {
+        e.preventDefault();
+        alert("Vui lòng chọn lại này sinh phù hợp");
+        exit();
+    }
+
 
     try { 
         const requestdata = {
@@ -138,8 +164,7 @@ datlich.addEventListener("click", async (e) => {
             address: address,
             message: message
         }
-        // const response = await fetch('http://192.168.56.1/api/login', {
-        const response = await fetch('http://localhost:3001/api/reservation', {
+        const response = await fetch('http://'+port+':3001/api/reservation', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -166,15 +191,15 @@ datlich.addEventListener("click", async (e) => {
 
 //xử lý li đặt lich
 function checkSession(){
-    fetch('http://localhost/src/Controllers/CheckSession.php')
+    fetch('http://'+port+'/src/Controllers/CheckSession.php')
         .then(response => response.json())
         .then(data => {
             if (data.session_exists) {
-                window.location.href = "http://localhost/?mod=home#appointment";
+                window.location.href = "http://"+port+"/?mod=home#appointment";
             } else {
                 // Nếu session không tồn tại
                 alert('Vui lòng đăng nhập');
-                window.location.href = 'http://localhost/?mod=taikhoan&act=login';
+                window.location.href = 'http://'+port+'/?mod=taikhoan&act=login';
             }
         });
 }

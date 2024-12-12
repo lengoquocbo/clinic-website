@@ -1,10 +1,7 @@
 // script send mail
 
-
 document.getElementById('back').addEventListener('click', function() {
-    // window.location.href = 'http://192.168.42.108';
-    window.location.href = 'http://localhost';
-
+    window.location.href = 'http://'+port;
 });
 const btmail = document.getElementById("enteremail");
 const email = document.getElementById("mail");
@@ -37,10 +34,8 @@ btmail.addEventListener('click', async function(event) {
     this.classList.add('btn-sending');
     this.textContent = "Đang gửi..."
     
-    // const response = await fetch('http://192.168.35.234/api/mailchangepass', {
-        const response = await fetch('http://localhost:3001/api/mailchangepass', {
+        const response = await fetch('http://'+port+':3001/api/mailchangepass', {
 
-    // const response = await fetch('http://192.168.42.108:3001/api/mailchangepass', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -91,9 +86,7 @@ btcode.addEventListener('click', async function(event) {
         //code đối chiếu mã code
         document.getElementById('errorMessage2').style.display = 'none';
 
-        // const response = await fetch('http://192.168.56.1:3001/api/checkcode', {
-
-        const response = await fetch('http://192.168.42.108:3001/api/checkcode', {
+        const response = await fetch('http://'+port+':3001/api/checkcode', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -169,9 +162,7 @@ btchange.addEventListener('click', async function(event) {
         if(passField.value == repassField.value) {
             document.getElementById('errorMessage3').style.display = 'none';
 
-            // const response = await fetch('http://192.168.56.1:3001/api/updatepass', {
-
-            const response = await fetch('http://192.168.42.108:3001/api/updatepass', {
+            const response = await fetch('http://'+port+':3001/api/updatepass', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -191,9 +182,9 @@ btchange.addEventListener('click', async function(event) {
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
                 setTimeout(() => {
-                    window.location.href = "http://192.168.42.108/?mod=taikhoan&act=login";
+                    window.location.href = "http://"+port+"/?mod=taikhoan&act=login";
                 }, 3000);
-                history.replaceState(null, "", "http://192.168.42.108/?mod=taikhoan&act=login");
+                history.replaceState(null, "", "http://"+port+"/?mod=taikhoan&act=login");
                     
             } else {
                 // hiển thị lỗi

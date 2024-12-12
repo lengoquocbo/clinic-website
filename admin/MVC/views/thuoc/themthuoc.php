@@ -1,6 +1,6 @@
 <?php
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\thuocmodel.php';
-require_once 'C:\xampp\htdocs\clinic-website\admin\MVC\model\dichvumodel.php';
+                    require_once __DIR__ . '/../../model/thuocmodel.php';
+                    require_once __DIR__ . '/../../model/dichvumodel.php';
 
 // Khởi tạo model và lấy danh sách dịch vụ
 $serviceModel = new Services();

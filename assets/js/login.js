@@ -1,6 +1,5 @@
 // hiện mật khẩu
 
-
 const passField = document.getElementById("password");
 const showBtn = document.getElementById("showpassword");
 const passwordIcon = document.getElementById("passwordIcon");
@@ -41,9 +40,7 @@ submit.addEventListener('click', async (e)=>{
 
     try { 
 
-        const response = await fetch('http://localhost:3001/api/login', {
-
-        // const response = await fetch('http://192.168.42.108:3001/api/login', {
+        const response = await fetch('http://'+port+':3001/api/login', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -64,10 +61,8 @@ submit.addEventListener('click', async (e)=>{
             localStorage.setItem('token', data.token);
             document.getElementById('successMessage').textContent = data.message;
             document.getElementById('successMessage').style.display = 'block';
-            // window.location.href = "http://192.168.1.8"+data.URL;
-            // history.replaceState(null, "", "http://192.168.1.8"+data.URL);
-            window.location.href = "http://localhost"+data.URL;
-            history.replaceState(null, "", "http://localhost"+data.URL);
+            window.location.href = "http://"+port+data.URL;
+            history.replaceState(null, "", "http://"+port+data.URL);
         } else {
             // hiển thị lỗi
             document.getElementById('errorMessage').textContent = data.message;

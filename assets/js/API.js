@@ -13,8 +13,7 @@ const PORT = 3001; // Đổi sang port khác vì PHP đang chạy ở 3000
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost',
-    // origin: 'http://192.168.42.108', // Hoặc chỉ định domain cụ thể
+    origin: 'http://192.168.187.166',
     credentials: true,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -23,10 +22,7 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Cấu hình
-const PHP_BASE_URL = 'http://localhost:80'; // URL của server PHP
-// const PHP_BASE_URL = 'http://192.168.42.108'; 
-
-
+const PHP_BASE_URL = 'http://192.168.187.166:80'; // URL của server PHP
 
 
 // Routes

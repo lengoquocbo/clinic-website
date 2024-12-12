@@ -1,5 +1,4 @@
 
-
 const passField = document.getElementById("password");
 const repassField = document.getElementById("repassword")
 const showBtn = document.getElementById("showpassword");
@@ -59,15 +58,13 @@ submit.addEventListener('click', async (e)=>{
     if(repassword == password) {
         
         try { 
-            // const response = await fetch('http://192.168.35.234:3001/api/register', {
             const requestdata = {
                 phone: phone,
                 name: name,
                 mail: mail,
                 pass: password
             }
-            const response = await fetch('http://localhost:3001/api/register', {
-            // const response = await fetch('http://192.168.42.108:3001/api/register', {
+            const response = await fetch('http://'+port+':3001/api/register', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -83,8 +80,8 @@ submit.addEventListener('click', async (e)=>{
                 localStorage.setItem('token', data.token);
                 document.getElementById('successMessage').textContent = data.message;
                 document.getElementById('successMessage').style.display = 'block';
-                window.location.href = "http://localhost/?mod=home";
-                history.replaceState(null, "", "http://localhost/?mod=home#home");   
+                window.location.href = "http://"+port+"/?mod=home";
+                history.replaceState(null, "", "http://"+port+"/?mod=home#home");   
                     
             } else {
                 // hiển thị lỗi
