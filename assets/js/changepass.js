@@ -7,7 +7,6 @@ const btmail = document.getElementById("enteremail");
 const email = document.getElementById("mail");
 const emailvalue = email.value;
 
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 btmail.addEventListener('click', async function(event) {
     document.getElementById('errorMessage1').style.display = 'none';
@@ -21,14 +20,7 @@ btmail.addEventListener('click', async function(event) {
         exit();
     }
 
-    if(!emailRegex.test(emailvalue)){
-        
-        event.preventDefault();
-        document.getElementById('errorMessage1').innerHTML = "Email không hợp lệ";
-        document.getElementById('errorMessage1').style.display = 'block';
-        exit();
-    }
-
+    
     //khôi phục lại các hiển thị thông báo
     this.disabled = true;
     this.classList.add('btn-sending');

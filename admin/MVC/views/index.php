@@ -109,7 +109,11 @@ function loadContent($mod, $act)
         ob_start();
         include '../views/khambenh/themkhambenh.php';
         return ob_get_clean();
-    } else if ($mod === 'lichhen' && $act === 'xacnhan') {
+    }else if ($mod === 'lichhen' && $act === 'henlai') {
+        ob_start();
+        include '../views/capnhatlichhen.php';
+        return ob_get_clean();
+    }else if ($mod === 'lichhen' && $act === 'xacnhan') {
         $appointmentID = $_GET['id'];
     
         require_once __DIR__ . '../../model/lichhenmodel.php';
@@ -491,10 +495,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                 </ul>
             </nav>
             <div class="header-right">
-                <form class="search-form" role="search">
-                    <input type="search" placeholder="Tìm kiếm..." aria-label="Search">
-                    <button type="submit"><i class='bx bx-search'></i></button>
-                </form>
+               
                 <div class="role-div">
                     <?php if ($role === 'admin'): ?>
                         <p class="role">ADMIN</p>

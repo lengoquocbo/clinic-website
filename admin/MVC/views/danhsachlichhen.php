@@ -31,7 +31,9 @@ foreach ($lichhen_list as $lichhen) { ?>
         </td>
         <td>
             <?php if ($lichhen['confirm'] == 0): ?>
+                
                 <a href="index.php?mod=lichhen&act=xacnhan&id=<?= $lichhen['appointmentID'] ?>" class="medicine-list__action-btn">Duyệt</a>
+                <a href="index.php?mod=lichhen&act=henlai&id=<?= $lichhen['appointmentID'] ?>" class="medicine-list__action-btn">Hẹn lại</a>
                 <a style="background-color:#f6c23e;" 
                    href="index.php?mod=lichhen&act=huy&id=<?= $lichhen['appointmentID'] ?>" 
                    onclick="return confirm('Bạn có chắc muốn hủy lịch hẹn này không?')" 

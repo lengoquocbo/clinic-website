@@ -44,6 +44,18 @@ LIMIT 0, 25";
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public function getAppointmentByID($id) {
+        $query = "SELECT * FROM appointments a
+        JOIN patients p ON p.patientID = a.patientID 
+         WHERE appointmentID = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        return $result->fetch_assoc(); // Trả về dữ liệu của lịch hẹn
+    }
+
 
     // Lấy chi tiết một lịch hẹn kèm đầy đủ thông tin liên quan
     // Lấy chi tiết một lịch hẹn kèm đầy đủ thông tin liên quan
@@ -337,7 +349,32 @@ LIMIT 0, 25";
         return $result->fetch_all(MYSQLI_ASSOC);
     }
     
+    public function updateAppointment($id, $appointmentday) {
+        // Kết nối cơ sở dữ liệu
+        $sql = "UPDATE appointments 
+                SET appointmentday = ? 
+                WHERE appointmentID = ?";
+        
+        // Chuẩn bị câu lệnh SQL
+        $stmt = $this->db->prepare($sql);
+        
+        if (!$stmt) {
+            die("Lỗi chuẩn bị câu lệnh SQL: " . $this->db->error);
+        }
     
+        // Gán giá trị cho các tham số
+        // Lưu ý: $appointmentday là kiểu chuỗi (s), và $id là kiểu chuỗi hoặc số nguyên (s hoặc i)
+        $stmt->bind_param("ss", $appointmentday, $id);
+    
+        // Thực thi câu lệnh
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true; // Cập nhật thành công
+        } else {
+            $stmt->close();
+            return false; // Cập nhật thất bại
+        }
+    }
     
     
     

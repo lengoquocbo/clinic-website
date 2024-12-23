@@ -109,12 +109,12 @@
         <h2 class="medicine-list__title">Danh Sách Lịch Hẹn</h2>
 
         <div class="btn">
-        <select class="select-div" name="confirm" id="confirm">
-        <option value="0">CHƯA DUYỆT</option>
-        <option value="1">ĐÃ DUYỆT</option>
-    </select>
-    <input class="select-div" type="date" id="filter-date" value="<?= date('Y-m-d') ?>">
-    <a href="#" class="loc" id="filter-btn">Lọc</a>
+            <select class="select-div" name="confirm" id="confirm">
+                <option value="0">CHƯA DUYỆT</option>
+                <option value="1">ĐÃ DUYỆT</option>
+            </select>
+            <input class="select-div" type="date" id="filter-date" value="<?= date('Y-m-d') ?>">
+            <a href="#" class="loc" id="filter-btn">Lọc</a>
             <a href="index.php?mod=lichhen&act=add" class="medicine-list__add-btn">Khám trực tiếp</a>
         </div>
 
@@ -141,20 +141,46 @@
     </div>
 
     <script>
-    document.getElementById('filter-btn').addEventListener('click', function () {
-    const confirmStatus = document.getElementById('confirm').value;
-    const selectedDate = document.getElementById('filter-date').value;
+        function fetchAppointments() {
+            const confirmValue = document.getElementById('confirm').value;
 
-    const [year, month, day] = selectedDate.split('-');
+            // Gửi request đến server với confirm
+            fetch(`/admin/MVC/views/danhsachlichhen.php?confirm=${confirmValue}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('appointment-body').innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        function fetchAppointmentsdate() {
+            const confirmValue = document.getElementById('confirm').value;
+            const selectedDate = document.getElementById('filter-date').value || '';
 
-    // Gửi request đến server với confirm và ngày đã chọn
-    fetch(`/admin/MVC/views/danhsachlichhen.php?confirm=${confirmStatus}&day=${day}&month=${month}&year=${year}`)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('appointment-body').innerHTML = data;
-        })
-        .catch(error => console.error('Error:', error));
-});
+            const [year, month, day] = selectedDate ? selectedDate.split('-') : ['', '', ''];
+
+            // Gửi request đến server với confirm và ngày đã chọn
+            fetch(`/admin/MVC/views/danhsachlichhen.php?confirm=${confirmValue}&day=${day}&month=${month}&year=${year}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('appointment-body').innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+       
+
+
+        // Lắng nghe sự thay đổi của dropdown confirm
+        document.getElementById('confirm').addEventListener('change', fetchAppointments);
+
+        // Gọi hàm fetchAppointments lần đầu để hiển thị danh sách mặc định
+        fetchAppointments();
+         // Lắng nghe sự thay đổi của dropdown confirm
+         document.getElementById('confirm').addEventListener('change', fetchAppointmentsdate);
+
+// Lắng nghe sự kiện click của nút Lọc
+document.getElementById('filter-btn').addEventListener('click', fetchAppointmentsdate);
+
 
     </script>
 </body>
