@@ -98,7 +98,7 @@
                     exit();
                 }
                 $ndata = array(
-                    'newpass' => $data['npwhashed'],
+                    'npwhashed' => $data['npwhashed'],
                     'userID' => $data['userID']
                 );
                 

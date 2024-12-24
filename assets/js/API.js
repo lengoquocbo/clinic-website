@@ -351,7 +351,7 @@ app.post('/api/updatepass', async (req, res) =>{
             });
         }
 
-        const pwhashed = hashPasswordAsync(password);
+        const pwhashed = await hashPasswordAsync(password);
         // Gọi đến PHP backend
         const response = await axios.post(
             `${PHP_BASE_URL}/src/Controllers/ChangePassController.php`,
@@ -540,7 +540,7 @@ app.post("/api/resetpass", async (req, res) =>{
         }
 
         userID = payload.user_id;
-        const npwhashed = hashPasswordAsync(newpassword);
+        const npwhashed = await hashPasswordAsync(newpassword);
         const response = await axios.post(
             `${PHP_BASE_URL}/src/Controllers/ChangeInfoController.php`,
             { type , userID , oldpassword, npwhashed },

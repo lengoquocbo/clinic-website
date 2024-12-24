@@ -152,7 +152,7 @@
                 $tieude = 'MÃ XÁC THỰC ĐẾ ĐỔI MẬT KHẨU | '.$current_datetime;
                 $sendmail = $Mailer->sendmail($mailaddress, $noidung, $tieude);
     
-                if($sendmail === 'success') {
+                if($sendmail) {
                     echo json_encode([
                         'success' => true,
                         'message' => 'Gửi mail thành công'
@@ -222,11 +222,11 @@
                 }
 
                 $dataupdate = array(
-                    'pass' => $data['pwhashed'],
+                    'npwhashed' => $data['pwhashed'],
                     'mail' => $data['mail']
                 );
 
-                $responseupt = $usermodel->updatepass($dataupdate);
+                $responseupt = $usermodel->updatePassByMail($dataupdate);
 
                 if(!$responseupt) {
                     echo json_encode([

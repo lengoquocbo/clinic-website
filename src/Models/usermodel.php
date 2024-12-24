@@ -28,6 +28,7 @@ class UserModel {
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
+        if(!$user) return NULL;
         if(password_verify($pass,  $user['pass'])){
             return $user;
         } else return NULL;
@@ -90,6 +91,13 @@ class UserModel {
     function updatePass($data) {
         $stmt = $this->db->prepare("UPDATE user SET pass = ? WHERE userID = ?");
         $stmt->bind_param("si", $data['npwhashed'], $data['userID']);
+        $result = $stmt->execute();
+        return $result;
+    }
+
+    function updatePassByMail($data) {
+        $stmt = $this->db->prepare("UPDATE user SET pass = ? WHERE mail = ?");
+        $stmt->bind_param("ss", $data['npwhashed'], $data['mail']);
         $result = $stmt->execute();
         return $result;
     }

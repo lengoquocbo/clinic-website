@@ -18,7 +18,7 @@ h3{
 }
 .form{
     max-width: 350px;
-    margin: 0 auto;
+    margin: 0 auto; 
     padding: 40px;
     border: 1px solid #ccc; 
     border-radius: 8px;
@@ -88,24 +88,19 @@ h1{
 }
 
 .change__input input {
-
-<<<<<<< Updated upstream
-=======
-    
->>>>>>> Stashed changes
-    padding: 10px 40px 10px 40px;
+    padding: 12px 40px 12px 40px !important;
     /* Tạo khoảng trống cho icon bên trái */
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
-
+    font-size: 14px;
+    align-items: center;
 }
 
 .change__input i {
     z-index: 10;
     position: absolute;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 8px;
     font-size: 25px;
     color: #999;
 }
