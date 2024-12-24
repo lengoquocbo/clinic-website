@@ -4,10 +4,17 @@ require_once __DIR__ . '../../model/lichhenmodel.php';
 if (isset($_GET['id'])) {
     $appointmentID = $_GET['id'];
     $appointment = new Appointment();
-    
+    require_once __DIR__.'/../../../assets/Mail/Mail.php';
+    $Mail = new Mail();
+    $ApmInfo = $appointment->getByAppID($appointmentID);
+    $mailaddress = $ApmInfo['mail'];
+    $name = $ApmInfo['fullname'];
+    $day = $ApmInfo['appointmentday'];
     // Thực hiện xóa lịch hẹn
     try {
         if ($appointment->deleteById($appointmentID)) {
+            $result = $Mail->RefuseApm($mailaddress, $day, $name, $appointmentID);
+            if(!$result) throw new Exception("Lỗi gửi mail");
             echo "<script>
                 alert('Hủy lịch hẹn thành công!');
                 window.location.href = 'index.php?mod=lichhen&act=list';

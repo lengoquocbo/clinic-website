@@ -47,45 +47,45 @@
 
 <!-- Phần Dịch vụ -->
 <section id="services">
-<div class="services-header">
-    <h2>Dịch vụ chăm sóc sức khỏe của chúng tôi</h2>
-</div>
-<div class="services-container">
-    <div class="service-item">
-        <img src="<?php echo IMAGES."xetnghiemmau.jpg"; ?>" alt="Xét nghiệm máu">
-        <h3><center>Xét nghiệm máu</center></h3>
-        <p>Chúng tôi cung cấp dịch vụ xét nghiệm máu với các thiết bị tiên tiến và năng lực nghiệp vụ cao siêu.</p>
+    <div class="services-header">
+        <h2>Dịch vụ chăm sóc sức khỏe của chúng tôi</h2>
     </div>
-    <div class="service-item">
-        <img src="<?php echo IMAGES."khamrang.webp"; ?>" alt="Dịch vụ khám răng">
-        <h3><center>Dịch vụ khám răng</center></h3>
-        <p>Các bác sĩ phụ trách với chuyên môn cao sẽ cho bạn cảm giác khám răng như đi nghỉ dưỡng.</p>
+    <div class="services-container">
+        <div class="service-item">
+            <img src="<?php echo IMAGES."xetnghiemmau.jpg"; ?>" alt="Xét nghiệm máu">
+            <h3><center>Xét nghiệm máu</center></h3>
+            <p>Chúng tôi cung cấp dịch vụ xét nghiệm máu với các thiết bị tiên tiến và năng lực nghiệp vụ cao siêu.</p>
+        </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."khamrang.webp"; ?>" alt="Dịch vụ khám răng">
+            <h3><center>Dịch vụ khám răng</center></h3>
+            <p>Các bác sĩ phụ trách với chuyên môn cao sẽ cho bạn cảm giác khám răng như đi nghỉ dưỡng.</p>
+        </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."tiemchung.jpg"; ?>" alt="Dịch vụ tiêm chủng">
+            <h3><center>Dịch vụ tiêm chủng</center></h3>
+            <p>Chúng tôi đảm bảo có thể tiêm chủng cho tất cả các loại bệnh, từ ung thư giai đoạn cuối đến cảm cúm nhẹ.</p>
+        </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."xquang.jpg"; ?>" alt="Dịch vụ chụp X - Quang">
+            <h3><center>Dịch vụ chụp X - Quang</center></h3>
+            <p>Với các thiết bị máy móc hiện đại, chúng tôi đảm bảo có thể tìm thấy tất cả xương từ xương cụt đến cái răng.</p>
+        </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."khamtimmach.jpg"; ?>" alt="Dịch vụ khám tim mạch">
+            <h3><center>Dịch vụ khám tim mạch</center></h3>
+            <p>Khám tim mạch thường xuyên để ngăn ngừa các nguy cơ bệnh tìm ẩn.</p>
+        </div>
+        <div class="service-item">
+            <img src="<?php echo IMAGES."khamtongquat.jpeg"; ?>" alt="Dịch vụ khám tổng quát">
+            <h3><center>Dịch vụ khám tổng quát</center></h3>
+            <p>Khám sức khỏe tổng quát định kỳ là thói quen lành mạnh để có một cuộc sống lâu dài, khỏe mạnh và hạnh phúc.</p>
+        </div>
+        
     </div>
-    <div class="service-item">
-        <img src="<?php echo IMAGES."tiemchung.jpg"; ?>" alt="Dịch vụ tiêm chủng">
-        <h3><center>Dịch vụ tiêm chủng</center></h3>
-        <p>Chúng tôi đảm bảo có thể tiêm chủng cho tất cả các loại bệnh, từ ung thư giai đoạn cuối đến cảm cúm nhẹ.</p>
+    <div class="cta-container">
+        <a href="#contact" class="cta-button">Liên hệ với chúng tôi</a>
     </div>
-    <div class="service-item">
-        <img src="<?php echo IMAGES."xquang.jpg"; ?>" alt="Dịch vụ chụp X - Quang">
-        <h3><center>Dịch vụ chụp X - Quang</center></h3>
-        <p>Với các thiết bị máy móc hiện đại, chúng tôi đảm bảo có thể tìm thấy tất cả xương từ xương cụt đến cái răng.</p>
-    </div>
-    <div class="service-item">
-        <img src="<?php echo IMAGES."khamtimmach.jpg"; ?>" alt="Dịch vụ khám tim mạch">
-        <h3><center>Dịch vụ khám tim mạch</center></h3>
-        <p>Khám tim mạch thường xuyên để ngăn ngừa các nguy cơ bệnh tìm ẩn.</p>
-    </div>
-    <div class="service-item">
-        <img src="<?php echo IMAGES."khamtongquat.jpeg"; ?>" alt="Dịch vụ khám tổng quát">
-        <h3><center>Dịch vụ khám tổng quát</center></h3>
-        <p>Khám sức khỏe tổng quát định kỳ là thói quen lành mạnh để có một cuộc sống lâu dài, khỏe mạnh và hạnh phúc.</p>
-    </div>
-    
-</div>
-<div class="cta-container">
-    <a href="#contact" class="cta-button">Liên hệ với chúng tôi</a>
-</div>
 </section>
 
 <!-- Phần Đội ngũ nhân viên -->

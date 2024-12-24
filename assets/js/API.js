@@ -1,19 +1,20 @@
-const bcrypt = require('bcryptjs');
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const axios = require('axios');
-const redis = require('redis');
-const client = redis.createClient();
-const jwt = require('jsonwebtoken');
-const secretkey = "0e#$gsj_ncs5-6at9+d1dplyf0evc%";
-
-const app = express();
+const bcrypt = require('bcryptjs')
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const axios = require('axios')
+const redis = require('redis')
+const jwt = require('jsonwebtoken')
+const http = require('http')
+const app = express()
+const { Server } = require('socket.io')
+const server = http.createServer(app)
+const io = new Server(server)
 const PORT = 3001; // Đổi sang port khác vì PHP đang chạy ở 3000
 
 // Middleware
 app.use(cors({
-    origin: 'http://192.168.1.30',
+    origin: 'http://192.168.35.106',
     credentials: true,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -22,7 +23,9 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Cấu hình
-const PHP_BASE_URL = 'http://192.168.1.30'; // URL của server PHP
+
+const PHP_BASE_URL = 'http://192.168.35.106:80'; // URL của server PHP
+
 
 
 // Routes
@@ -573,6 +576,8 @@ app.post("/api/resetpass", async (req, res) =>{
         }
     }
 });
+
+              
 
 
 

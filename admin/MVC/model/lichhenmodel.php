@@ -375,8 +375,21 @@ LIMIT 0, 25";
             return false; // Cập nhật thất bại
         }
     }
-    
-    
-    
-    
+ 
+    public function getByAppID($ApmID){
+        $stmt = $this->db->prepare(
+            "SELECT u.mail, ap.appointmentday, p.fullname
+            FROM appointments ap
+            INNER JOIN patients p ON ap.patientID = p.patientID
+            INNER JOIN user u ON u.userID = p.userID 
+            WHERE ap.appointmentID = ?"
+        );
+        $stmt->bind_param("s", $ApmID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $mail = $result->fetch_assoc();
+        return $mail;
+    }
+ 
+
 }

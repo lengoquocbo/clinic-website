@@ -32,9 +32,9 @@
                 <!-- Liên kết hữu ích -->
                 <div class="links">
                     <p>Liên kết hữu ích</p>
-                    <a href="#" class="link">Dịch vụ của chúng tôi</a>
+                    <a href="#services" class="link">Dịch vụ của chúng tôi</a>
                     <a href="#" class="link">Câu hỏi thường gặp</a>
-                    <a href="#" class="link">Liên hệ hỗ trợ</a>
+                    <a href="#contact" class="link">Liên hệ hỗ trợ</a>
                 </div>
 
                 <!-- Chính sách và điều khoản -->

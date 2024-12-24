@@ -106,13 +106,13 @@ class UserModel {
 
     function getByUserId($userID){
         $stmt = $this->db->prepare(
-            "SELECT st.staffID AS tennhanvien, e.exdaytime AS ngaykham, e.EXID AS mahoso, e.results AS chuandoan, u.userID AS userID
+            "SELECT st.fullname AS tennhanvien, e.exdaytime AS ngaykham, e.EXID AS mahoso, e.results AS chuandoan, u.userID AS userID
             FROM user u 
             JOIN patients p ON p.userID=u.userID
             JOIN appointments a ON a.patientID=p.patientID
             JOIN examine e ON e.EXID=a.EXID
             JOIN useservices us ON us.EXID= e.EXID
-            LEFT JOIN services s ON s.serviceID= us.userviceID
+            LEFT JOIN services s ON s.serviceID= us.serviceID
             LEFT JOIN staffs st ON st.staffID=s.staffID
             WHERE u.userID= ? AND a.status = 'done' "
         );
@@ -141,7 +141,7 @@ class UserModel {
             INNER JOIN user u ON u.userID = p.userID 
             LEFT JOIN useservices us ON e.EXID = us.EXID
             LEFT JOIN services s ON us.serviceID = s.serviceID
-            LEFT JOIN staffs st ON s.staffID = st.staffID
+            LEFT JOIN staffs st ON st.staffID = s.staffID 
             WHERE e.EXID = ?"
         );
         $stmt->bind_param("s", $EXID);
@@ -171,19 +171,18 @@ class UserModel {
         $result = $stmt->get_result();
         $UseMedicines = $result->fetch_all(MYSQLI_ASSOC);  // Now you can fetch data
         return $UseMedicines;
-
     }
 
     function getAppointment($userID) {
         // Câu truy vấn SQL
         $sql = "
-           SELECT * 
-FROM user u 
-JOIN patients p ON p.userID = u.userID 
-JOIN appointments a ON a.patientID = p.patientID 
-WHERE u.userID = ? AND a.status='waiting'
-ORDER BY a.appointmentday DESC
-";
+            SELECT * 
+            FROM user u 
+            JOIN patients p ON p.userID = u.userID 
+            JOIN appointments a ON a.patientID = p.patientID 
+            WHERE u.userID = ? AND a.status='waiting'
+            ORDER BY a.appointmentday DESC
+        ";
         
         // Chuẩn bị câu lệnh
         $stmt = $this->db->prepare($sql);

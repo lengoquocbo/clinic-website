@@ -115,7 +115,7 @@ function loadContent($mod, $act)
         return ob_get_clean();
     }else if ($mod === 'lichhen' && $act === 'xacnhan') {
         $appointmentID = $_GET['id'];
-    
+        
         require_once __DIR__ . '../../model/lichhenmodel.php';
         $lichhenmodel = new Appointment();
     
@@ -125,6 +125,11 @@ function loadContent($mod, $act)
         // Đặt thông báo dựa trên kết quả cập nhật
         if ($result) {
             setcookie('msg', 'Xác nhận lịch hẹn thành công!', time() + 5, '/');
+            require_once __DIR__.'/../../../assets/Mail/Mail.php';
+            $Mail = new Mail();
+            $ApmInfo = $lichhenmodel->getByAppID($appointmentID);
+            $result2 = $Mail->ConfirmAPM($ApmInfo['mail'], $ApmInfo['appointmentday'], $ApmInfo['fullname'], $appointmentID);
+            if(!$result2) throw new Exception("Lỗi gửi mail");
         } else {
             setcookie('msg', 'Không thể xác nhận lịch hẹn, vui lòng thử lại.', time() + 5, '/');
         }
@@ -541,7 +546,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                                             <button type="submit" name="logout"><i class='bx bx-log-out'></i> Đăng xuất</button>
                                         </form>
                                     </li>
-                                    <li style="margin-top: 20px;"><button><i class='bx bx-revision'></i> Tải lại</button></li>
                                 </ul>
                             </div>
                         </ul>

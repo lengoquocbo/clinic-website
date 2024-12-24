@@ -1,5 +1,5 @@
 <html>
-    <script> const port = "192.168.1.30"; </script>
+    <script> const port = "192.168.35.106"; </script>
 </html>
 <?php
     
